@@ -123,9 +123,9 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
         </div>
 
         {/* Application Form Section */}
-        <div id="creator-apply-form" className="max-w-3xl mx-auto p-6 sm:p-10 lg:p-12 rounded-2xl sm:rounded-3xl bg-[#0B0B0B] border border-[#202020] shadow-2xl">
+        <div id="creator-apply-form" className="max-w-3xl mx-auto">
           <div className="text-center max-w-xl mx-auto mb-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#141414] border border-[#262626] text-[11px] font-bold text-[#4F7CFF] uppercase tracking-widest mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#141414] border border-[#262626] text-[11px] font-bold text-[#4F7CFF] uppercase tracking-widest mb-3">
               Creator Network Application
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5]">
@@ -138,7 +138,7 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
 
           {isSubmitted ? (
             <div className="text-center py-10">
-              <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mx-auto mb-4">
+              <div className="w-16 h-16 bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mx-auto mb-4">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
               <h3 className="text-xl font-bold text-[#F5F5F5] mb-2">
@@ -150,14 +150,14 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <button
                   onClick={() => sendToWhatsApp(formatCreatorApplicationMessage(formData))}
-                  className="w-full sm:w-auto px-6 py-3.5 bg-[#3B82F6] hover:bg-[#2563EB] text-white text-xs font-semibold uppercase tracking-wider rounded-xl transition-all cursor-pointer shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto px-6 py-3.5 bg-[#3B82F6] hover:bg-[#2563EB] text-white text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2"
                 >
                   <MessageSquare className="w-4 h-4" />
                   <span>Open WhatsApp Chat</span>
                 </button>
                 <button
                   onClick={() => setIsSubmitted(false)}
-                  className="w-full sm:w-auto px-6 py-3.5 bg-[#111111] hover:bg-[#1A1A1A] border border-[#262626] text-xs font-semibold text-[#E5E7EB] uppercase tracking-wider rounded-xl cursor-pointer"
+                  className="w-full sm:w-auto px-6 py-3.5 bg-[#111111] hover:bg-[#1A1A1A] border border-[#262626] text-xs font-semibold text-[#E5E7EB] uppercase tracking-wider cursor-pointer"
                 >
                   Submit Another Channel
                 </button>
@@ -166,7 +166,7 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
               {error && (
-                <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs">
+                <div className="p-3.5 bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs">
                   {error}
                 </div>
               )}
@@ -181,7 +181,7 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
                     placeholder="e.g. Rohit Sharma"
                     value={formData.creatorName}
                     onChange={(e) => setFormData({ ...formData, creatorName: e.target.value })}
-                    className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#111111] border border-[#262626] focus:border-[#3B82F6] text-sm text-[#F3F4F6] placeholder-[#555555] outline-none transition-colors"
+                    className="w-full px-4 py-3 sm:py-3.5 bg-[#111111] border border-[#262626] focus:border-[#3B82F6] text-sm text-[#F3F4F6] placeholder-[#555555] outline-none transition-colors"
                   />
                 </div>
 
@@ -194,7 +194,7 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
                     placeholder="business@yourchannel.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#111111] border border-[#262626] focus:border-[#3B82F6] text-sm text-[#F3F4F6] placeholder-[#555555] outline-none transition-colors"
+                    className="w-full px-4 py-3 sm:py-3.5 bg-[#111111] border border-[#262626] focus:border-[#3B82F6] text-sm text-[#F3F4F6] placeholder-[#555555] outline-none transition-colors"
                   />
                 </div>
               </div>
@@ -209,7 +209,7 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
                     placeholder="https://youtube.com/@yourchannel"
                     value={formData.youtubeUrl}
                     onChange={(e) => setFormData({ ...formData, youtubeUrl: e.target.value })}
-                    className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#111111] border border-[#262626] focus:border-[#3B82F6] text-sm text-[#F3F4F6] placeholder-[#555555] outline-none transition-colors"
+                    className="w-full px-4 py-3 sm:py-3.5 bg-[#111111] border border-[#262626] focus:border-[#3B82F6] text-sm text-[#F3F4F6] placeholder-[#555555] outline-none transition-colors"
                   />
                 </div>
 
@@ -217,7 +217,7 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
                   <label className="block text-xs sm:text-[13px] font-medium text-[#E5E7EB] mb-2">
                     Phone Number / WhatsApp
                   </label>
-                  <div className="flex items-center rounded-xl bg-[#111111] border border-[#262626] focus-within:border-[#3B82F6] transition-colors overflow-hidden">
+                  <div className="flex items-center bg-[#111111] border border-[#262626] focus-within:border-[#3B82F6] transition-colors overflow-hidden">
                     <div className="flex items-center gap-1.5 px-3.5 py-3 sm:py-3.5 border-r border-[#262626] bg-[#0E0E0E] text-xs text-[#E5E7EB] select-none flex-shrink-0">
                       <span className="text-sm">🇮🇳</span>
                       <span className="text-[11px] font-mono text-[#9CA3AF]">+91</span>
@@ -242,7 +242,7 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
                   <select
                     value={formData.subscriberCount}
                     onChange={(e) => setFormData({ ...formData, subscriberCount: e.target.value })}
-                    className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#111111] border border-[#262626] focus:border-[#3B82F6] text-sm text-[#F3F4F6] outline-none cursor-pointer transition-colors"
+                    className="w-full px-4 py-3 sm:py-3.5 bg-[#111111] border border-[#262626] focus:border-[#3B82F6] text-sm text-[#F3F4F6] outline-none cursor-pointer transition-colors"
                   >
                     <option value="10K - 50K" className="bg-[#111111] text-[#F3F4F6]">10K - 50K (Rising Creator)</option>
                     <option value="50K - 200K" className="bg-[#111111] text-[#F3F4F6]">50K - 200K (Mid-Tier Influence)</option>
@@ -258,7 +258,7 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
                   <select
                     value={formData.niche}
                     onChange={(e) => setFormData({ ...formData, niche: e.target.value })}
-                    className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#111111] border border-[#262626] focus:border-[#3B82F6] text-sm text-[#F3F4F6] outline-none cursor-pointer transition-colors"
+                    className="w-full px-4 py-3 sm:py-3.5 bg-[#111111] border border-[#262626] focus:border-[#3B82F6] text-sm text-[#F3F4F6] outline-none cursor-pointer transition-colors"
                   >
                     <option value="Technology" className="bg-[#111111] text-[#F3F4F6]">Technology & Hardware</option>
                     <option value="Gaming" className="bg-[#111111] text-[#F3F4F6]">Gaming & Esports</option>
@@ -281,7 +281,7 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
                   placeholder="Tell us what we can help you with (views per video, sponsor preferences, audience demographic)..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#111111] border border-[#262626] focus:border-[#3B82F6] text-sm text-[#F3F4F6] placeholder-[#555555] outline-none resize-none transition-colors"
+                  className="w-full px-4 py-3 sm:py-3.5 bg-[#111111] border border-[#262626] focus:border-[#3B82F6] text-sm text-[#F3F4F6] placeholder-[#555555] outline-none resize-none transition-colors"
                 />
               </div>
 
@@ -291,7 +291,7 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
                   type="checkbox"
                   id="creator-apply-terms"
                   defaultChecked
-                  className="mt-1 w-4 h-4 rounded bg-[#111111] border-[#333333] text-[#3B82F6] focus:ring-0 focus:ring-offset-0 cursor-pointer accent-[#3B82F6]"
+                  className="mt-1 w-4 h-4 bg-[#111111] border-[#333333] text-[#3B82F6] focus:ring-0 focus:ring-offset-0 cursor-pointer accent-[#3B82F6]"
                 />
                 <label htmlFor="creator-apply-terms" className="text-xs sm:text-[13px] text-[#9CA3AF] leading-relaxed cursor-pointer">
                   I'd like to receive more information about company, I understand and agree to the{' '}
@@ -303,7 +303,7 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 sm:py-4 px-6 bg-[#3B82F6] hover:bg-[#2563EB] text-white text-sm sm:text-base font-semibold rounded-xl sm:rounded-2xl transition-all duration-200 cursor-pointer shadow-lg shadow-blue-600/25 flex items-center justify-center gap-2"
+                  className="w-full py-3.5 sm:py-4 px-6 bg-[#3B82F6] hover:bg-[#2563EB] text-white text-sm sm:text-base font-semibold transition-all duration-200 cursor-pointer shadow-lg shadow-blue-600/25 flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? (
                     <>
