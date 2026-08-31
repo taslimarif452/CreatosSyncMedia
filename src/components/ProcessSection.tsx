@@ -160,15 +160,6 @@ export const ProcessSection: React.FC = () => {
     }
   });
 
-  const scrollToStep = (index: number) => {
-    if (!containerRef.current) return;
-    const containerTop = containerRef.current.offsetTop;
-    const containerHeight = containerRef.current.offsetHeight;
-    const targetProgress = index === 6 ? 0.96 : (index * 0.155) + 0.05;
-    const scrollTarget = containerTop + (containerHeight * targetProgress);
-    window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
-  };
-
   const handleStartBrief = () => {
     const el = document.getElementById('campaign-lead-form-section');
     if (el) {
@@ -178,17 +169,21 @@ export const ProcessSection: React.FC = () => {
     }
   };
 
+  const handleReplay = () => {
+    if (!containerRef.current) return;
+    const containerTop = containerRef.current.offsetTop;
+    window.scrollTo({ top: containerTop, behavior: 'smooth' });
+  };
+
   return (
     <section
       ref={containerRef}
       id="process-section"
-      className="relative bg-[#080808] border-b border-[#202020] text-[#F5F5F5] h-[550vh]"
+      className="relative bg-[#080808] border-b border-[#222222] text-[#F5F5F5] h-[520vh]"
     >
-      {/* Background ambient lighting */}
+      {/* Background ambient lighting matching ServicesSection */}
       <div className="sticky top-0 left-0 w-full h-screen overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-1/3 left-1/4 w-[550px] sm:w-[750px] h-[380px] sm:h-[550px] bg-[#2E5BFF]/12 rounded-full blur-[140px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[450px] sm:w-[650px] h-[320px] sm:h-[480px] bg-[#1E3A8A]/20 rounded-full blur-[150px]" />
-        <div className="absolute inset-0 bg-grid-subtle opacity-25" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] sm:w-[800px] h-[450px] sm:h-[650px] bg-[#4F7CFF]/5 rounded-full blur-[140px] pointer-events-none" />
       </div>
 
       {/* Sticky Main Stage Container */}
@@ -207,62 +202,17 @@ export const ProcessSection: React.FC = () => {
 
             {/* Main Headline */}
             <h2
-              className="text-2xl sm:text-4xl lg:text-[42px] font-black tracking-tight text-[#F5F5F5] uppercase leading-[1.08] mb-4 sm:mb-6"
-              style={{ fontFamily: "'Syne', 'Plus Jakarta Sans', sans-serif" }}
+              className="text-3xl sm:text-4xl md:text-[40px] lg:text-[46px] font-extrabold tracking-tight text-[#F5F5F5] uppercase leading-[1.08] mb-4 sm:mb-6"
+              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: '-0.02em' }}
             >
               FROM CREATOR DISCOVERY <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#888888] via-[#BBBBBB] to-[#4F7CFF]">
-                TO CAMPAIGN IMPACT.
-              </span>
+              <span className="text-[#6E6E6E]">TO CAMPAIGN IMPACT.</span>
             </h2>
 
             {/* Description */}
-            <p className="text-xs sm:text-sm text-[#A1A1A1] leading-relaxed max-w-lg mb-5 sm:mb-7 font-normal">
+            <p className="text-sm sm:text-base text-[#909090] max-w-md font-normal leading-relaxed mb-6 sm:mb-8">
               A high-precision execution sequence built for modern brands. Scroll to step through our complete 6-stage campaign management architecture.
             </p>
-
-            {/* Interactive Step Tabs & Progress Bar */}
-            <div className="space-y-3 mb-6 sm:mb-8 max-w-md">
-              <div className="flex items-center justify-between text-[11px] font-mono font-bold text-[#777777] mb-1">
-                <span>STAGE {STEPS_DATA[activeStepIndex].number} OF 06</span>
-                <span className="text-[#4F7CFF] font-semibold">{STEPS_DATA[activeStepIndex].stepName}</span>
-              </div>
-
-              {/* Progress Scrub Bar */}
-              <div className="w-full h-1.5 bg-[#181818] rounded-full overflow-hidden border border-[#262626]">
-                <motion.div
-                  className="h-full bg-gradient-to-r from-[#3B71CA] via-[#4F7CFF] to-[#60A5FA]"
-                  style={{
-                    width: `${((activeStepIndex + 1) / 6) * 100}%`,
-                    transition: 'width 0.35s cubic-bezier(0.16, 1, 0.3, 1)'
-                  }}
-                />
-              </div>
-
-              {/* Step Buttons (01 - 06) */}
-              <div className="grid grid-cols-6 gap-1.5 pt-1">
-                {STEPS_DATA.map((step, idx) => {
-                  const isActive = idx === activeStepIndex;
-                  const isPast = idx < activeStepIndex;
-                  return (
-                    <button
-                      key={step.number}
-                      onClick={() => scrollToStep(idx)}
-                      title={`Jump to ${step.stepName}`}
-                      className={`group py-2 rounded-xl text-center font-mono text-[11px] sm:text-xs font-bold transition-all duration-200 cursor-pointer border ${
-                        isActive
-                          ? 'bg-[#3B71CA] text-white border-[#60A5FA] shadow-[0_0_15px_rgba(59,113,202,0.5)] scale-105'
-                          : isPast
-                          ? 'bg-[#18233C] text-[#93C5FD] border-[#254BA6] hover:border-[#60A5FA]'
-                          : 'bg-[#0E0E0E] text-[#666666] border-[#1E1E1E] hover:border-[#333333] hover:text-[#999999]'
-                      }`}
-                    >
-                      {step.number}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
 
             {/* Quick Action Button & Status */}
             <div className="flex items-center gap-3">
@@ -286,8 +236,8 @@ export const ProcessSection: React.FC = () => {
               ───────────────────────────────────────────────────────────── */}
           <div className="lg:col-span-7 flex flex-col items-center justify-center relative w-full">
             
-            {/* Card Deck Wrapper Container - Angled subtly like reference image (-4deg tilt) */}
-            <div className="relative w-full max-w-[530px] h-[410px] sm:h-[440px] flex items-center justify-center -rotate-2 sm:-rotate-3 transition-transform duration-500">
+            {/* Card Deck Unified Container Stage */}
+            <div className="relative w-full max-w-[500px] sm:max-w-[530px] h-[390px] sm:h-[430px] md:h-[450px] flex items-center justify-center">
 
               {/* ── 6 INDIVIDUAL SLIDING PHYSICAL DECK CARDS (01 TO 06) ── */}
               {STEPS_DATA.map((step, idx) => (
@@ -297,7 +247,7 @@ export const ProcessSection: React.FC = () => {
                   index={idx}
                   totalSteps={STEPS_DATA.length}
                   scrollYProgress={scrollYProgress}
-                  activeStepIndex={activeStepIndex}
+                  isActive={idx === activeStepIndex}
                 />
               ))}
 
@@ -306,15 +256,15 @@ export const ProcessSection: React.FC = () => {
                 scrollYProgress={scrollYProgress}
                 isVisible={isFullyCompleted}
                 onAction={handleStartBrief}
-                onReplay={() => scrollToStep(0)}
+                onReplay={handleReplay}
               />
 
             </div>
 
             {/* Scroll Indicator Prompt below deck */}
-            <div className="mt-6 flex items-center gap-2 text-[11px] font-mono text-[#777777]">
+            <div className="mt-4 flex items-center gap-2 text-[11px] font-mono text-[#777777]">
               <ChevronDown className="w-3.5 h-3.5 text-[#4F7CFF] animate-bounce" />
-              <span>Scroll down to slide next card from below</span>
+              <span>Scroll down to stack the next stage</span>
             </div>
 
           </div>
@@ -327,88 +277,112 @@ export const ProcessSection: React.FC = () => {
 
 /* ─────────────────────────────────────────────────────────────────────────────
    SUBCOMPONENT: PHYSICAL DECK CARD
-   Styling inspired by the attached royal blue physical card reference.
-   Card 01 starts in center; Cards 02-06 slide UP from underneath one by one,
-   and settle with an offset forming the stacked fan shown in the reference image.
+   Styling inspired by royal blue physical card reference.
+   Card 01 starts in place; Cards 02-06 slide UP from underneath one by one,
+   and settle with an offset forming the clean stacked card edges shown in reference.
+   Covered cards smoothly fade out their inner text/content to 0.
    ───────────────────────────────────────────────────────────────────────────── */
 interface DeckCardProps {
   step: ProcessStep;
   index: number;
   totalSteps: number;
   scrollYProgress: any;
-  activeStepIndex: number;
+  isActive: boolean;
 }
 
 const DeckCard: React.FC<DeckCardProps> = ({
   step,
   index,
   totalSteps,
-  scrollYProgress
+  scrollYProgress,
+  isActive
 }) => {
   const IconComponent = step.icon;
 
+  // Target settled offsets:
+  // Each card is offset by 16px Y, 4px X, and consistent -1.5deg tilt (top-right higher, top-left lower)
+  const targetY = -40 + index * 16;
+  const targetX = -10 + index * 4;
+  const targetRotate = -1.5;
+
   // Scroll milestones for each of the 6 cards:
-  // Step 01 (index 0): Active [0.00 -> 0.15]
-  // Step 02 (index 1): Slides up from bottom [0.15 -> 0.28], active [0.28 -> 0.32]
-  // Step 03 (index 2): Slides up from bottom [0.31 -> 0.44], active [0.44 -> 0.48]
-  // Step 04 (index 3): Slides up from bottom [0.47 -> 0.60], active [0.60 -> 0.64]
-  // Step 05 (index 4): Slides up from bottom [0.63 -> 0.76], active [0.76 -> 0.80]
-  // Step 06 (index 5): Slides up from bottom [0.79 -> 0.91], active [0.91 -> 1.00]
+  // Card 0 (01): Always present
+  // Card 1 (02): Enters [0.14 -> 0.28], covers Card 01
+  // Card 2 (03): Enters [0.30 -> 0.44], covers Card 02
+  // Card 3 (04): Enters [0.46 -> 0.60], covers Card 03
+  // Card 4 (05): Enters [0.62 -> 0.76], covers Card 04
+  // Card 5 (06): Enters [0.78 -> 0.92], covers Card 05
+  const enterStart = index === 0 ? 0 : 0.14 + (index - 1) * 0.16;
+  const enterEnd = index === 0 ? 0 : enterStart + 0.14;
+  const opacityStart = Math.max(0, enterStart - 0.02);
+  const opacityFull = enterStart + 0.02;
 
-  // Entry timing for this card:
-  const enterStart = index === 0 ? 0 : 0.15 + (index - 1) * 0.16;
-  const enterEnd = index === 0 ? 0 : enterStart + 0.13;
+  // Next card cover timing (when this card gets covered by index + 1):
+  const nextCoverStart = enterEnd + 0.04;
+  const nextCoverEnd = nextCoverStart + 0.12;
 
-  // When card enters from below:
-  // Y position: 135% (below deck) -> 0% (exact center active position)
+  // 1. Vertical Translation (Y):
+  // Starts at '135%' (below container) and smoothly slides up to targetY
   const y = useTransform(
     scrollYProgress,
     index === 0
-      ? [0, 0.16, 0.32, 0.48, 0.64, 0.80, 0.92, 1]
-      : [0, Math.max(0, enterStart - 0.03), enterStart, enterEnd, 1],
+      ? [0, 1]
+      : [0, opacityStart, enterStart, enterEnd, 1],
     index === 0
-      ? ['0px', '0px', '-10px', '-18px', '-26px', '-34px', '-40px', '-40px']
-      : ['135%', '135%', '130%', '0%', '0%']
+      ? [`${targetY}px`, `${targetY}px`]
+      : ['135%', '135%', '125%', `${targetY}px`, `${targetY}px`]
   );
 
-  // X offset: Sits at 0px when entering/active. As subsequent cards enter, it shifts left (-6px per card)
-  // to form the fanned stacked deck from the attached image!
+  // 2. Horizontal Translation (X):
   const x = useTransform(
-    scrollYProgress,
-    [0, enterEnd, enterEnd + 0.16, enterEnd + 0.32, enterEnd + 0.48, 1],
-    ['0px', '0px', '-7px', '-14px', '-21px', `-${(totalSteps - 1 - index) * 7}px`]
-  );
-
-  // Rotation: Sits flat (0deg) when active. As cards stack on top, rotates slightly (-1deg per level)
-  const rotate = useTransform(
-    scrollYProgress,
-    [0, enterEnd, enterEnd + 0.16, enterEnd + 0.32, 1],
-    ['0deg', '0deg', '-0.8deg', '-1.6deg', `-${(totalSteps - 1 - index) * 0.8}deg`]
-  );
-
-  // Opacity: Invisible (0) until scroll nears its entry threshold, then 1
-  const opacity = useTransform(
     scrollYProgress,
     index === 0
       ? [0, 1]
-      : [0, Math.max(0, enterStart - 0.04), enterStart, enterEnd, 1],
-    index === 0
-      ? [1, 1]
-      : [0, 0, 0.4, 1, 1]
-  );
-
-  // Scale: 0.96 when in stack, 1 when active on top
-  const scale = useTransform(
-    scrollYProgress,
-    index === 0
-      ? [0, 0.18, 0.90, 1]
       : [0, enterStart, enterEnd, 1],
     index === 0
-      ? [1, 0.98, 0.95, 0.95]
-      : [0.94, 0.95, 1, 1]
+      ? [`${targetX}px`, `${targetX}px`]
+      : ['0px', '0px', `${targetX}px`, `${targetX}px`]
   );
 
-  // Z-index: Higher index card slides ON TOP of previous cards
+  // 3. Overall Card Opacity:
+  const cardOpacity = useTransform(
+    scrollYProgress,
+    index === 0
+      ? [0, 1]
+      : [0, opacityStart, opacityFull, 1],
+    index === 0
+      ? [1, 1]
+      : [0, 0, 1, 1]
+  );
+
+  // 4. Subtle Rotation: Consistent -1.5deg counter-clockwise tilt across all stacked cards
+  const rotate = useTransform(
+    scrollYProgress,
+    index === 0
+      ? [0, 1]
+      : [0, enterStart, enterEnd, 1],
+    index === 0
+      ? [`${targetRotate}deg`, `${targetRotate}deg`]
+      : [`${targetRotate}deg`, `${targetRotate}deg`, `${targetRotate}deg`, `${targetRotate}deg`]
+  );
+
+  // 5. Card Inner Content Opacity:
+  // When a card gets covered by the next card, its inner text/UI fades out to 0!
+  const contentOpacity = useTransform(
+    scrollYProgress,
+    index === 0
+      ? [0, 0.16, 0.26, 1]
+      : index === totalSteps - 1
+      ? [0, enterStart, enterEnd, 1]
+      : [0, enterStart, enterEnd, nextCoverStart, nextCoverEnd, 1],
+    index === 0
+      ? [1, 1, 0, 0]
+      : index === totalSteps - 1
+      ? [0, 0, 1, 1]
+      : [0, 0, 1, 1, 0, 0]
+  );
+
+  // Z-index: Higher cards sit ON TOP of lower cards
   const zIndex = 10 + index * 10;
 
   return (
@@ -417,78 +391,87 @@ const DeckCard: React.FC<DeckCardProps> = ({
         y,
         x,
         rotate,
-        scale,
-        opacity,
-        zIndex
+        opacity: cardOpacity,
+        zIndex,
+        pointerEvents: isActive ? 'auto' : 'none'
       }}
-      className="absolute w-full h-[370px] sm:h-[400px] rounded-[28px] sm:rounded-[32px] bg-gradient-to-br from-[#3B71CA] via-[#2F61B8] to-[#1E428F] border-[2px] border-[#60A5FA]/80 p-6 sm:p-8 flex flex-col justify-between shadow-[0_22px_55px_rgba(0,0,0,0.85)] select-none overflow-hidden text-white"
+      className={`absolute w-full h-[330px] sm:h-[360px] md:h-[370px] rounded-2xl sm:rounded-[22px] bg-[#111111] border select-none overflow-hidden text-white transition-colors duration-200 ${
+        isActive
+          ? 'border-[#333333] shadow-[0_4px_24px_rgba(0,0,0,0.45)]'
+          : 'border-[#222222] shadow-[0_2px_12px_rgba(0,0,0,0.3)]'
+      }`}
     >
       {/* Top subtle inner specular highlight for physical card sheen */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-white/50 to-transparent" />
-      <div className="absolute -top-24 -right-24 w-48 h-48 bg-white/10 rounded-full blur-2xl pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent rounded-t-2xl pointer-events-none" />
 
-      {/* ── CARD TOP BAR ── */}
-      <div>
-        <div className="flex items-center justify-between mb-3 sm:mb-4">
-          {/* Card Number 01 - 06 */}
-          <div className="flex items-center gap-2.5">
-            <span
-              className="text-2xl sm:text-3xl font-mono font-black tracking-tight text-white drop-shadow-sm"
-              style={{ fontFamily: "'Syne', sans-serif" }}
-            >
-              {step.number}
-            </span>
-            <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
-            <span className="text-[11px] sm:text-xs font-mono font-bold tracking-widest text-blue-100 uppercase">
-              PHASE {step.stepCount}
-            </span>
-          </div>
-
-          {/* Capability Tag Pill */}
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/20 backdrop-blur-md border border-white/20 text-[10px] sm:text-[11px] font-mono font-bold text-white shadow-sm">
-            <span>{step.tag}</span>
-          </div>
-        </div>
-
-        {/* ── STEP NAME & SUBTITLE ── */}
-        <h3
-          className="text-xl sm:text-2xl lg:text-[26px] font-black text-white uppercase tracking-tight leading-snug mb-1 drop-shadow-sm"
-          style={{ fontFamily: "'Syne', sans-serif" }}
-        >
-          {step.stepName}
-        </h3>
-
-        <div className="text-xs sm:text-sm font-semibold text-blue-100 mb-3 sm:mb-4">
-          {step.subtitle}
-        </div>
-
-        {/* Crisp Card Divider */}
-        <div className="w-full h-px bg-white/20 mb-3 sm:mb-4" />
-
-        {/* Key Deliverables Bullet Points */}
-        <div className="space-y-2 mb-2">
-          {step.deliverables.map((item, dIdx) => (
-            <div key={dIdx} className="flex items-center gap-2 text-xs text-blue-50 font-medium">
-              <CheckCircle2 className="w-3.5 h-3.5 text-white flex-shrink-0" />
-              <span className="leading-tight">{item}</span>
+      {/* ── CARD INNER CONTENT: Fades to 0 when covered by the next card ── */}
+      <motion.div
+        style={{ opacity: contentOpacity }}
+        className="w-full h-full p-6 sm:p-7 md:p-8 flex flex-col justify-between"
+      >
+        {/* ── CARD TOP BAR ── */}
+        <div>
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
+            {/* Card Number 01 - 06 */}
+            <div className="flex items-center gap-2.5">
+              <span
+                className="text-2xl sm:text-3xl font-mono font-bold tracking-tight text-[#F5F5F5]"
+                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+              >
+                {step.number}
+              </span>
+              <div className="w-1.5 h-1.5 rounded-full bg-[#444444]" />
+              <span className="text-[11px] sm:text-xs font-mono font-bold tracking-widest text-[#7A7A7A] uppercase">
+                PHASE {step.stepCount}
+              </span>
             </div>
-          ))}
-        </div>
-      </div>
 
-      {/* ── CARD FOOTER: OUTPUT BADGE ── */}
-      <div className="pt-2.5 border-t border-white/20 flex items-center justify-between gap-3 bg-black/25 backdrop-blur-sm -mx-6 sm:-mx-8 -mb-6 sm:-mb-8 px-6 sm:px-8 py-3 rounded-b-[26px] sm:rounded-b-[30px]">
-        <div className="flex items-center gap-2 overflow-hidden">
-          <div className="w-2 h-2 rounded-full bg-[#60A5FA] animate-pulse" />
-          <span className="text-[10px] sm:text-[11px] font-mono font-bold text-blue-100 truncate">
-            {step.outputBadge}
-          </span>
+            {/* Capability Tag Pill */}
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#181818] border border-[#2D2D2D] text-[10px] sm:text-[11px] font-mono font-bold text-[#4F7CFF] shadow-sm">
+              <span>{step.tag}</span>
+            </div>
+          </div>
+
+          {/* ── STEP NAME & SUBTITLE ── */}
+          <h3
+            className="text-xl sm:text-2xl lg:text-[24px] font-bold text-[#F5F5F5] uppercase tracking-tight leading-snug mb-1"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+          >
+            {step.stepName}
+          </h3>
+
+          <div className="text-xs sm:text-sm font-medium text-[#A1A1A1] mb-3 sm:mb-4">
+            {step.subtitle}
+          </div>
+
+          {/* Crisp Card Divider */}
+          <div className="w-full h-px bg-[#1F1F1F] mb-3 sm:mb-4" />
+
+          {/* Key Deliverables Bullet Points */}
+          <div className="space-y-1.5 sm:space-y-2 mb-2">
+            {step.deliverables.map((item, dIdx) => (
+              <div key={dIdx} className="flex items-center gap-2 text-xs text-[#CCCCCC] font-normal">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#4F7CFF] flex-shrink-0" />
+                <span className="leading-tight">{item}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="w-7 h-7 rounded-lg bg-white/15 border border-white/25 flex items-center justify-center flex-shrink-0">
-          <IconComponent className="w-3.5 h-3.5 text-white" />
+        {/* ── CARD FOOTER: OUTPUT BADGE ── */}
+        <div className="pt-2.5 border-t border-[#1F1F1F] flex items-center justify-between gap-3 bg-[#0D0D0D]/90 -mx-6 sm:-mx-8 -mb-6 sm:-mb-8 px-6 sm:px-8 py-3 rounded-b-2xl">
+          <div className="flex items-center gap-2 overflow-hidden">
+            <div className="w-2 h-2 rounded-full bg-[#4F7CFF] animate-pulse" />
+            <span className="text-[10px] sm:text-[11px] font-mono font-bold text-[#A1A1A1] truncate">
+              {step.outputBadge}
+            </span>
+          </div>
+
+          <div className="w-7 h-7 rounded-lg bg-[#181818] border border-[#2D2D2D] flex items-center justify-center flex-shrink-0">
+            <IconComponent className="w-3.5 h-3.5 text-[#4F7CFF]" />
+          </div>
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };
@@ -520,16 +503,17 @@ const CampaignImpactClimax: React.FC<CampaignImpactClimaxProps> = ({
         opacity,
         scale,
         y,
+        rotate: '-1.5deg',
         zIndex: 90,
         pointerEvents: isVisible ? 'auto' : 'none'
       }}
-      className="absolute inset-0 rounded-[28px] sm:rounded-[32px] bg-gradient-to-br from-[#0D1627] via-[#090F1C] to-[#04060A] border-[2px] border-[#3B71CA] p-6 sm:p-8 flex flex-col justify-between shadow-[0_0_80px_rgba(59,113,202,0.45)] backdrop-blur-2xl"
+      className="absolute inset-0 rounded-2xl sm:rounded-[22px] bg-[#111111] border border-[#333333] p-6 sm:p-8 flex flex-col justify-between shadow-[0_8px_32px_rgba(0,0,0,0.6)]"
     >
       {/* Top Header */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3B71CA]/20 border border-[#3B71CA]/50 text-[10px] font-mono font-bold text-[#60A5FA] uppercase tracking-widest">
-            <span className="w-2 h-2 rounded-full bg-[#60A5FA] animate-ping" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#181818] border border-[#2D2D2D] text-[10px] font-mono font-bold text-[#4F7CFF] uppercase tracking-widest">
+            <span className="w-2 h-2 rounded-full bg-[#4F7CFF] animate-ping" />
             FINAL DESTINATION
           </div>
           <span className="text-xs font-mono font-bold text-[#34D399]">ALL 6 STAGES READY</span>
@@ -537,12 +521,12 @@ const CampaignImpactClimax: React.FC<CampaignImpactClimaxProps> = ({
 
         {/* Climax Title */}
         <div className="text-center py-1">
-          <div className="text-xs font-mono font-bold text-[#60A5FA] uppercase tracking-[0.3em] mb-1">
+          <div className="text-xs font-mono font-bold text-[#4F7CFF] uppercase tracking-[0.3em] mb-1">
             ↓
           </div>
           <h3
-            className="text-2xl sm:text-4xl font-black tracking-tight text-white uppercase leading-none mb-2"
-            style={{ fontFamily: "'Syne', sans-serif" }}
+            className="text-2xl sm:text-4xl font-bold tracking-tight text-[#F5F5F5] uppercase leading-none mb-2"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
           >
             CAMPAIGN IMPACT
           </h3>
@@ -553,26 +537,26 @@ const CampaignImpactClimax: React.FC<CampaignImpactClimaxProps> = ({
 
         {/* 3 Value Metrics */}
         <div className="grid grid-cols-3 gap-2 sm:gap-3 my-3">
-          <div className="p-2.5 sm:p-3 rounded-2xl bg-[#111A2E] border border-[#1E3056] text-center">
-            <div className="text-base sm:text-lg font-black font-mono text-[#60A5FA]">100%</div>
-            <div className="text-[9px] sm:text-[10px] text-[#93C5FD] uppercase font-bold">Brand Safe</div>
+          <div className="p-2.5 sm:p-3 rounded-xl bg-[#161616] border border-[#262626] text-center">
+            <div className="text-base sm:text-lg font-bold font-mono text-[#4F7CFF]">100%</div>
+            <div className="text-[9px] sm:text-[10px] text-[#888888] uppercase font-bold">Brand Safe</div>
           </div>
-          <div className="p-2.5 sm:p-3 rounded-2xl bg-[#111A2E] border border-[#1E3056] text-center">
-            <div className="text-base sm:text-lg font-black font-mono text-[#93C5FD]">3.8x</div>
-            <div className="text-[9px] sm:text-[10px] text-[#93C5FD] uppercase font-bold">Avg. ROAS</div>
+          <div className="p-2.5 sm:p-3 rounded-xl bg-[#161616] border border-[#262626] text-center">
+            <div className="text-base sm:text-lg font-bold font-mono text-[#4F7CFF]">3.8x</div>
+            <div className="text-[9px] sm:text-[10px] text-[#888888] uppercase font-bold">Avg. ROAS</div>
           </div>
-          <div className="p-2.5 sm:p-3 rounded-2xl bg-[#111A2E] border border-[#1E3056] text-center">
-            <div className="text-base sm:text-lg font-black font-mono text-[#34D399]">Evergreen</div>
-            <div className="text-[9px] sm:text-[10px] text-[#93C5FD] uppercase font-bold">Traffic Flow</div>
+          <div className="p-2.5 sm:p-3 rounded-xl bg-[#161616] border border-[#262626] text-center">
+            <div className="text-base sm:text-lg font-bold font-mono text-[#34D399]">Evergreen</div>
+            <div className="text-[9px] sm:text-[10px] text-[#888888] uppercase font-bold">Traffic Flow</div>
           </div>
         </div>
       </div>
 
       {/* Bottom CTA Row */}
-      <div className="flex flex-col sm:flex-row items-center gap-3 pt-3 border-t border-[#1C2842]">
+      <div className="flex flex-col sm:flex-row items-center gap-3 pt-3 border-t border-[#1F1F1F]">
         <button
           onClick={onAction}
-          className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-[#3B71CA] hover:bg-[#2F61B8] text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer shadow-lg flex items-center justify-center gap-2"
+          className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-[#4F7CFF] hover:bg-[#3B6AE8] text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer shadow-md flex items-center justify-center gap-2"
         >
           <span>Launch Your Campaign Brief</span>
           <ArrowRight className="w-3.5 h-3.5" />
@@ -580,7 +564,7 @@ const CampaignImpactClimax: React.FC<CampaignImpactClimaxProps> = ({
 
         <button
           onClick={onReplay}
-          className="w-full sm:w-auto py-3 px-4 rounded-xl bg-[#111A2E] hover:bg-[#1A2640] text-[#93C5FD] hover:text-white font-mono text-xs font-bold transition-colors cursor-pointer border border-[#23355C] flex items-center justify-center gap-1.5"
+          className="w-full sm:w-auto py-3 px-4 rounded-xl bg-[#161616] hover:bg-[#202020] text-[#A1A1A1] hover:text-white font-mono text-xs font-bold transition-colors cursor-pointer border border-[#262626] flex items-center justify-center gap-1.5"
         >
           <RotateCcw className="w-3 h-3" />
           <span>Replay</span>

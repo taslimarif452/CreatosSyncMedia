@@ -91,15 +91,6 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
     }
   });
 
-  const scrollToCard = (index: number) => {
-    if (!containerRef.current) return;
-    const containerTop = containerRef.current.offsetTop;
-    const containerHeight = containerRef.current.offsetHeight;
-    const targetProgress = index === 0 ? 0.03 : 0.14 + (index - 1) * 0.16 + 0.08;
-    const scrollTarget = containerTop + containerHeight * targetProgress;
-    window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
-  };
-
   const handleCardClick = (serviceId: string) => {
     if (onSelectService) {
       onSelectService(serviceId);
@@ -140,30 +131,6 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
             <p className="text-sm sm:text-base text-[#909090] max-w-md font-normal leading-relaxed mb-6 sm:mb-8 hidden md:block">
               A comprehensive deck of strategic capabilities built to turn creator integrations into authentic brand equity and measurable ROI.
             </p>
-
-            {/* Step Indicators / Interactive Jump Buttons */}
-            <div className="flex items-center gap-2 mb-6 sm:mb-8">
-              {SERVICES_DECK.map((service, idx) => {
-                const isActive = idx === activeIndex;
-                const isPast = idx < activeIndex;
-                return (
-                  <button
-                    key={service.id}
-                    onClick={() => scrollToCard(idx)}
-                    title={`Go to ${service.title}`}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all duration-200 cursor-pointer border ${
-                      isActive
-                        ? 'bg-[#4F7CFF] text-white border-[#4F7CFF] shadow-[0_0_12px_rgba(79,124,255,0.4)] scale-105'
-                        : isPast
-                        ? 'bg-[#181818] text-[#D0D0D0] border-[#303030] hover:border-[#4F7CFF]/50'
-                        : 'bg-[#101010] text-[#666666] border-[#1F1F1F] hover:border-[#333333]'
-                    }`}
-                  >
-                    {service.number}
-                  </button>
-                );
-              })}
-            </div>
 
             {/* ── FINAL TRANSITION STATE (CAMPAIGN IMPACT) ── */}
             <motion.div
@@ -251,10 +218,10 @@ const ServiceDeckCard: React.FC<ServiceDeckCardProps> = ({
   onClick
 }) => {
   // Target settled offsets:
-  // Each card is offset by 16px Y, 4px X, and 0.25deg rotation
+  // Each card is offset by 16px Y, 4px X, and consistent -1.5deg tilt (top-right higher, top-left lower)
   const targetY = -40 + index * 16;
   const targetX = -10 + index * 4;
-  const targetRotate = -0.6 + index * 0.25;
+  const targetRotate = -1.5;
 
   // Scroll milestones for each card:
   // Card 0 (01): Always present
@@ -306,7 +273,7 @@ const ServiceDeckCard: React.FC<ServiceDeckCardProps> = ({
       : [0, 0, 1, 1]
   );
 
-  // 4. Subtle Rotation:
+  // 4. Subtle Rotation: Consistent -1.5deg counter-clockwise tilt across all stacked cards
   const rotate = useTransform(
     scrollYProgress,
     index === 0
@@ -314,7 +281,7 @@ const ServiceDeckCard: React.FC<ServiceDeckCardProps> = ({
       : [0, enterStart, enterEnd, 1],
     index === 0
       ? [`${targetRotate}deg`, `${targetRotate}deg`]
-      : ['0deg', '0deg', `${targetRotate}deg`, `${targetRotate}deg`]
+      : [`${targetRotate}deg`, `${targetRotate}deg`, `${targetRotate}deg`, `${targetRotate}deg`]
   );
 
   // 5. Card Inner Content Opacity:
