@@ -14,10 +14,13 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#141414] border border-[#262626] text-[11px] font-bold text-[#4F7CFF] uppercase tracking-widest mb-4">
             Agency Philosophy & Identity
           </div>
-          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#F5F5F5] leading-[1.05] mb-6 max-w-4xl">
+          <h1
+            className="text-2xl sm:text-4xl lg:text-[44px] font-normal tracking-tight text-[#EDEDED] leading-[1.25] mb-6 max-w-3xl"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+          >
             We Believe the Best Marketing <br />
-            <span className="text-[#A1A1A1]">Doesn't Feel Like</span> <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F5F5F5] via-[#FFFFFF] to-[#4F7CFF]">
+            <span className="text-[#9A9A9A] font-light">Doesn't Feel Like</span>{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFFFFF] via-[#E2E8F0] to-[#4F7CFF] font-medium">
               Marketing.
             </span>
           </h1>
@@ -27,7 +30,7 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
         </div>
 
         {/* Core Mission Block */}
-        <div className="mb-24 p-8 sm:p-14 rounded-3xl bg-[#101010] border border-[#262626] grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div className="mb-24 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           <div className="lg:col-span-7">
             <span className="text-xs font-bold text-[#4F7CFF] uppercase tracking-widest block mb-2">
               Our Core Thesis
@@ -43,21 +46,21 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
             </p>
           </div>
 
-          <div className="lg:col-span-5 grid grid-cols-2 gap-4">
-            <div className="p-6 rounded-2xl bg-[#141414] border border-[#262626] text-center">
-              <div className="text-3xl font-black text-[#4F7CFF] mb-1">500+</div>
+          <div className="lg:col-span-5 grid grid-cols-2 gap-6 sm:gap-8">
+            <div className="text-center sm:text-left">
+              <div className="text-3xl sm:text-4xl font-black text-[#4F7CFF] mb-1">500+</div>
               <div className="text-xs font-bold text-[#F5F5F5]">Vetted Creators</div>
             </div>
-            <div className="p-6 rounded-2xl bg-[#141414] border border-[#262626] text-center">
-              <div className="text-3xl font-black text-[#4F7CFF] mb-1">50M+</div>
+            <div className="text-center sm:text-left">
+              <div className="text-3xl sm:text-4xl font-black text-[#4F7CFF] mb-1">50M+</div>
               <div className="text-xs font-bold text-[#F5F5F5]">Monthly Reach</div>
             </div>
-            <div className="p-6 rounded-2xl bg-[#141414] border border-[#262626] text-center">
-              <div className="text-3xl font-black text-[#4F7CFF] mb-1">100+</div>
+            <div className="text-center sm:text-left">
+              <div className="text-3xl sm:text-4xl font-black text-[#4F7CFF] mb-1">100+</div>
               <div className="text-xs font-bold text-[#F5F5F5]">Live Campaigns</div>
             </div>
-            <div className="p-6 rounded-2xl bg-[#141414] border border-[#262626] text-center">
-              <div className="text-3xl font-black text-[#4F7CFF] mb-1">Pan-India</div>
+            <div className="text-center sm:text-left">
+              <div className="text-3xl sm:text-4xl font-black text-[#4F7CFF] mb-1">Pan-India</div>
               <div className="text-xs font-bold text-[#F5F5F5]">Regional Reach</div>
             </div>
           </div>

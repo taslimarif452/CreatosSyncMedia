@@ -88,10 +88,15 @@ export const Services: React.FC<ServicesPageProps> = ({ navigate }) => {
               <Sparkles className="w-3.5 h-3.5" /> Full-Cycle Agency Capabilities
             </div>
 
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#F5F5F5] leading-[1.05] mb-6">
+            <h1
+              className="text-2xl sm:text-4xl lg:text-[44px] font-normal tracking-tight text-[#EDEDED] leading-[1.25] mb-6 max-w-3xl"
+              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+            >
               Services That Turn <br />
-              <span className="text-[#A1A1A1]">Creator Influence</span> <br />
-              Into <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F5F5F5] via-white to-[#4F7CFF]">Brand Impact.</span>
+              <span className="text-[#9A9A9A] font-light">Creator Influence</span>{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFFFFF] via-[#E2E8F0] to-[#4F7CFF] font-medium">
+                Into Brand Impact.
+              </span>
             </h1>
 
             <p className="text-sm sm:text-base text-[#A1A1A1] max-w-xl leading-relaxed mb-8 sm:mb-10 font-normal">
@@ -224,9 +229,12 @@ export const Services: React.FC<ServicesPageProps> = ({ navigate }) => {
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#141414] border border-[#262626] text-[11px] font-bold text-[#4F7CFF] tracking-widest mb-4">
                   For Brands
                 </div>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#F5F5F5] tracking-tight leading-tight mb-4">
+                <h2
+                  className="text-2xl sm:text-3xl lg:text-4xl font-normal text-[#EDEDED] tracking-tight leading-[1.25] mb-4"
+                  style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                >
                   You Bring the Brand. <br />
-                  <span className="text-[#A1A1A1]">We Bring the Right Creators.</span>
+                  <span className="text-[#9A9A9A] font-light">We Bring the Right Creators.</span>
                 </h2>
                 <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed">
                   Build campaigns that reach people through creators they already watch, trust, and follow. We eliminate guesswork with audited audience demographics and guaranteed deliverable management.
@@ -362,9 +370,12 @@ export const Services: React.FC<ServicesPageProps> = ({ navigate }) => {
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#141414] border border-[#262626] text-[11px] font-bold text-[#4F7CFF] tracking-widest mb-4">
                   For Creators
                 </div>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#F5F5F5] tracking-tight leading-tight mb-4">
+                <h2
+                  className="text-2xl sm:text-3xl lg:text-4xl font-normal text-[#EDEDED] tracking-tight leading-[1.25] mb-4"
+                  style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                >
                   Your Audience Has Value. <br />
-                  <span className="text-[#A1A1A1]">Your Influence Has Value.</span>
+                  <span className="text-[#9A9A9A] font-light">Your Influence Has Value.</span>
                 </h2>
                 <p className="text-sm sm:text-base text-[#A1A1A1] leading-relaxed mb-8">
                   We connect creators with brands looking for authentic voices and meaningful collaborations. Get verified brand deals, fair market compensation, and zero administrative headache.

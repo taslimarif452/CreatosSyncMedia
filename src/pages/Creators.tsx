@@ -59,9 +59,12 @@ export const Creators: React.FC<CreatorsPageProps> = ({ onSelectCreator, navigat
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#141414] border border-[#262626] text-[11px] font-bold text-[#4F7CFF] uppercase tracking-widest mb-4">
             Creator Directory & Talent Roster
           </div>
-          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#F5F5F5] leading-[1.05] mb-4">
+          <h1
+            className="text-2xl sm:text-4xl lg:text-[44px] font-normal tracking-tight text-[#EDEDED] leading-[1.25] mb-4"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+          >
             Find the Voices <br />
-            <span className="text-[#A1A1A1]">Your Audience Trusts.</span>
+            <span className="text-[#9A9A9A] font-light">Your Audience Trusts.</span>
           </h1>
           <p className="text-sm sm:text-base text-[#A1A1A1] max-w-2xl leading-relaxed">
             Browse our vetted roster of 500+ top Indian YouTube creators across Technology, Finance, Gaming, Lifestyle, and Education.

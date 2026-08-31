@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, CheckCircle2, Mail, MapPin, Phone, Send, Loader2, MessageSquare, Sparkles } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Mail, MapPin, Phone, Send, Loader2, MessageSquare } from 'lucide-react';
 import { sendToWhatsApp, formatContactInquiryMessage } from '../utils/whatsapp';
 
 export const Contact: React.FC = () => {
@@ -43,7 +43,10 @@ export const Contact: React.FC = () => {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#141414] border border-[#262626] text-[11px] font-bold text-[#4F7CFF] uppercase tracking-widest mb-4">
             Get In Touch
           </div>
-          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#F5F5F5] leading-[1.05] mb-4">
+          <h1
+            className="text-2xl sm:text-4xl lg:text-[44px] font-normal tracking-tight text-[#EDEDED] leading-[1.25] mb-4"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+          >
             Let's Talk.
           </h1>
           <p className="text-sm sm:text-base text-[#A1A1A1] max-w-2xl leading-relaxed">
@@ -109,17 +112,6 @@ export const Contact: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* Quick Note Card */}
-            <div className="p-8 rounded-3xl bg-[#101010] border border-[#4F7CFF]/30">
-              <div className="flex items-center gap-2 text-xs font-bold text-[#4F7CFF] uppercase tracking-widest mb-2">
-                <Sparkles className="w-4 h-4" />
-                <span>Fast Agency Response</span>
-              </div>
-              <p className="text-xs text-[#A1A1A1] leading-relaxed">
-                All campaign briefs and creator partnership inquiries are reviewed by our senior partners within 24 hours.
-              </p>
             </div>
           </div>
 

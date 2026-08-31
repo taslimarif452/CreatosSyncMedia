@@ -52,9 +52,12 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#141414] border border-[#262626] text-[11px] font-bold text-[#4F7CFF] uppercase tracking-widest mb-4">
             Creator Representation & Brand Deals
           </div>
-          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#F5F5F5] leading-[1.05] mb-6 max-w-4xl">
+          <h1
+            className="text-2xl sm:text-4xl lg:text-[44px] font-normal tracking-tight text-[#EDEDED] leading-[1.25] mb-6 max-w-3xl"
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+          >
             Your Audience Has Value. <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F5F5F5] via-[#FFFFFF] to-[#4F7CFF]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFFFFF] via-[#E2E8F0] to-[#4F7CFF] font-medium">
               Your Influence Has Value.
             </span>
           </h1>
