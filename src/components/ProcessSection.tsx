@@ -107,7 +107,7 @@ export const ProcessSection: React.FC = () => {
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUpOrLeave}
             onMouseLeave={handleMouseUpOrLeave}
-            className={`w-full flex items-stretch gap-4 sm:gap-6 px-4 sm:px-8 lg:px-16 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory py-4 ${
+            className={`w-full flex items-stretch gap-2.5 sm:gap-6 px-3 sm:px-8 lg:px-16 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory py-3 sm:py-4 ${
               isDragging ? 'cursor-grabbing select-none' : 'cursor-grab'
             }`}
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
@@ -115,7 +115,7 @@ export const ProcessSection: React.FC = () => {
             {STEPS_DATA.map((step, index) => (
               <div
                 key={step.number}
-                className="w-[240px] min-[380px]:w-[260px] sm:w-[320px] lg:w-[350px] flex-shrink-0 snap-start"
+                className="w-[160px] min-[380px]:w-[175px] min-[420px]:w-[190px] sm:w-[320px] lg:w-[350px] flex-shrink-0 snap-start"
               >
                 <ProcessHorizontalCard
                   step={step}
@@ -155,7 +155,7 @@ const ProcessHorizontalCard: React.FC<ProcessHorizontalCardProps> = ({
   return (
     <div
       onClick={onClick}
-      className="group relative h-[215px] min-[380px]:h-[230px] sm:h-[270px] lg:h-[280px] w-full rounded-xl bg-[#0D0D0D] border border-[#202020] hover:border-[#383838] transition-all duration-300 ease-out p-4 min-[380px]:p-5 sm:p-6 flex flex-col justify-between cursor-pointer select-none overflow-hidden hover:-translate-y-1 hover:shadow-[0_6px_25px_rgba(0,0,0,0.5)]"
+      className="group relative h-[145px] min-[380px]:h-[155px] sm:h-[270px] lg:h-[280px] w-full rounded-lg sm:rounded-xl bg-[#0D0D0D] border border-[#202020] hover:border-[#383838] transition-all duration-300 ease-out p-3 min-[380px]:p-3.5 sm:p-6 flex flex-col justify-between cursor-pointer select-none overflow-hidden hover:-translate-y-1 hover:shadow-[0_6px_25px_rgba(0,0,0,0.5)]"
     >
       {/* Top subtle specular highlight */}
       <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
@@ -163,28 +163,28 @@ const ProcessHorizontalCard: React.FC<ProcessHorizontalCardProps> = ({
       {/* ── CARD HEADER: LARGE 01-04 NUMBERING ── */}
       <div className="flex items-center justify-between">
         <span
-          className="text-xl sm:text-2xl lg:text-3xl font-mono font-bold tracking-tight text-[#555555] group-hover:text-[#4F7CFF] transition-colors duration-200"
+          className="text-base min-[380px]:text-lg sm:text-2xl lg:text-3xl font-mono font-bold tracking-tight text-[#555555] group-hover:text-[#4F7CFF] transition-colors duration-200"
           style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
         >
           {step.number}
         </span>
-        <span className="text-[8px] min-[380px]:text-[9px] sm:text-[10px] font-mono font-semibold text-[#444444] uppercase tracking-widest">
-          STEP {step.number}
+        <span className="text-[7px] min-[380px]:text-[8px] sm:text-[10px] font-mono font-semibold text-[#444444] uppercase tracking-wider">
+          P-{step.number}
         </span>
       </div>
 
       {/* ── CARD BODY: NAME, SUBTITLE & SHORT DESCRIPTION ── */}
-      <div className="mt-auto py-1">
+      <div className="mt-auto py-0.5 sm:py-1">
         <h3
-          className="text-base min-[380px]:text-lg sm:text-2xl font-extrabold text-[#F5F5F5] group-hover:text-white uppercase tracking-tight leading-tight mb-0.5 sm:mb-1 transition-colors duration-200"
+          className="text-[11.5px] min-[380px]:text-[12.5px] sm:text-2xl font-extrabold text-[#F5F5F5] group-hover:text-white uppercase tracking-tight leading-tight mb-0.5 sm:mb-1 transition-colors duration-200 line-clamp-1 sm:line-clamp-none"
           style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
         >
           {step.stepName}
         </h3>
-        <div className="text-[11px] min-[380px]:text-xs sm:text-[13px] font-semibold text-[#4F7CFF] mb-1.5 sm:mb-2">
+        <div className="text-[9px] min-[380px]:text-[10px] sm:text-[13px] font-semibold text-[#4F7CFF] mb-0.5 sm:mb-2 line-clamp-1">
           {step.subtitle}
         </div>
-        <p className="text-[11px] min-[380px]:text-xs sm:text-[13px] text-[#959595] leading-snug font-normal line-clamp-3">
+        <p className="text-[8.5px] min-[380px]:text-[9.5px] sm:text-[13px] text-[#959595] leading-tight sm:leading-snug font-normal line-clamp-2 sm:line-clamp-3">
           {step.description}
         </p>
       </div>
