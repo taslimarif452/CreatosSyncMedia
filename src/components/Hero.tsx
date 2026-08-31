@@ -1,59 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 
 interface HeroProps {
   onStartCampaign: () => void;
   onJoinNetwork: () => void;
 }
 
-const HERO_IMAGES = [
-  "https://res.cloudinary.com/dbqmhnahl/image/upload/v1788169787/OL9BZxze2qZUj9IuBKrWtyganvryT8iMs6IiPtfO0tx1_QbUxmt7mBwL3ZRq43FshFvW-1-pw5Wh9v91Di0r-D0mJvkceaid2DClfoP-v4LmfoK0WCSRR6HwOLynaTAwdr7KwW4Nk9lskEHZo3gqNJOEuKTkjuosk5WwWt_8MsD2N4hWMU23__cspsj5wTIS_oncnwj.jpg",
-  "https://res.cloudinary.com/dbqmhnahl/image/upload/v1788169788/RZoDzZ8lm-pATwCA7NB8YSD8JdqLZv9xVI9Bo_ga2P0yAmjWLsh3Qum2zEQCRTu7_38tH-WuNYoQUkjk7wooao0xTMtSSvc6VQdVTuQpiy5kbWP809kcvAzlk9bj4xdbklAE-VPS6LUynO_hSevW-tXdqCOuUZqAZYt_X-uRbk_x95Qom0pNGbdQtMaOoAFN_yr7cbv.jpg",
-  "https://res.cloudinary.com/dbqmhnahl/image/upload/v1788169788/Wd2ajhIeW5hwII4AB4Qqrf9K6A3LvZuZ6tadpnFkROEexhj-bZ4TnjF_rOApXIhL1gq8Xk-3bn3tDGG5QlLd6ZZeLsiKoiREebof79pumHYB1oj3CRyxRwyQwKHAHt2B2QUFYGcpbItXQxN0t56Vtqm6pT0eBsdIE1p0_Xjd2_8QfqvBhJQW-FrnE3G30IAX_vj83ev.jpg"
-];
-
 export const Hero: React.FC<HeroProps> = ({ onStartCampaign, onJoinNetwork }) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % HERO_IMAGES.length);
-    }, 10000);
-
-    return () => clearInterval(timer);
-  }, []);
-
   return (
     <section
       id="hero-section"
       className="relative min-h-[68vh] sm:min-h-[75vh] md:min-h-[80vh] pt-44 sm:pt-52 md:pt-56 pb-20 sm:pb-28 flex items-center justify-center bg-[#080808] border-none overflow-hidden"
     >
-      {/* Hero Background Image Slider - Auto slides right to left every 10s */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-[#080808]">
-        <AnimatePresence initial={false} mode="sync">
-          <motion.img
-            key={HERO_IMAGES[currentImageIndex]}
-            src={HERO_IMAGES[currentImageIndex]}
-            alt={`Hero Background ${currentImageIndex + 1}`}
-            initial={{ x: '100%', opacity: 0 }}
-            animate={{ x: '0%', opacity: 1 }}
-            exit={{ x: '-100%', opacity: 0 }}
-            transition={{ duration: 1.4, ease: [0.25, 1, 0.5, 1] }}
-            className="absolute inset-0 w-full h-full min-w-full min-h-full object-cover object-[center_top] sm:object-[center_5%] md:object-[center_8%]"
-            referrerPolicy="no-referrer"
-          />
-        </AnimatePresence>
+      {/* ── ULTRA-SUBTLE TECHNICAL GRID ── */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {/* Subtle, soft technical grid */}
+        <div
+          className="absolute inset-0 opacity-55"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(255, 255, 255, 0.065) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(255, 255, 255, 0.065) 1px, transparent 1px)
+            `,
+            backgroundSize: '48px 48px',
+            maskImage: 'radial-gradient(ellipse 85% 75% at 50% 50%, black 40%, transparent 95%)',
+            WebkitMaskImage: 'radial-gradient(ellipse 85% 75% at 50% 50%, black 40%, transparent 95%)'
+          }}
+        />
 
-        {/* Soft edge darkening & Vignette overlays */}
-        <div className="absolute inset-0 bg-black/60 md:bg-black/55 z-[2]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#080808] via-transparent to-[#080808] z-[2]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#080808]/80 via-transparent to-[#080808]/80 z-[2]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/30 to-[#080808]/90 z-[2]" />
+        {/* Soft Ambient Glow */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[380px] bg-[#4F7CFF]/10 blur-[140px] rounded-full" />
       </div>
-
-      {/* Subtle atmospheric ambient glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] bg-[#4F7CFF]/15 blur-[130px] rounded-full pointer-events-none z-[1]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <div className="max-w-5xl xl:max-w-6xl mx-auto flex flex-col justify-center items-center text-center">

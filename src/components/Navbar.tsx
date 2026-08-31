@@ -242,7 +242,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center gap-2.5 text-left group focus:outline-none cursor-pointer"
             aria-label="CreatorsSyncMedia Home"
           >
-            <div className="h-9 sm:h-10 w-9 sm:w-10 rounded-lg overflow-hidden bg-[#141414] border border-[#262626] group-hover:border-[#4F7CFF] flex items-center justify-center transition-colors flex-shrink-0 p-0.5">
+            <div className="h-9 sm:h-10 w-9 sm:w-10 flex items-center justify-center flex-shrink-0">
               <img
                 src="https://res.cloudinary.com/dbqmhnahl/image/upload/v1788166817/CSM_fevicon_uvvso7.png"
                 alt="CreatorsSyncMedia Logo"
