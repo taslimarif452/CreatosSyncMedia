@@ -1,5 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'motion/react';
+import React, { useRef, useState } from 'react';
 
 interface ProcessStep {
   number: string;
@@ -41,53 +40,32 @@ const STEPS_DATA: ProcessStep[] = [
 ];
 
 export const ProcessSection: React.FC = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [scrollRange, setScrollRange] = useState<number>(0);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
 
-  // Measure total horizontal track translation distance accurately
-  const updateDimensions = () => {
-    const mobileCheck = window.innerWidth < 768;
-    setIsMobile(mobileCheck);
-
-    if (trackRef.current) {
-      const scrollWidth = trackRef.current.scrollWidth;
-      const clientWidth = window.innerWidth;
-      // Calculate how far we need to translate to show card 04 completely aligned with right padding
-      const totalDistance = Math.max(0, scrollWidth - clientWidth + 96);
-      setScrollRange(totalDistance);
-    }
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!scrollContainerRef.current) return;
+    setIsDragging(true);
+    setStartX(e.pageX - scrollContainerRef.current.offsetLeft);
+    setScrollLeft(scrollContainerRef.current.scrollLeft);
   };
 
-  useEffect(() => {
-    updateDimensions();
-    // Re-check after font loading and render
-    const timer = setTimeout(updateDimensions, 200);
-    window.addEventListener('resize', updateDimensions);
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('resize', updateDimensions);
-    };
-  }, []);
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !scrollContainerRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollContainerRef.current.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    scrollContainerRef.current.scrollLeft = scrollLeft - walk;
+  };
 
-  // Track vertical scroll progress inside the pinned section
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end end']
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 90,
-    damping: 26,
-    mass: 0.6,
-    restDelta: 0.001
-  });
-
-  // Dynamically translate track horizontally based on vertical scroll
-  const xTranslate = useTransform(smoothProgress, (val) => -val * scrollRange);
+  const handleMouseUpOrLeave = () => {
+    setIsDragging(false);
+  };
 
   const handleStartBrief = () => {
+    if (isDragging) return;
     const el = document.getElementById('campaign-lead-form-section');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
@@ -98,18 +76,15 @@ export const ProcessSection: React.FC = () => {
 
   return (
     <section
-      ref={sectionRef}
       id="process-section"
-      className="relative bg-[#080808] border-b border-[#1E1E1E] text-[#F5F5F5] md:h-[220vh]"
+      className="relative bg-[#080808] border-b border-[#1E1E1E] text-[#F5F5F5] py-16 sm:py-24 overflow-hidden"
     >
-      {/* ── STICKY VIEWPORT CONTAINER (DESKTOP) ── */}
-      <div className="md:sticky md:top-0 md:h-screen w-full flex flex-col justify-center py-8 sm:py-12 overflow-hidden z-10">
-        
+      <div className="w-full flex flex-col justify-center overflow-hidden z-10">
         {/* Subtle centered radial ambient glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] md:w-[850px] h-[350px] md:h-[500px] bg-[#4F7CFF]/5 rounded-full blur-[140px] pointer-events-none" />
 
         {/* ── 1. SECTION HEADER (CENTERED EDITORIAL - COMPACT & CRISP) ── */}
-        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center select-none mb-4 sm:mb-6 md:mb-8">
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center select-none mb-8 sm:mb-12">
           <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 rounded-full bg-[#121212] border border-[#262626] text-[9px] sm:text-[10px] md:text-[11px] font-mono font-bold text-[#4F7CFF] uppercase tracking-[0.25em] mb-2 sm:mb-3 shadow-sm">
             <span className="w-1.5 h-1.5 rounded-full bg-[#4F7CFF] animate-pulse" />
             <span>PROCESS</span>
@@ -124,47 +99,33 @@ export const ProcessSection: React.FC = () => {
           </h2>
         </div>
 
-        {/* ── 2. SINGLE HORIZONTAL ROW OF EXACTLY 4 PROCESS CARDS ── */}
-        <div className="relative z-20 w-full flex items-center my-auto overflow-hidden">
-          {isMobile ? (
-            /* Mobile: Native Touch Swipe Track showing compact, nicely proportioned cards */
-            <div className="w-full flex items-stretch gap-3 px-4 overflow-x-auto no-scrollbar snap-x snap-mandatory py-2">
-              {STEPS_DATA.map((step, index) => (
-                <div
-                  key={step.number}
-                  className="w-[215px] min-[380px]:w-[235px] sm:w-[275px] flex-shrink-0 snap-start"
-                >
-                  <ProcessHorizontalCard
-                    step={step}
-                    index={index}
-                    onClick={handleStartBrief}
-                  />
-                </div>
-              ))}
-            </div>
-          ) : (
-            /* Desktop / Tablet: Smooth Scroll-Driven Horizontal Translation Track */
-            <motion.div
-              ref={trackRef}
-              style={{ x: xTranslate }}
-              className="flex items-center gap-5 px-8 lg:px-16 w-max select-none"
-            >
-              {STEPS_DATA.map((step, index) => (
-                <div
-                  key={step.number}
-                  className="w-[300px] lg:w-[330px] flex-shrink-0"
-                >
-                  <ProcessHorizontalCard
-                    step={step}
-                    index={index}
-                    onClick={handleStartBrief}
-                  />
-                </div>
-              ))}
-            </motion.div>
-          )}
+        {/* ── 2. SINGLE HORIZONTAL ROW OF ALL 4 PROCESS CARDS WITH HORIZONTAL SCROLL & DRAG ── */}
+        <div className="relative z-20 w-full flex items-center overflow-hidden">
+          <div
+            ref={scrollContainerRef}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUpOrLeave}
+            onMouseLeave={handleMouseUpOrLeave}
+            className={`w-full flex items-stretch gap-4 sm:gap-6 px-4 sm:px-8 lg:px-16 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory py-4 ${
+              isDragging ? 'cursor-grabbing select-none' : 'cursor-grab'
+            }`}
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {STEPS_DATA.map((step, index) => (
+              <div
+                key={step.number}
+                className="w-[240px] min-[380px]:w-[260px] sm:w-[320px] lg:w-[350px] flex-shrink-0 snap-start"
+              >
+                <ProcessHorizontalCard
+                  step={step}
+                  index={index}
+                  onClick={handleStartBrief}
+                />
+              </div>
+            ))}
+          </div>
         </div>
-
       </div>
     </section>
   );
