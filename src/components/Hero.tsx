@@ -16,11 +16,11 @@ export const Hero: React.FC<HeroProps> = ({ onStartCampaign, onJoinNetwork }) =>
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] bg-[#4F7CFF]/10 blur-[130px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-        <div className="max-w-4xl mx-auto flex flex-col justify-center items-center text-center">
+        <div className="max-w-5xl xl:max-w-6xl mx-auto flex flex-col justify-center items-center text-center">
           {/* Editorial Headline */}
           <h1 className="flex flex-col items-center text-center tracking-tight mb-10 sm:mb-16 md:mb-20 max-w-full px-2">
             <span
-              className="text-3xl min-[380px]:text-4xl min-[480px]:text-5xl sm:text-7xl md:text-8xl lg:text-[104px] xl:text-[112px] font-black text-white leading-[1.1] sm:leading-[1.05] mb-8 sm:mb-12 md:mb-16 tracking-tight max-w-full break-words"
+              className="text-3xl min-[380px]:text-4xl min-[480px]:text-5xl sm:text-6xl md:text-7xl lg:text-[84px] xl:text-[96px] 2xl:text-[104px] font-black text-white leading-[1.1] sm:leading-none mb-8 sm:mb-12 md:mb-16 tracking-tight max-w-full sm:whitespace-nowrap select-none"
               style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: '-0.03em' }}
             >
               CreatorsSyncMedia<span className="text-[#4F7CFF]">.</span>
