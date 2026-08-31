@@ -10,31 +10,23 @@ export const Hero: React.FC<HeroProps> = ({ onStartCampaign, onJoinNetwork }) =>
   return (
     <section
       id="hero-section"
-      className="relative pt-36 sm:pt-44 md:pt-48 pb-14 sm:pb-18 flex items-center bg-[#080808] border-none overflow-hidden"
+      className="relative min-h-[82vh] md:min-h-[88vh] lg:min-h-[92vh] pt-40 sm:pt-48 md:pt-56 pb-20 sm:pb-28 flex items-center justify-center bg-[#080808] border-none overflow-hidden"
     >
-      {/* Hero Background Image - Full fit without cropping on any device */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center bg-[#080808]">
-        {/* Ambient blurred backdrop for seamless edge transition */}
-        <img
-          src="https://images.openai.com/static-rsc-4/OL9BZxze2qZUj9IuBKrWtyganvryT8iMs6IiPtfO0tx1_QbUxmt7mBwL3ZRq43FshFvW-1-pw5Wh9v91Di0r-D0mJvkceaid2DClfoP-v4LmfoK0WCSRR6HwOLynaTAwdr7KwW4Nk9lskEHZo3gqNJOEuKTkjuosk5WwWt_8MsD2N4hWMU23__cspsj5wTIS?purpose=fullsize"
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-40"
-          aria-hidden="true"
-          referrerPolicy="no-referrer"
-        />
-
-        {/* Primary Uncropped Image */}
+      {/* Hero Background Image - Seamless and responsive across all screens */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-[#080808]">
+        {/* Background artwork: tailored scaling across mobile & desktop */}
         <img
           src="https://images.openai.com/static-rsc-4/OL9BZxze2qZUj9IuBKrWtyganvryT8iMs6IiPtfO0tx1_QbUxmt7mBwL3ZRq43FshFvW-1-pw5Wh9v91Di0r-D0mJvkceaid2DClfoP-v4LmfoK0WCSRR6HwOLynaTAwdr7KwW4Nk9lskEHZo3gqNJOEuKTkjuosk5WwWt_8MsD2N4hWMU23__cspsj5wTIS?purpose=fullsize"
           alt="Hero Atmosphere Background"
-          className="relative max-w-full max-h-full w-auto h-full object-contain object-center z-[1]"
+          className="w-full h-full object-cover object-[center_20%] md:object-cover md:object-[center_25%] transition-all duration-300"
           referrerPolicy="no-referrer"
         />
 
-        {/* Dark Overlays & Gradient Vignette */}
-        <div className="absolute inset-0 bg-black/60 z-[2]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#080808] via-transparent to-[#080808] z-[2]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/40 to-[#080808]/90 z-[2]" />
+        {/* Soft edge darkening & Vignette overlays so text pops and corners blend gracefully */}
+        <div className="absolute inset-0 bg-black/60 md:bg-black/55" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#080808] via-transparent to-[#080808]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#080808]/80 via-transparent to-[#080808]/80" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/30 to-[#080808]/90" />
       </div>
 
       {/* Subtle atmospheric ambient glow */}
