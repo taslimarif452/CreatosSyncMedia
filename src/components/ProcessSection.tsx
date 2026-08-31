@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface ProcessStep {
   number: string;
@@ -88,18 +87,6 @@ export const ProcessSection: React.FC = () => {
   // Dynamically translate track horizontally based on vertical scroll
   const xTranslate = useTransform(smoothProgress, (val) => -val * scrollRange);
 
-  const handleManualScroll = (direction: 'left' | 'right') => {
-    if (!sectionRef.current) return;
-    const currentScroll = window.scrollY;
-    const totalSectionHeight = sectionRef.current.offsetHeight - window.innerHeight;
-    const scrollStep = totalSectionHeight / 3;
-    
-    window.scrollTo({
-      top: direction === 'right' ? currentScroll + scrollStep : currentScroll - scrollStep,
-      behavior: 'smooth'
-    });
-  };
-
   const handleStartBrief = () => {
     const el = document.getElementById('campaign-lead-form-section');
     if (el) {
@@ -113,19 +100,19 @@ export const ProcessSection: React.FC = () => {
     <section
       ref={sectionRef}
       id="process-section"
-      className="relative bg-[#080808] border-b border-[#1E1E1E] text-[#F5F5F5] md:h-[260vh]"
+      className="relative bg-[#080808] border-b border-[#1E1E1E] text-[#F5F5F5] md:h-[220vh]"
     >
       {/* ── STICKY VIEWPORT CONTAINER (DESKTOP) ── */}
-      <div className="md:sticky md:top-0 md:h-screen w-full flex flex-col justify-between py-6 sm:py-8 md:py-10 overflow-hidden z-10">
+      <div className="md:sticky md:top-0 md:h-screen w-full flex flex-col justify-center py-8 sm:py-12 overflow-hidden z-10">
         
         {/* Subtle centered radial ambient glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] md:w-[850px] h-[350px] md:h-[500px] bg-[#4F7CFF]/5 rounded-full blur-[140px] pointer-events-none" />
 
         {/* ── 1. SECTION HEADER (CENTERED EDITORIAL - COMPACT & CRISP) ── */}
-        <div className="relative z-20 w-full max-w-7xl mx-auto px-6 text-center flex flex-col items-center select-none mb-3 sm:mb-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#121212] border border-[#262626] text-[10px] sm:text-[11px] font-mono font-bold text-[#4F7CFF] uppercase tracking-[0.25em] mb-2.5 shadow-sm">
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-6 text-center flex flex-col items-center select-none mb-6 sm:mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#121212] border border-[#262626] text-[10px] sm:text-[11px] font-mono font-bold text-[#4F7CFF] uppercase tracking-[0.25em] mb-3 shadow-sm">
             <span className="w-1.5 h-1.5 rounded-full bg-[#4F7CFF] animate-pulse" />
-            <span>SERVICES</span>
+            <span>PROCESS</span>
           </div>
 
           <h2
@@ -138,7 +125,7 @@ export const ProcessSection: React.FC = () => {
         </div>
 
         {/* ── 2. SINGLE HORIZONTAL ROW OF EXACTLY 4 PROCESS CARDS ── */}
-        <div className="relative z-20 w-full flex-1 flex items-center my-auto overflow-hidden">
+        <div className="relative z-20 w-full flex items-center my-auto overflow-hidden">
           {isMobile ? (
             /* Mobile: Native Touch Swipe Track showing ~1.1-1.2 cards with smooth snap */
             <div className="w-full flex items-stretch gap-3.5 px-5 overflow-x-auto no-scrollbar snap-x snap-mandatory py-2">
@@ -156,7 +143,7 @@ export const ProcessSection: React.FC = () => {
               ))}
             </div>
           ) : (
-            /* Desktop / Tablet: Smooth Scroll-Driven Horizontal Translation Track + Drag Support */
+            /* Desktop / Tablet: Smooth Scroll-Driven Horizontal Translation Track */
             <motion.div
               ref={trackRef}
               style={{ x: xTranslate }}
@@ -176,56 +163,6 @@ export const ProcessSection: React.FC = () => {
               ))}
             </motion.div>
           )}
-        </div>
-
-        {/* ── 3. BOTTOM FOOTER MILESTONE: BRAND IMPACT ── */}
-        <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-8 mt-3 sm:mt-4 flex items-center justify-between">
-          
-          {/* Left / Desktop Navigation Controls */}
-          <div className="hidden md:flex items-center gap-2.5">
-            <button
-              onClick={() => handleManualScroll('left')}
-              title="Previous Step"
-              className="w-7 h-7 rounded-lg bg-[#121212] border border-[#242424] hover:border-[#383838] flex items-center justify-center text-[#888888] hover:text-[#F5F5F5] transition-colors cursor-pointer"
-            >
-              <ChevronLeft className="w-3.5 h-3.5" />
-            </button>
-            <button
-              onClick={() => handleManualScroll('right')}
-              title="Next Step"
-              className="w-7 h-7 rounded-lg bg-[#121212] border border-[#242424] hover:border-[#383838] flex items-center justify-center text-[#888888] hover:text-[#F5F5F5] transition-colors cursor-pointer"
-            >
-              <ChevronRight className="w-3.5 h-3.5" />
-            </button>
-            <span className="text-[10px] font-mono text-[#666666] uppercase tracking-wider pl-1.5">
-              SCROLL TO EXPLORE
-            </span>
-          </div>
-
-          {/* Center/Destination Milestone */}
-          <div className="flex items-center gap-2.5 mx-auto md:mx-0">
-            <div className="w-5 h-5 rounded-full bg-[#121212] border border-[#262626] flex items-center justify-center text-[11px] text-[#4F7CFF] shadow-sm">
-              ↓
-            </div>
-            <div
-              className="px-3.5 py-1 rounded-full bg-[#111111] border border-[#262626] text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#999999]"
-            >
-              BRAND IMPACT
-            </div>
-          </div>
-
-          {/* Right Progress indicator on Desktop */}
-          <div className="hidden md:flex items-center gap-2">
-            <span className="text-[10px] font-mono text-[#555555]">01</span>
-            <div className="w-20 h-1 bg-[#181818] rounded-full overflow-hidden border border-[#242424]">
-              <motion.div
-                className="h-full bg-[#4F7CFF]"
-                style={{ width: useTransform(smoothProgress, [0, 1], ['25%', '100%']) }}
-              />
-            </div>
-            <span className="text-[10px] font-mono text-[#555555]">04</span>
-          </div>
-
         </div>
 
       </div>
@@ -276,7 +213,7 @@ const ProcessHorizontalCard: React.FC<ProcessHorizontalCardProps> = ({
       </div>
 
       {/* ── CARD BODY: NAME, SUBTITLE & SHORT DESCRIPTION ── */}
-      <div className="my-auto py-1">
+      <div className="mt-auto py-1">
         <h3
           className="text-xl sm:text-2xl font-extrabold text-[#F5F5F5] group-hover:text-white uppercase tracking-tight leading-tight mb-1 transition-colors duration-200"
           style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
@@ -289,14 +226,6 @@ const ProcessHorizontalCard: React.FC<ProcessHorizontalCardProps> = ({
         <p className="text-xs sm:text-[13px] text-[#959595] leading-snug font-normal line-clamp-3">
           {step.description}
         </p>
-      </div>
-
-      {/* ── CARD FOOTER: PHASE 0X / 04 ── */}
-      <div className="pt-3 border-t border-[#1C1C1C] flex items-center justify-between">
-        <span className="text-[10px] sm:text-[11px] font-mono font-bold tracking-wider text-[#777777] uppercase group-hover:text-[#AAAAAA] transition-colors duration-200">
-          {step.phaseTag}
-        </span>
-        <div className="w-1.5 h-1.5 rounded-full bg-[#333333] group-hover:bg-[#4F7CFF] transition-colors duration-200" />
       </div>
     </div>
   );
