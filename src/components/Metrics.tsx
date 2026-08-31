@@ -86,8 +86,8 @@ export const Metrics: React.FC = () => {
           </p>
         </div>
 
-        {/* 4-Metric Grid with expanded height and generous spacing */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 rounded-none bg-black border border-[#222222]">
+        {/* 4-Metric Container: 4-Column Grid on all screen sizes including mobile (No horizontal scrolling) */}
+        <div className="grid grid-cols-4 rounded-none bg-black border border-[#222222]">
           {METRICS_DATA.map((item, index) => {
             // Calculate dynamic animated value if numerical
             let displayVal = item.value;
@@ -99,19 +99,19 @@ export const Metrics: React.FC = () => {
             return (
               <div
                 key={item.id}
-                className={`min-h-[190px] sm:min-h-[220px] md:min-h-[240px] p-6 sm:p-8 md:p-10 flex flex-col justify-between transition-colors duration-200 hover:bg-[#0c0c0c] ${
-                  index !== 0 ? 'border-t sm:border-t-0 sm:border-l border-[#1F1F1F]' : ''
+                className={`min-h-[110px] sm:min-h-[160px] md:min-h-[220px] p-2.5 sm:p-4 md:p-8 flex flex-col justify-between transition-colors duration-200 hover:bg-[#0c0c0c] ${
+                  index !== 0 ? 'border-l border-[#1F1F1F]' : ''
                 }`}
               >
                 <div>
-                  <div className="text-3xl sm:text-4xl lg:text-5xl font-normal text-[#F5F5F5] tracking-tight mb-2.5 sm:mb-3">
+                  <div className="text-base min-[380px]:text-lg sm:text-3xl md:text-4xl lg:text-5xl font-bold sm:font-normal text-[#F5F5F5] tracking-tight mb-1 sm:mb-2">
                     {displayVal}
                   </div>
-                  <div className="text-sm sm:text-base font-normal text-[#F5F5F5] uppercase tracking-wider mb-2">
+                  <div className="text-[10px] min-[380px]:text-[11px] sm:text-sm md:text-base font-medium sm:font-normal text-[#F5F5F5] uppercase tracking-tight sm:tracking-wider">
                     {item.label}
                   </div>
                 </div>
-                <div className="text-xs sm:text-sm font-normal text-[#8A8A8A] leading-relaxed pt-2 border-t border-[#1a1a1a]/60">
+                <div className="text-[9px] min-[380px]:text-[10px] sm:text-xs md:text-sm font-normal text-[#8A8A8A] leading-tight sm:leading-relaxed pt-1.5 sm:pt-2 border-t border-[#1a1a1a]/60 mt-2">
                   {item.sublabel}
                 </div>
               </div>

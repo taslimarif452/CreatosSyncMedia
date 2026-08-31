@@ -89,17 +89,17 @@ export const TrustSection: React.FC = () => {
       {ecosystemPillars.map((item, idx) => (
         <div
           key={idx}
-          className="flex flex-col items-center justify-center text-center shrink-0 select-none group px-8 sm:px-12 md:px-16 py-4 border-r border-[#262626]"
+          className="flex flex-col items-center justify-center text-center shrink-0 select-none group px-5 sm:px-10 md:px-16 py-2 sm:py-4 border-r border-[#262626]"
         >
           <img
             src={item.image}
             alt={item.label}
-            className="h-28 sm:h-36 md:h-44 max-w-[280px] object-contain mb-4 pointer-events-none drop-shadow-md"
+            className="h-16 sm:h-28 md:h-36 max-w-[170px] sm:max-w-[240px] md:max-w-[280px] object-contain mb-2 sm:mb-4 pointer-events-none drop-shadow-md"
             loading="lazy"
             draggable={false}
             referrerPolicy="no-referrer"
           />
-          <span className="text-sm sm:text-base md:text-lg font-medium text-[#D4D4D4] group-hover:text-white transition-colors leading-tight whitespace-nowrap">
+          <span className="text-xs sm:text-base md:text-lg font-medium text-[#D4D4D4] group-hover:text-white transition-colors leading-tight whitespace-nowrap">
             {item.label}
           </span>
         </div>
@@ -110,7 +110,7 @@ export const TrustSection: React.FC = () => {
   return (
     <section
       id="trust-section"
-      className="py-14 sm:py-16 md:py-20 bg-[#080808] border border-[#262626] overflow-hidden flex items-center min-h-[160px] sm:min-h-[200px]"
+      className="py-8 sm:py-14 md:py-20 bg-[#080808] border-y border-[#262626] overflow-hidden flex items-center min-h-[110px] sm:min-h-[160px] md:min-h-[200px]"
     >
       <div className="w-full">
         <div className="flex flex-col items-center text-center">
