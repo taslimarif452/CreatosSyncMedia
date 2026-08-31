@@ -89,15 +89,15 @@ export const Home: React.FC<HomeProps> = ({
         }}
       />
 
-      {/* 06. Campaign Showcase */}
+      {/* 06. How It Works / Process */}
+      <ProcessSection />
+
+      {/* 07. Campaign Showcase (Campaigns That Made Noise) */}
       <CampaignShowcase
         onSelectCampaign={onSelectCampaign}
       />
 
-      {/* 08. How It Works */}
-      <ProcessSection />
-
-      {/* 09. For Brands CTA */}
+      {/* 08. For Brands CTA */}
       <BrandCTA onStartCampaign={scrollToCampaignForm} />
 
       {/* 10. For Creators CTA */}
