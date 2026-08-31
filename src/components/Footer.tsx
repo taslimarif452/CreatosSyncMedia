@@ -32,7 +32,7 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
               <div className="flex items-center gap-2.5 mb-4">
                 <div className="h-9 sm:h-10 w-9 sm:w-10 rounded-lg overflow-hidden bg-[#141414] border border-[#262626] flex items-center justify-center flex-shrink-0 p-0.5">
                   <img
-                    src="https://res.cloudinary.com/dbqmhnahl/image/upload/v1788163020/ChatGPT_Image_Aug_31_2026_11_56_21_AM_n89mr2.png"
+                    src="https://res.cloudinary.com/dbqmhnahl/image/upload/v1788166817/CSM_fevicon_uvvso7.png"
                     alt="CreatorsSyncMedia Logo"
                     className="w-full h-full object-contain"
                     referrerPolicy="no-referrer"

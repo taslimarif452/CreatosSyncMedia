@@ -123,7 +123,7 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
         </div>
 
         {/* Application Form Section */}
-        <div id="creator-apply-form" className="max-w-3xl mx-auto p-8 sm:p-12 rounded-3xl bg-[#101010] border border-[#262626] shadow-2xl">
+        <div id="creator-apply-form" className="max-w-3xl mx-auto p-6 sm:p-10 lg:p-12 rounded-2xl sm:rounded-3xl bg-[#0B0B0B] border border-[#202020] shadow-2xl">
           <div className="text-center max-w-xl mx-auto mb-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#141414] border border-[#262626] text-[11px] font-bold text-[#4F7CFF] uppercase tracking-widest mb-3">
               Creator Network Application
@@ -131,7 +131,7 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5]">
               Join the CreatorsSyncMedia Roster
             </h2>
-            <p className="text-xs text-[#A1A1A1] mt-2">
+            <p className="text-xs sm:text-sm text-[#9CA3AF] mt-2">
               Free to join. 100% creator-friendly. We review channel statistics and respond within 48 hours.
             </p>
           </div>
@@ -144,20 +144,20 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
               <h3 className="text-xl font-bold text-[#F5F5F5] mb-2">
                 Application Transferred to WhatsApp
               </h3>
-              <p className="text-xs text-[#A1A1A1] max-w-md mx-auto mb-6">
+              <p className="text-sm text-[#9CA3AF] max-w-md mx-auto mb-6">
                 Thank you for applying, <strong className="text-[#F5F5F5]">{formData.creatorName}</strong>! Your channel application has been routed directly to our talent acquisition team on WhatsApp (<strong className="text-[#4F7CFF]">+91 81089 75875</strong>).
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <button
                   onClick={() => sendToWhatsApp(formatCreatorApplicationMessage(formData))}
-                  className="px-6 py-2.5 bg-[#4F7CFF] hover:bg-[#3D6CE5] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all cursor-pointer shadow-lg shadow-[#4F7CFF]/20 flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto px-6 py-3.5 bg-[#3B82F6] hover:bg-[#2563EB] text-white text-xs font-semibold uppercase tracking-wider rounded-xl transition-all cursor-pointer shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2"
                 >
                   <MessageSquare className="w-4 h-4" />
                   <span>Open WhatsApp Chat</span>
                 </button>
                 <button
                   onClick={() => setIsSubmitted(false)}
-                  className="px-6 py-2.5 bg-[#141414] hover:bg-[#1C1C1C] border border-[#262626] text-xs font-bold text-[#F5F5F5] uppercase tracking-wider rounded-xl cursor-pointer"
+                  className="w-full sm:w-auto px-6 py-3.5 bg-[#111111] hover:bg-[#1A1A1A] border border-[#262626] text-xs font-semibold text-[#E5E7EB] uppercase tracking-wider rounded-xl cursor-pointer"
                 >
                   Submit Another Channel
                 </button>
@@ -171,22 +171,22 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
                 </div>
               )}
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#A1A1A1] mb-1.5">
+                  <label className="block text-xs sm:text-[13px] font-medium text-[#E5E7EB] mb-2">
                     Creator / Channel Name *
                   </label>
                   <input
                     type="text"
-                    placeholder="e.g. GeekyTech / Rohit Sharma"
+                    placeholder="e.g. Rohit Sharma"
                     value={formData.creatorName}
                     onChange={(e) => setFormData({ ...formData, creatorName: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-[#141414] border border-[#262626] focus:border-[#4F7CFF] text-xs text-[#F5F5F5] outline-none"
+                    className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#111111] border border-[#262626] focus:border-[#3B82F6] text-sm text-[#F3F4F6] placeholder-[#555555] outline-none transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#A1A1A1] mb-1.5">
+                  <label className="block text-xs sm:text-[13px] font-medium text-[#E5E7EB] mb-2">
                     Primary Email *
                   </label>
                   <input
@@ -194,14 +194,14 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
                     placeholder="business@yourchannel.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-[#141414] border border-[#262626] focus:border-[#4F7CFF] text-xs text-[#F5F5F5] outline-none"
+                    className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#111111] border border-[#262626] focus:border-[#3B82F6] text-sm text-[#F3F4F6] placeholder-[#555555] outline-none transition-colors"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#A1A1A1] mb-1.5">
+                  <label className="block text-xs sm:text-[13px] font-medium text-[#E5E7EB] mb-2">
                     YouTube Channel Link *
                   </label>
                   <input
@@ -209,87 +209,110 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
                     placeholder="https://youtube.com/@yourchannel"
                     value={formData.youtubeUrl}
                     onChange={(e) => setFormData({ ...formData, youtubeUrl: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-[#141414] border border-[#262626] focus:border-[#4F7CFF] text-xs text-[#F5F5F5] outline-none"
+                    className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#111111] border border-[#262626] focus:border-[#3B82F6] text-sm text-[#F3F4F6] placeholder-[#555555] outline-none transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#A1A1A1] mb-1.5">
-                    WhatsApp / Phone
+                  <label className="block text-xs sm:text-[13px] font-medium text-[#E5E7EB] mb-2">
+                    Phone Number / WhatsApp
                   </label>
-                  <input
-                    type="tel"
-                    placeholder="+91 98765 43210"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-[#141414] border border-[#262626] focus:border-[#4F7CFF] text-xs text-[#F5F5F5] outline-none"
-                  />
+                  <div className="flex items-center rounded-xl bg-[#111111] border border-[#262626] focus-within:border-[#3B82F6] transition-colors overflow-hidden">
+                    <div className="flex items-center gap-1.5 px-3.5 py-3 sm:py-3.5 border-r border-[#262626] bg-[#0E0E0E] text-xs text-[#E5E7EB] select-none flex-shrink-0">
+                      <span className="text-sm">🇮🇳</span>
+                      <span className="text-[11px] font-mono text-[#9CA3AF]">+91</span>
+                      <span className="text-[10px] text-[#666666]">▾</span>
+                    </div>
+                    <input
+                      type="tel"
+                      placeholder="(+91) 98765-43210"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="w-full px-4 py-3 sm:py-3.5 bg-transparent text-sm text-[#F3F4F6] placeholder-[#555555] outline-none"
+                    />
+                  </div>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#A1A1A1] mb-1.5">
+                  <label className="block text-xs sm:text-[13px] font-medium text-[#E5E7EB] mb-2">
                     Subscriber Tier
                   </label>
                   <select
                     value={formData.subscriberCount}
                     onChange={(e) => setFormData({ ...formData, subscriberCount: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-[#141414] border border-[#262626] focus:border-[#4F7CFF] text-xs text-[#F5F5F5] outline-none cursor-pointer"
+                    className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#111111] border border-[#262626] focus:border-[#3B82F6] text-sm text-[#F3F4F6] outline-none cursor-pointer transition-colors"
                   >
-                    <option value="10K - 50K">10K - 50K (Rising Creator)</option>
-                    <option value="50K - 200K">50K - 200K (Mid-Tier Influence)</option>
-                    <option value="200K - 1M">200K - 1M (Macro Leader)</option>
-                    <option value="1M+">1M+ (Mega Authority)</option>
+                    <option value="10K - 50K" className="bg-[#111111] text-[#F3F4F6]">10K - 50K (Rising Creator)</option>
+                    <option value="50K - 200K" className="bg-[#111111] text-[#F3F4F6]">50K - 200K (Mid-Tier Influence)</option>
+                    <option value="200K - 1M" className="bg-[#111111] text-[#F3F4F6]">200K - 1M (Macro Leader)</option>
+                    <option value="1M+" className="bg-[#111111] text-[#F3F4F6]">1M+ (Mega Authority)</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#A1A1A1] mb-1.5">
+                  <label className="block text-xs sm:text-[13px] font-medium text-[#E5E7EB] mb-2">
                     Primary Content Niche
                   </label>
                   <select
                     value={formData.niche}
                     onChange={(e) => setFormData({ ...formData, niche: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-[#141414] border border-[#262626] focus:border-[#4F7CFF] text-xs text-[#F5F5F5] outline-none cursor-pointer"
+                    className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#111111] border border-[#262626] focus:border-[#3B82F6] text-sm text-[#F3F4F6] outline-none cursor-pointer transition-colors"
                   >
-                    <option value="Technology">Technology & Hardware</option>
-                    <option value="Gaming">Gaming & Esports</option>
-                    <option value="Finance">Finance & Investing</option>
-                    <option value="Lifestyle">Lifestyle & Fashion</option>
-                    <option value="Education">Education & EdTech</option>
-                    <option value="Fitness">Fitness & Health</option>
-                    <option value="Beauty">Beauty & Skincare</option>
-                    <option value="Comedy">Comedy & Entertainment</option>
+                    <option value="Technology" className="bg-[#111111] text-[#F3F4F6]">Technology & Hardware</option>
+                    <option value="Gaming" className="bg-[#111111] text-[#F3F4F6]">Gaming & Esports</option>
+                    <option value="Finance" className="bg-[#111111] text-[#F3F4F6]">Finance & Investing</option>
+                    <option value="Lifestyle" className="bg-[#111111] text-[#F3F4F6]">Lifestyle & Fashion</option>
+                    <option value="Education" className="bg-[#111111] text-[#F3F4F6]">Education & EdTech</option>
+                    <option value="Fitness" className="bg-[#111111] text-[#F3F4F6]">Fitness & Health</option>
+                    <option value="Beauty" className="bg-[#111111] text-[#F3F4F6]">Beauty & Skincare</option>
+                    <option value="Comedy" className="bg-[#111111] text-[#F3F4F6]">Comedy & Entertainment</option>
                   </select>
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#A1A1A1] mb-1.5">
-                  Anything else about your channel & audience?
+                <label className="block text-xs sm:text-[13px] font-medium text-[#E5E7EB] mb-2">
+                  Message / Tell us what we can help you with
                 </label>
                 <textarea
                   rows={3}
-                  placeholder="e.g. Average views per video, core audience age split, favorite types of sponsorships..."
+                  placeholder="Tell us what we can help you with (views per video, sponsor preferences, audience demographic)..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-[#141414] border border-[#262626] focus:border-[#4F7CFF] text-xs text-[#F5F5F5] outline-none resize-none"
+                  className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#111111] border border-[#262626] focus:border-[#3B82F6] text-sm text-[#F3F4F6] placeholder-[#555555] outline-none resize-none transition-colors"
                 />
+              </div>
+
+              {/* Privacy Checkbox row matching image UI */}
+              <div className="flex items-start gap-3 pt-2 select-none">
+                <input
+                  type="checkbox"
+                  id="creator-apply-terms"
+                  defaultChecked
+                  className="mt-1 w-4 h-4 rounded bg-[#111111] border-[#333333] text-[#3B82F6] focus:ring-0 focus:ring-offset-0 cursor-pointer accent-[#3B82F6]"
+                />
+                <label htmlFor="creator-apply-terms" className="text-xs sm:text-[13px] text-[#9CA3AF] leading-relaxed cursor-pointer">
+                  I'd like to receive more information about company, I understand and agree to the{' '}
+                  <span className="text-[#3B82F6] hover:underline">Privacy Policy</span>
+                </label>
               </div>
 
               <div className="pt-2">
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-4 bg-[#4F7CFF] hover:bg-[#3D6CE5] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all cursor-pointer shadow-lg shadow-[#4F7CFF]/20 flex items-center justify-center gap-2"
+                  className="w-full py-3.5 sm:py-4 px-6 bg-[#3B82F6] hover:bg-[#2563EB] text-white text-sm sm:text-base font-semibold rounded-xl sm:rounded-2xl transition-all duration-200 cursor-pointer shadow-lg shadow-blue-600/25 flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? (
-                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Submitting Application...</span>
+                    </>
                   ) : (
                     <>
-                      <span>Submit Creator Application</span>
-                      <Send className="w-3.5 h-3.5" />
+                      <span>Send Message</span>
                     </>
                   )}
                 </button>
