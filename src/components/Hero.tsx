@@ -12,18 +12,29 @@ export const Hero: React.FC<HeroProps> = ({ onStartCampaign, onJoinNetwork }) =>
       id="hero-section"
       className="relative pt-36 sm:pt-44 md:pt-48 pb-14 sm:pb-18 flex items-center bg-[#080808] border-none overflow-hidden"
     >
-      {/* Hero Background Image */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      {/* Hero Background Image - Full fit without cropping on any device */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center bg-[#080808]">
+        {/* Ambient blurred backdrop for seamless edge transition */}
+        <img
+          src="https://images.openai.com/static-rsc-4/OL9BZxze2qZUj9IuBKrWtyganvryT8iMs6IiPtfO0tx1_QbUxmt7mBwL3ZRq43FshFvW-1-pw5Wh9v91Di0r-D0mJvkceaid2DClfoP-v4LmfoK0WCSRR6HwOLynaTAwdr7KwW4Nk9lskEHZo3gqNJOEuKTkjuosk5WwWt_8MsD2N4hWMU23__cspsj5wTIS?purpose=fullsize"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-40"
+          aria-hidden="true"
+          referrerPolicy="no-referrer"
+        />
+
+        {/* Primary Uncropped Image */}
         <img
           src="https://images.openai.com/static-rsc-4/OL9BZxze2qZUj9IuBKrWtyganvryT8iMs6IiPtfO0tx1_QbUxmt7mBwL3ZRq43FshFvW-1-pw5Wh9v91Di0r-D0mJvkceaid2DClfoP-v4LmfoK0WCSRR6HwOLynaTAwdr7KwW4Nk9lskEHZo3gqNJOEuKTkjuosk5WwWt_8MsD2N4hWMU23__cspsj5wTIS?purpose=fullsize"
           alt="Hero Atmosphere Background"
-          className="w-full h-full object-cover object-center scale-105"
+          className="relative max-w-full max-h-full w-auto h-full object-contain object-center z-[1]"
           referrerPolicy="no-referrer"
         />
+
         {/* Dark Overlays & Gradient Vignette */}
-        <div className="absolute inset-0 bg-black/70" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#080808] via-transparent to-[#080808]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/40 to-[#080808]/90" />
+        <div className="absolute inset-0 bg-black/60 z-[2]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#080808] via-transparent to-[#080808] z-[2]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/40 to-[#080808]/90 z-[2]" />
       </div>
 
       {/* Subtle atmospheric ambient glow */}
