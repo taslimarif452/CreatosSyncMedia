@@ -30,8 +30,13 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
           <div className="lg:col-span-2 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2.5 mb-4">
-                <div className="w-7 h-7 rounded-lg bg-[#141414] border border-[#262626] flex items-center justify-center">
-                  <span className="w-2 h-2 rounded-full bg-[#4F7CFF]" />
+                <div className="w-8 h-8 rounded-lg overflow-hidden bg-[#141414] border border-[#262626] flex items-center justify-center flex-shrink-0">
+                  <img
+                    src="https://res.cloudinary.com/dbqmhnahl/image/upload/v1788161482/ChatGPT_Image_Aug_31_2026_11_56_21_AM_l9cjw7.png"
+                    alt="CreatorsSyncMedia Logo"
+                    className="w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
+                  />
                 </div>
                 <span
                   className="text-xl font-extrabold tracking-tight text-[#F5F5F5]"

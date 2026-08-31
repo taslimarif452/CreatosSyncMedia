@@ -242,8 +242,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center gap-2.5 text-left group focus:outline-none cursor-pointer"
             aria-label="CreatorsSyncMedia Home"
           >
-            <div className="w-8 h-8 rounded-lg bg-[#141414] border border-[#262626] group-hover:border-[#4F7CFF] flex items-center justify-center transition-colors">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#4F7CFF] group-hover:scale-125 transition-transform" />
+            <div className="w-8 h-8 rounded-lg overflow-hidden bg-[#141414] border border-[#262626] group-hover:border-[#4F7CFF] flex items-center justify-center transition-colors flex-shrink-0">
+              <img
+                src="https://res.cloudinary.com/dbqmhnahl/image/upload/v1788161482/ChatGPT_Image_Aug_31_2026_11_56_21_AM_l9cjw7.png"
+                alt="CreatorsSyncMedia Logo"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                referrerPolicy="no-referrer"
+              />
             </div>
             <div className="flex flex-col">
               <span
