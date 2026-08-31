@@ -109,8 +109,8 @@ export const ProcessSection: React.FC = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] md:w-[850px] h-[350px] md:h-[500px] bg-[#4F7CFF]/5 rounded-full blur-[140px] pointer-events-none" />
 
         {/* ── 1. SECTION HEADER (CENTERED EDITORIAL - COMPACT & CRISP) ── */}
-        <div className="relative z-20 w-full max-w-7xl mx-auto px-6 text-center flex flex-col items-center select-none mb-6 sm:mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#121212] border border-[#262626] text-[10px] sm:text-[11px] font-mono font-bold text-[#4F7CFF] uppercase tracking-[0.25em] mb-3 shadow-sm">
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center select-none mb-4 sm:mb-6 md:mb-8">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 rounded-full bg-[#121212] border border-[#262626] text-[9px] sm:text-[10px] md:text-[11px] font-mono font-bold text-[#4F7CFF] uppercase tracking-[0.25em] mb-2 sm:mb-3 shadow-sm">
             <span className="w-1.5 h-1.5 rounded-full bg-[#4F7CFF] animate-pulse" />
             <span>PROCESS</span>
           </div>
@@ -127,12 +127,12 @@ export const ProcessSection: React.FC = () => {
         {/* ── 2. SINGLE HORIZONTAL ROW OF EXACTLY 4 PROCESS CARDS ── */}
         <div className="relative z-20 w-full flex items-center my-auto overflow-hidden">
           {isMobile ? (
-            /* Mobile: Native Touch Swipe Track showing ~1.1-1.2 cards with smooth snap */
-            <div className="w-full flex items-stretch gap-3.5 px-5 overflow-x-auto no-scrollbar snap-x snap-mandatory py-2">
+            /* Mobile: Native Touch Swipe Track showing compact, nicely proportioned cards */
+            <div className="w-full flex items-stretch gap-3 px-4 overflow-x-auto no-scrollbar snap-x snap-mandatory py-2">
               {STEPS_DATA.map((step, index) => (
                 <div
                   key={step.number}
-                  className="w-[280px] sm:w-[310px] flex-shrink-0 snap-start"
+                  className="w-[215px] min-[380px]:w-[235px] sm:w-[275px] flex-shrink-0 snap-start"
                 >
                   <ProcessHorizontalCard
                     step={step}
@@ -194,7 +194,7 @@ const ProcessHorizontalCard: React.FC<ProcessHorizontalCardProps> = ({
   return (
     <div
       onClick={onClick}
-      className="group relative h-[255px] sm:h-[270px] lg:h-[280px] w-full rounded-xl bg-[#0D0D0D] border border-[#202020] hover:border-[#383838] transition-all duration-300 ease-out p-5 sm:p-6 flex flex-col justify-between cursor-pointer select-none overflow-hidden hover:-translate-y-1 hover:shadow-[0_6px_25px_rgba(0,0,0,0.5)]"
+      className="group relative h-[215px] min-[380px]:h-[230px] sm:h-[270px] lg:h-[280px] w-full rounded-xl bg-[#0D0D0D] border border-[#202020] hover:border-[#383838] transition-all duration-300 ease-out p-4 min-[380px]:p-5 sm:p-6 flex flex-col justify-between cursor-pointer select-none overflow-hidden hover:-translate-y-1 hover:shadow-[0_6px_25px_rgba(0,0,0,0.5)]"
     >
       {/* Top subtle specular highlight */}
       <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
@@ -202,12 +202,12 @@ const ProcessHorizontalCard: React.FC<ProcessHorizontalCardProps> = ({
       {/* ── CARD HEADER: LARGE 01-04 NUMBERING ── */}
       <div className="flex items-center justify-between">
         <span
-          className="text-2xl sm:text-3xl font-mono font-bold tracking-tight text-[#555555] group-hover:text-[#4F7CFF] transition-colors duration-200"
+          className="text-xl sm:text-2xl lg:text-3xl font-mono font-bold tracking-tight text-[#555555] group-hover:text-[#4F7CFF] transition-colors duration-200"
           style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
         >
           {step.number}
         </span>
-        <span className="text-[9px] sm:text-[10px] font-mono font-semibold text-[#444444] uppercase tracking-widest">
+        <span className="text-[8px] min-[380px]:text-[9px] sm:text-[10px] font-mono font-semibold text-[#444444] uppercase tracking-widest">
           STEP {step.number}
         </span>
       </div>
@@ -215,15 +215,15 @@ const ProcessHorizontalCard: React.FC<ProcessHorizontalCardProps> = ({
       {/* ── CARD BODY: NAME, SUBTITLE & SHORT DESCRIPTION ── */}
       <div className="mt-auto py-1">
         <h3
-          className="text-xl sm:text-2xl font-extrabold text-[#F5F5F5] group-hover:text-white uppercase tracking-tight leading-tight mb-1 transition-colors duration-200"
+          className="text-base min-[380px]:text-lg sm:text-2xl font-extrabold text-[#F5F5F5] group-hover:text-white uppercase tracking-tight leading-tight mb-0.5 sm:mb-1 transition-colors duration-200"
           style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
         >
           {step.stepName}
         </h3>
-        <div className="text-xs sm:text-[13px] font-semibold text-[#4F7CFF] mb-2">
+        <div className="text-[11px] min-[380px]:text-xs sm:text-[13px] font-semibold text-[#4F7CFF] mb-1.5 sm:mb-2">
           {step.subtitle}
         </div>
-        <p className="text-xs sm:text-[13px] text-[#959595] leading-snug font-normal line-clamp-3">
+        <p className="text-[11px] min-[380px]:text-xs sm:text-[13px] text-[#959595] leading-snug font-normal line-clamp-3">
           {step.description}
         </p>
       </div>
