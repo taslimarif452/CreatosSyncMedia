@@ -19,7 +19,7 @@ export const Hero: React.FC<HeroProps> = ({ onStartCampaign, onJoinNetwork }) =>
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % HERO_IMAGES.length);
-    }, 3000);
+    }, 10000);
 
     return () => clearInterval(timer);
   }, []);
@@ -29,17 +29,17 @@ export const Hero: React.FC<HeroProps> = ({ onStartCampaign, onJoinNetwork }) =>
       id="hero-section"
       className="relative min-h-[68vh] sm:min-h-[75vh] md:min-h-[80vh] pt-44 sm:pt-52 md:pt-56 pb-20 sm:pb-28 flex items-center justify-center bg-[#080808] border-none overflow-hidden"
     >
-      {/* Hero Background Image Slider - Auto slides every 3s */}
+      {/* Hero Background Image Slider - Auto slides right to left every 10s */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-[#080808]">
-        <AnimatePresence mode="sync">
+        <AnimatePresence initial={false} mode="sync">
           <motion.img
             key={HERO_IMAGES[currentImageIndex]}
             src={HERO_IMAGES[currentImageIndex]}
             alt={`Hero Background ${currentImageIndex + 1}`}
-            initial={{ opacity: 0, scale: 1.04 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
+            initial={{ x: '100%', opacity: 0 }}
+            animate={{ x: '0%', opacity: 1 }}
+            exit={{ x: '-100%', opacity: 0 }}
+            transition={{ duration: 1.4, ease: [0.25, 1, 0.5, 1] }}
             className="absolute inset-0 w-full h-full min-w-full min-h-full object-cover object-[center_top] sm:object-[center_5%] md:object-[center_8%]"
             referrerPolicy="no-referrer"
           />
