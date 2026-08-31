@@ -10,7 +10,7 @@ export const Hero: React.FC<HeroProps> = ({ onStartCampaign, onJoinNetwork }) =>
   return (
     <section
       id="hero-section"
-      className="relative pt-36 sm:pt-44 md:pt-48 pb-14 sm:pb-18 flex items-center bg-[#080808] border-none overflow-hidden"
+      className="relative min-h-[68vh] sm:min-h-[75vh] md:min-h-[80vh] pt-44 sm:pt-52 md:pt-56 pb-20 sm:pb-28 flex items-center justify-center bg-[#080808] border-none overflow-hidden"
     >
       {/* Hero Background Image - Naturally responsive and positioned slightly upwards */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-[#080808]">
