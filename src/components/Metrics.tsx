@@ -1,0 +1,124 @@
+import React, { useState, useEffect } from 'react';
+
+interface MetricItem {
+  id: string;
+  value: string;
+  targetNum: number;
+  suffix: string;
+  label: string;
+  sublabel: string;
+}
+
+export const Metrics: React.FC = () => {
+  // Configurable business numbers
+  const METRICS_DATA: MetricItem[] = [
+    {
+      id: 'creators-count',
+      value: '500+',
+      targetNum: 500,
+      suffix: '+',
+      label: 'Creators',
+      sublabel: 'Vetted Category Leaders'
+    },
+    {
+      id: 'audience-reach',
+      value: '50M+',
+      targetNum: 50,
+      suffix: 'M+',
+      label: 'Reach',
+      sublabel: 'Engaged Monthly Impressions'
+    },
+    {
+      id: 'campaigns-count',
+      value: '100+',
+      targetNum: 100,
+      suffix: '+',
+      label: 'Campaigns',
+      sublabel: 'Delivered Across Verticals'
+    },
+    {
+      id: 'network-span',
+      value: 'PAN INDIA',
+      targetNum: 0,
+      suffix: '',
+      label: 'Network',
+      sublabel: 'Tier 1 & Tier 2 Regional Reach'
+    }
+  ];
+
+  const [counter, setCounter] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const duration = 1200;
+    const stepTime = 30;
+    const steps = duration / stepTime;
+    const increment = 100 / steps;
+
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= 100) {
+        setCounter(100);
+        clearInterval(timer);
+      } else {
+        setCounter(Math.floor(start));
+      }
+    }, stepTime);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <section id="metrics-section" className="py-16 md:py-24 bg-[#080808] border-b border-[#262626]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#141414] border border-[#262626] text-xs font-bold text-[#4F7CFF] uppercase tracking-widest mb-3.5">
+            Our Network
+          </div>
+          <h2
+            className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white leading-snug"
+            style={{ fontFamily: "'Syne', sans-serif" }}
+          >
+            where attention meets influence.
+          </h2>
+          <p className="mt-3 text-sm sm:text-base text-[#A1A1A1] max-w-xl mx-auto leading-relaxed">
+            Direct relationships with top digital creators across India’s most influential consumer niches.
+          </p>
+        </div>
+
+        {/* 4-Metric Grid with expanded height and generous spacing */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 rounded-none bg-black border border-[#222222]">
+          {METRICS_DATA.map((item, index) => {
+            // Calculate dynamic animated value if numerical
+            let displayVal = item.value;
+            if (item.targetNum > 0) {
+              const currentNum = Math.floor((item.targetNum * counter) / 100);
+              displayVal = `${currentNum}${item.suffix}`;
+            }
+
+            return (
+              <div
+                key={item.id}
+                className={`min-h-[190px] sm:min-h-[220px] md:min-h-[240px] p-6 sm:p-8 md:p-10 flex flex-col justify-between transition-colors duration-200 hover:bg-[#0c0c0c] ${
+                  index !== 0 ? 'border-t sm:border-t-0 sm:border-l border-[#1F1F1F]' : ''
+                }`}
+              >
+                <div>
+                  <div className="text-3xl sm:text-4xl lg:text-5xl font-normal text-[#F5F5F5] tracking-tight mb-2.5 sm:mb-3">
+                    {displayVal}
+                  </div>
+                  <div className="text-sm sm:text-base font-normal text-[#F5F5F5] uppercase tracking-wider mb-2">
+                    {item.label}
+                  </div>
+                </div>
+                <div className="text-xs sm:text-sm font-normal text-[#8A8A8A] leading-relaxed pt-2 border-t border-[#1a1a1a]/60">
+                  {item.sublabel}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+};

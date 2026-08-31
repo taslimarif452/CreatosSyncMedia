@@ -1,0 +1,202 @@
+import React, { useState } from 'react';
+import { X, CheckCircle2, Loader2, Send, ShieldCheck, MessageSquare } from 'lucide-react';
+import { Creator } from '../types';
+import { sendToWhatsApp, formatCreatorCollabMessage } from '../utils/whatsapp';
+
+interface CreatorCollabModalProps {
+  creator: Creator | null;
+  onClose: () => void;
+}
+
+export const CreatorCollabModal: React.FC<CreatorCollabModalProps> = ({
+  creator,
+  onClose
+}) => {
+  if (!creator) return null;
+
+  const [brandName, setBrandName] = useState('');
+  const [email, setEmail] = useState('');
+  const [budget, setBudget] = useState('₹5 Lakh - ₹15 Lakh');
+  const [details, setDetails] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!brandName.trim() || !email.trim()) {
+      setError('Please fill in your Brand Name and Work Email.');
+      return;
+    }
+    setError('');
+    setIsSubmitting(true);
+
+    const formattedMsg = formatCreatorCollabMessage({
+      creatorName: creator.name,
+      creatorHandle: creator.handle,
+      brandName,
+      email,
+      budget,
+      details
+    });
+    sendToWhatsApp(formattedMsg);
+
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+    }, 600);
+  };
+
+  return (
+    <div
+      id="creator-collab-modal"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto animate-in fade-in duration-200"
+    >
+      <div className="relative w-full max-w-lg rounded-3xl bg-[#101010] border border-[#262626] text-[#F5F5F5] shadow-2xl p-6 sm:p-8">
+        <button
+          onClick={onClose}
+          className="absolute top-6 right-6 p-2 rounded-xl bg-[#141414] border border-[#262626] hover:text-[#4F7CFF] hover:border-[#4F7CFF] text-[#A1A1A1] transition-colors cursor-pointer"
+        >
+          <X className="w-5 h-5" />
+        </button>
+
+        {isSubmitted ? (
+          <div className="text-center py-8">
+            <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mx-auto mb-4">
+              <CheckCircle2 className="w-7 h-7" />
+            </div>
+            <h3 className="text-xl font-bold text-[#F5F5F5] mb-2">
+              Request Sent to WhatsApp
+            </h3>
+            <p className="text-xs text-[#A1A1A1] max-w-xs mx-auto mb-6 leading-relaxed">
+              Your inquiry for <strong className="text-[#F5F5F5]">{creator.name}</strong> has been transferred to our WhatsApp team (<strong className="text-[#4F7CFF]">+91 81089 75875</strong>).
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <button
+                onClick={() => {
+                  const msg = formatCreatorCollabMessage({
+                    creatorName: creator.name,
+                    creatorHandle: creator.handle,
+                    brandName,
+                    email,
+                    budget,
+                    details
+                  });
+                  sendToWhatsApp(msg);
+                }}
+                className="w-full sm:w-auto px-5 py-2.5 bg-[#4F7CFF] hover:bg-[#3D6CE5] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-colors cursor-pointer shadow-lg shadow-[#4F7CFF]/20 flex items-center justify-center gap-2"
+              >
+                <MessageSquare className="w-4 h-4" />
+                <span>Open WhatsApp Chat</span>
+              </button>
+              <button
+                onClick={onClose}
+                className="w-full sm:w-auto px-5 py-2.5 bg-[#141414] hover:bg-[#1C1C1C] border border-[#262626] text-xs font-bold uppercase tracking-wider rounded-xl transition-colors cursor-pointer"
+              >
+                Close Window
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <div className="flex items-center gap-3.5 mb-6 pb-4 border-b border-[#262626]">
+              <img
+                src={creator.image}
+                alt={creator.name}
+                className="w-12 h-12 rounded-xl object-cover border border-[#262626]"
+                referrerPolicy="no-referrer"
+              />
+              <div>
+                <span className="text-[10px] font-bold text-[#4F7CFF] uppercase tracking-widest">
+                  Request Collaboration
+                </span>
+                <h3 className="text-base font-bold text-[#F5F5F5]">
+                  {creator.name} <span className="text-xs text-[#A1A1A1]">({creator.handle})</span>
+                </h3>
+              </div>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {error && (
+                <div className="p-3 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs">
+                  {error}
+                </div>
+              )}
+
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-[#A1A1A1] mb-1.5">
+                  Brand / Company Name *
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g. OnePlus / Swiggy / Zerodha"
+                  value={brandName}
+                  onChange={(e) => setBrandName(e.target.value)}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#141414] border border-[#262626] focus:border-[#4F7CFF] text-xs text-[#F5F5F5] outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-[#A1A1A1] mb-1.5">
+                  Work Email *
+                </label>
+                <input
+                  type="email"
+                  placeholder="name@company.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#141414] border border-[#262626] focus:border-[#4F7CFF] text-xs text-[#F5F5F5] outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-[#A1A1A1] mb-1.5">
+                  Estimated Campaign Budget
+                </label>
+                <select
+                  value={budget}
+                  onChange={(e) => setBudget(e.target.value)}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#141414] border border-[#262626] focus:border-[#4F7CFF] text-xs text-[#F5F5F5] outline-none"
+                >
+                  <option value="₹2 Lakh - ₹5 Lakh">₹2 Lakh - ₹5 Lakh (Integration)</option>
+                  <option value="₹5 Lakh - ₹15 Lakh">₹5 Lakh - ₹15 Lakh (Dedicated Video)</option>
+                  <option value="₹15 Lakh+">₹15 Lakh+ (Multi-Month Ambassador)</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-[#A1A1A1] mb-1.5">
+                  Brief Pitch / Target Dates
+                </label>
+                <textarea
+                  rows={3}
+                  placeholder="Describe your product launch, desired integration angles, and timeline..."
+                  value={details}
+                  onChange={(e) => setDetails(e.target.value)}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#141414] border border-[#262626] focus:border-[#4F7CFF] text-xs text-[#F5F5F5] outline-none resize-none"
+                />
+              </div>
+
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full flex items-center justify-center gap-2 py-3.5 bg-[#4F7CFF] hover:bg-[#3D6CE5] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all cursor-pointer shadow-lg shadow-[#4F7CFF]/20"
+                >
+                  {isSubmitting ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <>
+                      <span>Submit Collaboration Brief</span>
+                      <Send className="w-3.5 h-3.5" />
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};

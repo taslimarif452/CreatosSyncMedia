@@ -1,0 +1,151 @@
+import React from 'react';
+import { ArrowRight, CheckCircle2, Flame, Layers, ShieldCheck, Sparkles, Target, Users, Zap } from 'lucide-react';
+
+interface AboutPageProps {
+  navigate: (path: string) => void;
+}
+
+export const About: React.FC<AboutPageProps> = ({ navigate }) => {
+  return (
+    <div id="about-page" className="pt-32 pb-24 bg-[#080808]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Page Hero */}
+        <div className="mb-20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#141414] border border-[#262626] text-[11px] font-bold text-[#4F7CFF] uppercase tracking-widest mb-4">
+            Agency Philosophy & Identity
+          </div>
+          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#F5F5F5] leading-[1.05] mb-6 max-w-4xl">
+            We Believe the Best Marketing <br />
+            <span className="text-[#A1A1A1]">Doesn't Feel Like</span> <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F5F5F5] via-[#FFFFFF] to-[#4F7CFF]">
+              Marketing.
+            </span>
+          </h1>
+          <p className="text-base sm:text-lg text-[#A1A1A1] max-w-2xl leading-relaxed">
+            CreatorsSyncMedia is a premium creator & influencer marketing agency founded to bridge the gap between ambitious brand vision and authentic creator storytelling.
+          </p>
+        </div>
+
+        {/* Core Mission Block */}
+        <div className="mb-24 p-8 sm:p-14 rounded-3xl bg-[#101010] border border-[#262626] grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div className="lg:col-span-7">
+            <span className="text-xs font-bold text-[#4F7CFF] uppercase tracking-widest block mb-2">
+              Our Core Thesis
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] leading-snug mb-4">
+              Attention Has Migrated to Creators. Influence Has Migrated to Trust.
+            </h2>
+            <p className="text-xs sm:text-sm text-[#A1A1A1] leading-relaxed mb-4">
+              Consumers no longer trust billboard banners or generic programmatic popups. They buy because a creator they have watched for five years demonstrated how a laptop performs under pressure, explained why a financial app simplified their taxes, or integrated a product into their genuine daily routine.
+            </p>
+            <p className="text-xs sm:text-sm text-[#A1A1A1] leading-relaxed">
+              We eliminate the chaos of creator marketing—handling vetted talent matching, contract negotiations, script framing, production oversight, and verified conversion metrics.
+            </p>
+          </div>
+
+          <div className="lg:col-span-5 grid grid-cols-2 gap-4">
+            <div className="p-6 rounded-2xl bg-[#141414] border border-[#262626] text-center">
+              <div className="text-3xl font-black text-[#4F7CFF] mb-1">500+</div>
+              <div className="text-xs font-bold text-[#F5F5F5]">Vetted Creators</div>
+            </div>
+            <div className="p-6 rounded-2xl bg-[#141414] border border-[#262626] text-center">
+              <div className="text-3xl font-black text-[#4F7CFF] mb-1">50M+</div>
+              <div className="text-xs font-bold text-[#F5F5F5]">Monthly Reach</div>
+            </div>
+            <div className="p-6 rounded-2xl bg-[#141414] border border-[#262626] text-center">
+              <div className="text-3xl font-black text-[#4F7CFF] mb-1">100+</div>
+              <div className="text-xs font-bold text-[#F5F5F5]">Live Campaigns</div>
+            </div>
+            <div className="p-6 rounded-2xl bg-[#141414] border border-[#262626] text-center">
+              <div className="text-3xl font-black text-[#4F7CFF] mb-1">Pan-India</div>
+              <div className="text-xs font-bold text-[#F5F5F5]">Regional Reach</div>
+            </div>
+          </div>
+        </div>
+
+        {/* 4 Guiding Principles */}
+        <div className="mb-24">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-xs font-bold text-[#4F7CFF] uppercase tracking-widest">
+              Standard Of Excellence
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#F5F5F5] mt-2">
+              Our Agency Principles
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="p-7 rounded-2xl bg-[#101010] border border-[#262626]">
+              <div className="w-10 h-10 rounded-xl bg-[#141414] border border-[#262626] flex items-center justify-center mb-4">
+                <Target className="w-5 h-5 text-[#4F7CFF]" />
+              </div>
+              <h3 className="text-base font-bold text-[#F5F5F5] mb-2">
+                Zero Vanity Metrics
+              </h3>
+              <p className="text-xs text-[#A1A1A1] leading-relaxed">
+                We measure genuine retention, verified link clicks, conversions, and brand recall—not shallow bot impressions.
+              </p>
+            </div>
+
+            <div className="p-7 rounded-2xl bg-[#101010] border border-[#262626]">
+              <div className="w-10 h-10 rounded-xl bg-[#141414] border border-[#262626] flex items-center justify-center mb-4">
+                <ShieldCheck className="w-5 h-5 text-[#4F7CFF]" />
+              </div>
+              <h3 className="text-base font-bold text-[#F5F5F5] mb-2">
+                Brand Safety Vetting
+              </h3>
+              <p className="text-xs text-[#A1A1A1] leading-relaxed">
+                Every creator on our roster is audited for past controversies, organic sentiment, and category exclusivity.
+              </p>
+            </div>
+
+            <div className="p-7 rounded-2xl bg-[#101010] border border-[#262626]">
+              <div className="w-10 h-10 rounded-xl bg-[#141414] border border-[#262626] flex items-center justify-center mb-4">
+                <Sparkles className="w-5 h-5 text-[#4F7CFF]" />
+              </div>
+              <h3 className="text-base font-bold text-[#F5F5F5] mb-2">
+                Narrative Integration
+              </h3>
+              <p className="text-xs text-[#A1A1A1] leading-relaxed">
+                We refuse boring cookie-cutter scripts. We craft natural story arcs that integrate your product seamlessly into creator content.
+              </p>
+            </div>
+
+            <div className="p-7 rounded-2xl bg-[#101010] border border-[#262626]">
+              <div className="w-10 h-10 rounded-xl bg-[#141414] border border-[#262626] flex items-center justify-center mb-4">
+                <Zap className="w-5 h-5 text-[#4F7CFF]" />
+              </div>
+              <h3 className="text-base font-bold text-[#F5F5F5] mb-2">
+                Velocity & Execution
+              </h3>
+              <p className="text-xs text-[#A1A1A1] leading-relaxed">
+                Rapid turnaround from initial campaign brief to creator sign-off in under 10 business days.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA Block */}
+        <div className="p-8 sm:p-12 rounded-3xl bg-[#101010] border border-[#262626] flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+          <div>
+            <h3 className="text-2xl font-bold text-[#F5F5F5] mb-2">
+              Ready to Collaborate with CreatorsSyncMedia?
+            </h3>
+            <p className="text-xs sm:text-sm text-[#A1A1A1]">
+              Whether you are a global brand or an ambitious Indian startup, we are ready to scale your influence.
+            </p>
+          </div>
+          <button
+            onClick={() => {
+              navigate('/contact');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="px-8 py-4 bg-[#4F7CFF] hover:bg-[#3D6CE5] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all cursor-pointer whitespace-nowrap shadow-lg shadow-[#4F7CFF]/20"
+          >
+            Schedule Strategy Call →
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
