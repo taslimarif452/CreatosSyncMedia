@@ -10,15 +10,15 @@ export const Hero: React.FC<HeroProps> = ({ onStartCampaign, onJoinNetwork }) =>
   return (
     <section
       id="hero-section"
-      className="relative pt-36 sm:pt-44 md:pt-52 lg:pt-60 pb-20 sm:pb-28 md:pb-36 flex items-center justify-center bg-[#080808] border-none overflow-hidden"
+      className="relative pt-36 sm:pt-44 md:pt-48 pb-14 sm:pb-18 flex items-center bg-[#080808] border-none overflow-hidden"
     >
-      {/* Hero Background Image - Naturally responsive and scales with page zoom */}
+      {/* Hero Background Image - Naturally responsive and positioned slightly upwards */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-[#080808]">
         {/* Background artwork */}
         <img
           src="https://images.openai.com/static-rsc-4/OL9BZxze2qZUj9IuBKrWtyganvryT8iMs6IiPtfO0tx1_QbUxmt7mBwL3ZRq43FshFvW-1-pw5Wh9v91Di0r-D0mJvkceaid2DClfoP-v4LmfoK0WCSRR6HwOLynaTAwdr7KwW4Nk9lskEHZo3gqNJOEuKTkjuosk5WwWt_8MsD2N4hWMU23__cspsj5wTIS?purpose=fullsize"
           alt="Hero Atmosphere Background"
-          className="w-full h-full min-w-full min-h-full object-cover object-[center_20%] md:object-[center_25%]"
+          className="w-full h-full min-w-full min-h-full object-cover object-[center_top] sm:object-[center_5%] md:object-[center_8%]"
           referrerPolicy="no-referrer"
         />
 
@@ -33,7 +33,7 @@ export const Hero: React.FC<HeroProps> = ({ onStartCampaign, onJoinNetwork }) =>
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] bg-[#4F7CFF]/15 blur-[130px] rounded-full pointer-events-none z-[1]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-        <div className="max-w-5xl xl:max-w-6xl mx-auto flex flex-col justify-center items-center text-center pt-10 sm:pt-16 md:pt-24 lg:pt-28">
+        <div className="max-w-5xl xl:max-w-6xl mx-auto flex flex-col justify-center items-center text-center">
           {/* Editorial Headline */}
           <h1 className="flex flex-col items-center text-center tracking-tight mb-10 sm:mb-16 md:mb-20 max-w-full px-2">
             <span
