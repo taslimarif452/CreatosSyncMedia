@@ -10,6 +10,8 @@ import { Creators } from './pages/Creators';
 import { CreatorProfile } from './pages/CreatorProfile';
 import { About } from './pages/About';
 import { Contact } from './pages/Contact';
+import { Admin } from './pages/Admin';
+import { AdminDataProvider } from './context/AdminDataContext';
 import { Campaign } from './types';
 
 export default function App() {
@@ -68,9 +70,10 @@ export default function App() {
     navigate('/for-brands');
   };
 
-  const renderContent = () => {
-    const basePath = currentPath.split('?')[0].split('#')[0];
+  const basePath = currentPath.split('?')[0].split('#')[0];
+  const isAdminPage = basePath === '/admin';
 
+  const renderContent = () => {
     if (basePath.startsWith('/creator/') || selectedCreatorId) {
       return (
         <CreatorProfile
@@ -82,6 +85,8 @@ export default function App() {
     }
 
     switch (basePath) {
+      case '/admin':
+        return <Admin navigate={navigate} />;
       case '/services':
         return <Services navigate={navigate} />;
       case '/for-brands':
@@ -112,22 +117,24 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#080808] text-[#F5F5F5] font-sans antialiased selection:bg-[#4F7CFF] selection:text-white flex flex-col justify-between">
-      {/* Persistent Navigation */}
-      <Navbar currentPath={currentPath} navigate={navigate} />
+    <AdminDataProvider>
+      <div className="min-h-screen bg-[#080808] text-[#F5F5F5] font-sans antialiased selection:bg-[#4F7CFF] selection:text-white flex flex-col justify-between">
+        {/* Persistent Navigation (Hidden on standalone admin screen for clean workspace) */}
+        {!isAdminPage && <Navbar currentPath={currentPath} navigate={navigate} />}
 
-      {/* Main Page Content */}
-      <main className="flex-grow">{renderContent()}</main>
+        {/* Main Page Content */}
+        <main className={`flex-grow ${isAdminPage ? 'min-h-screen' : ''}`}>{renderContent()}</main>
 
-      {/* Persistent Footer */}
-      <Footer navigate={navigate} />
+        {/* Persistent Footer (Hidden on standalone admin screen) */}
+        {!isAdminPage && <Footer navigate={navigate} />}
 
-      {/* Global Interactive Campaign Detail Modal */}
-      <CampaignDetailModal
-        campaign={selectedCampaign}
-        onClose={() => setSelectedCampaign(null)}
-        onStartCampaign={handleStartCampaignFromModal}
-      />
-    </div>
+        {/* Global Interactive Campaign Detail Modal */}
+        <CampaignDetailModal
+          campaign={selectedCampaign}
+          onClose={() => setSelectedCampaign(null)}
+          onStartCampaign={handleStartCampaignFromModal}
+        />
+      </div>
+    </AdminDataProvider>
   );
 }

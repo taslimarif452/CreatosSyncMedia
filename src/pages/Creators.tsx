@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Search, MapPin, Eye, ArrowRight, CheckCircle2, SlidersHorizontal, Youtube } from 'lucide-react';
-import { CREATORS } from '../data/creators';
+import { useAdminData } from '../context/AdminDataContext';
 import { CreatorCategory } from '../types';
 
 interface CreatorsPageProps {
@@ -9,6 +9,7 @@ interface CreatorsPageProps {
 }
 
 export const Creators: React.FC<CreatorsPageProps> = ({ onSelectCreator, navigate }) => {
+  const { creators } = useAdminData();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<CreatorCategory>('All');
   const [tierFilter, setTierFilter] = useState<'all' | 'mega' | 'macro' | 'rising'>('all');
@@ -25,7 +26,7 @@ export const Creators: React.FC<CreatorsPageProps> = ({ onSelectCreator, navigat
     'Comedy'
   ];
 
-  const filteredCreators = CREATORS.filter((creator) => {
+  const filteredCreators = creators.filter((creator) => {
     // Search query filter
     const matchesSearch =
       creator.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -39,7 +40,7 @@ export const Creators: React.FC<CreatorsPageProps> = ({ onSelectCreator, navigat
 
     // Tier filter
     let matchesTier = true;
-    const subCountRaw = creator.subscribers;
+    const subCountRaw = creator.subscribers || '';
     if (tierFilter === 'mega') {
       matchesTier = subCountRaw.includes('M');
     } else if (tierFilter === 'macro') {

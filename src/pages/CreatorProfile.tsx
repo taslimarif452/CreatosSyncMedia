@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowLeft, CheckCircle2, Eye, MapPin, Youtube, ExternalLink, Sparkles, Send, Play, BarChart3, Users, Globe } from 'lucide-react';
-import { CREATORS } from '../data/creators';
+import { useAdminData } from '../context/AdminDataContext';
 import { CreatorCollabModal } from '../components/CreatorCollabModal';
 
 interface CreatorProfileProps {
@@ -10,8 +10,18 @@ interface CreatorProfileProps {
 }
 
 export const CreatorProfile: React.FC<CreatorProfileProps> = ({ creatorId, onBack, navigate }) => {
-  const creator = CREATORS.find((c) => c.id === creatorId) || CREATORS[0];
+  const { creators } = useAdminData();
+  const creator = creators.find((c) => c.id === creatorId) || creators[0];
   const [isCollabModalOpen, setIsCollabModalOpen] = useState(false);
+
+  if (!creator) {
+    return (
+      <div className="pt-32 pb-24 text-center text-white">
+        <p>Creator not found.</p>
+        <button onClick={onBack} className="mt-4 px-4 py-2 bg-[#4F7CFF] rounded-lg">Go Back</button>
+      </div>
+    );
+  }
 
   return (
     <div id="creator-profile-page" className="pt-28 pb-24 bg-[#080808]">

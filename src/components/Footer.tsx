@@ -116,6 +116,13 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
             >
               Contact & Enquiries
             </button>
+            <button
+              onClick={() => handleNav('/admin')}
+              className="text-xs text-left text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1.5 font-semibold"
+            >
+              <span>Admin Panel (Manage Content)</span>
+              <ArrowUpRight className="w-3 h-3" />
+            </button>
           </div>
 
           {/* For Brands */}

@@ -1,0 +1,224 @@
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { Creator, Campaign } from '../types';
+import { CREATORS as DEFAULT_CREATORS } from '../data/creators';
+import { CAMPAIGNS as DEFAULT_CAMPAIGNS } from '../data/campaigns';
+
+export interface SectionSettings {
+  showCreatorsSection: boolean;
+  showCampaignsSection: boolean;
+  creatorsSectionTitle?: string;
+  creatorsSectionSubtitle?: string;
+  campaignsSectionTitle?: string;
+  campaignsSectionSubtitle?: string;
+}
+
+interface AdminDataContextType {
+  creators: Creator[];
+  campaigns: Campaign[];
+  settings: SectionSettings;
+  addCreator: (creator: Creator) => void;
+  updateCreator: (id: string, updatedData: Partial<Creator>) => void;
+  deleteCreator: (id: string) => void;
+  addCampaign: (campaign: Campaign) => void;
+  updateCampaign: (id: string, updatedData: Partial<Campaign>) => void;
+  deleteCampaign: (id: string) => void;
+  setSectionVisibility: (section: 'creators' | 'campaigns', isVisible: boolean) => void;
+  updateSettings: (newSettings: Partial<SectionSettings>) => void;
+  resetToDefaults: () => void;
+  exportDataJSON: () => string;
+  importDataJSON: (jsonString: string) => { success: boolean; message: string };
+}
+
+const STORAGE_KEY = 'csm_admin_data_store_v2';
+
+const DEFAULT_SETTINGS: SectionSettings = {
+  showCreatorsSection: true,
+  showCampaignsSection: true,
+  creatorsSectionTitle: 'creators with influence.',
+  creatorsSectionSubtitle: 'audiences with trust.',
+  campaignsSectionTitle: 'campaigns that',
+  campaignsSectionSubtitle: 'made noise.'
+};
+
+const AdminDataContext = createContext<AdminDataContextType | undefined>(undefined);
+
+export const AdminDataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [creators, setCreators] = useState<Creator[]>(() => {
+    try {
+      const stored = localStorage.getItem(`${STORAGE_KEY}_creators`);
+      if (stored) {
+        return JSON.parse(stored);
+      }
+    } catch (e) {
+      console.error('Failed to parse stored creators:', e);
+    }
+    return DEFAULT_CREATORS;
+  });
+
+  const [campaigns, setCampaigns] = useState<Campaign[]>(() => {
+    try {
+      const stored = localStorage.getItem(`${STORAGE_KEY}_campaigns`);
+      if (stored) {
+        return JSON.parse(stored);
+      }
+    } catch (e) {
+      console.error('Failed to parse stored campaigns:', e);
+    }
+    return DEFAULT_CAMPAIGNS;
+  });
+
+  const [settings, setSettings] = useState<SectionSettings>(() => {
+    try {
+      const stored = localStorage.getItem(`${STORAGE_KEY}_settings`);
+      if (stored) {
+        return { ...DEFAULT_SETTINGS, ...JSON.parse(stored) };
+      }
+    } catch (e) {
+      console.error('Failed to parse stored settings:', e);
+    }
+    return DEFAULT_SETTINGS;
+  });
+
+  // Save to localStorage on change
+  useEffect(() => {
+    try {
+      localStorage.setItem(`${STORAGE_KEY}_creators`, JSON.stringify(creators));
+    } catch (e) {
+      console.error('Failed to save creators:', e);
+    }
+  }, [creators]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(`${STORAGE_KEY}_campaigns`, JSON.stringify(campaigns));
+    } catch (e) {
+      console.error('Failed to save campaigns:', e);
+    }
+  }, [campaigns]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(`${STORAGE_KEY}_settings`, JSON.stringify(settings));
+    } catch (e) {
+      console.error('Failed to save settings:', e);
+    }
+  }, [settings]);
+
+  // Creator Actions
+  const addCreator = (newCreator: Creator) => {
+    setCreators((prev) => [newCreator, ...prev]);
+  };
+
+  const updateCreator = (id: string, updatedData: Partial<Creator>) => {
+    setCreators((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, ...updatedData } : c))
+    );
+  };
+
+  const deleteCreator = (id: string) => {
+    setCreators((prev) => prev.filter((c) => c.id !== id));
+  };
+
+  // Campaign Actions
+  const addCampaign = (newCampaign: Campaign) => {
+    setCampaigns((prev) => [newCampaign, ...prev]);
+  };
+
+  const updateCampaign = (id: string, updatedData: Partial<Campaign>) => {
+    setCampaigns((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, ...updatedData } : c))
+    );
+  };
+
+  const deleteCampaign = (id: string) => {
+    setCampaigns((prev) => prev.filter((c) => c.id !== id));
+  };
+
+  // Visibility Controls
+  const setSectionVisibility = (section: 'creators' | 'campaigns', isVisible: boolean) => {
+    setSettings((prev) => {
+      if (section === 'creators') {
+        return { ...prev, showCreatorsSection: isVisible };
+      } else {
+        return { ...prev, showCampaignsSection: isVisible };
+      }
+    });
+  };
+
+  const updateSettings = (newSettings: Partial<SectionSettings>) => {
+    setSettings((prev) => ({ ...prev, ...newSettings }));
+  };
+
+  const resetToDefaults = () => {
+    setCreators(DEFAULT_CREATORS);
+    setCampaigns(DEFAULT_CAMPAIGNS);
+    setSettings(DEFAULT_SETTINGS);
+    try {
+      localStorage.removeItem(`${STORAGE_KEY}_creators`);
+      localStorage.removeItem(`${STORAGE_KEY}_campaigns`);
+      localStorage.removeItem(`${STORAGE_KEY}_settings`);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const exportDataJSON = () => {
+    const data = {
+      version: '1.0',
+      exportedAt: new Date().toISOString(),
+      settings,
+      creators,
+      campaigns
+    };
+    return JSON.stringify(data, null, 2);
+  };
+
+  const importDataJSON = (jsonString: string): { success: boolean; message: string } => {
+    try {
+      const parsed = JSON.parse(jsonString);
+      if (Array.isArray(parsed.creators)) {
+        setCreators(parsed.creators);
+      }
+      if (Array.isArray(parsed.campaigns)) {
+        setCampaigns(parsed.campaigns);
+      }
+      if (parsed.settings) {
+        setSettings({ ...DEFAULT_SETTINGS, ...parsed.settings });
+      }
+      return { success: true, message: 'Data imported successfully!' };
+    } catch (err: any) {
+      return { success: false, message: `Invalid JSON format: ${err?.message || 'Error'}` };
+    }
+  };
+
+  return (
+    <AdminDataContext.Provider
+      value={{
+        creators,
+        campaigns,
+        settings,
+        addCreator,
+        updateCreator,
+        deleteCreator,
+        addCampaign,
+        updateCampaign,
+        deleteCampaign,
+        setSectionVisibility,
+        updateSettings,
+        resetToDefaults,
+        exportDataJSON,
+        importDataJSON
+      }}
+    >
+      {children}
+    </AdminDataContext.Provider>
+  );
+};
+
+export const useAdminData = () => {
+  const context = useContext(AdminDataContext);
+  if (!context) {
+    throw new Error('useAdminData must be used within an AdminDataProvider');
+  }
+  return context;
+};

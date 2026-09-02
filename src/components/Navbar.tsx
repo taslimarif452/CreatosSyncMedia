@@ -585,7 +585,20 @@ export const Navbar: React.FC<NavbarProps> = ({
           </nav>
 
           {/* Desktop Right CTA */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-3">
+            <button
+              id="desktop-admin-link-btn"
+              onClick={() => handleNavClick('/admin')}
+              className={`px-3.5 py-2 text-xs font-semibold rounded-full border transition-all cursor-pointer flex items-center gap-1.5 ${
+                currentPath === '/admin'
+                  ? 'bg-blue-600 text-white border-blue-500 shadow-md shadow-blue-500/20'
+                  : 'bg-[#141414] text-[#A1A1A1] border-[#262626] hover:text-white hover:border-[#4F7CFF]'
+              }`}
+            >
+              <Shield className="w-3.5 h-3.5 text-[#4F7CFF]" />
+              <span>Admin</span>
+            </button>
+
             <button
               id="desktop-start-campaign-cta"
               onClick={handleStartCampaign}
@@ -807,6 +820,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <span>Contact</span>
               <ArrowRight className="w-4 h-4 text-[#707070]" />
+            </button>
+
+            <button
+              onClick={() => handleNavClick('/admin')}
+              className="text-xl font-bold tracking-tight text-left flex items-center justify-between py-3 border-b border-[#1A1A1A] text-[#4F7CFF] hover:text-white cursor-pointer"
+            >
+              <div className="flex items-center gap-2">
+                <Shield className="w-5 h-5 text-[#4F7CFF]" />
+                <span>Admin Dashboard</span>
+              </div>
+              <ArrowRight className="w-4 h-4 text-[#4F7CFF]" />
             </button>
           </div>
 

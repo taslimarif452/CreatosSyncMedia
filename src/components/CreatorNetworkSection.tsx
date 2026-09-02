@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
-import { CREATORS } from '../data/creators';
+import { useAdminData } from '../context/AdminDataContext';
 
 interface CreatorNetworkSectionProps {
   onSelectCreator: (creatorId: string) => void;
@@ -10,18 +10,24 @@ interface CreatorNetworkSectionProps {
 export const CreatorNetworkSection: React.FC<CreatorNetworkSectionProps> = ({
   onSelectCreator
 }) => {
+  const { creators, settings } = useAdminData();
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
-  // Take top 6 creators for the featured roster display
-  const featuredCreators = CREATORS.slice(0, 6);
-  const currentCreator = featuredCreators[activeIndex] || featuredCreators[0];
+  // Take creators for the featured roster display
+  const featuredCreators = creators.length > 0 ? creators.slice(0, 12) : [];
+  const safeIndex = activeIndex >= featuredCreators.length ? 0 : activeIndex;
+  const currentCreator = featuredCreators[safeIndex];
+
+  if (!featuredCreators.length || !currentCreator) {
+    return null;
+  }
 
   const handlePrev = () => {
     setActiveIndex((prev) => (prev === 0 ? featuredCreators.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
-    setActiveIndex((prev) => (prev === featuredCreators.length - 1 ? 0 : prev + 1));
+    setActiveIndex((prev) => (prev >= featuredCreators.length - 1 ? 0 : prev + 1));
   };
 
   return (
@@ -41,8 +47,8 @@ export const CreatorNetworkSection: React.FC<CreatorNetworkSectionProps> = ({
               className="text-3xl sm:text-5xl font-bold tracking-tight text-gray-950 leading-[1.15]"
               style={{ fontFamily: "'Syne', sans-serif" }}
             >
-              creators with influence. <br />
-              <span className="text-gray-400">audiences with trust.</span>
+              {settings.creatorsSectionTitle || 'creators with influence.'} <br />
+              <span className="text-gray-400">{settings.creatorsSectionSubtitle || 'audiences with trust.'}</span>
             </h2>
           </div>
 
@@ -51,7 +57,7 @@ export const CreatorNetworkSection: React.FC<CreatorNetworkSectionProps> = ({
           </div>
         </div>
 
-        {/* TOP SHOWCASE BANNER (Matching image layout with clean light theme styling) */}
+        {/* TOP SHOWCASE BANNER */}
         <div
           id="featured-creator-showcase"
           className="rounded-2xl bg-white border border-gray-200 overflow-hidden grid grid-cols-1 lg:grid-cols-12 min-h-[440px] md:min-h-[480px] mb-4 shadow-xl shadow-gray-200/60 transition-all duration-300"
@@ -77,7 +83,7 @@ export const CreatorNetworkSection: React.FC<CreatorNetworkSectionProps> = ({
             <div className="pt-8 md:pt-12 mt-6 border-t border-gray-200 flex items-end justify-between">
               <div className="flex items-baseline gap-2.5">
                 <span className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-950 tracking-tight font-sans">
-                  {currentCreator.followersShort || currentCreator.subscribers.split(' ')[0]}
+                  {currentCreator.followersShort || currentCreator.subscribers?.split(' ')[0] || '500K+'}
                 </span>
                 <span className="text-xs md:text-sm font-bold uppercase tracking-widest text-gray-500">
                   FOLLOWERS
@@ -133,10 +139,10 @@ export const CreatorNetworkSection: React.FC<CreatorNetworkSectionProps> = ({
           </div>
         </div>
 
-        {/* BOTTOM THUMBNAIL ROSTER (Adapted for light mode with high-contrast text & borders) */}
+        {/* BOTTOM THUMBNAIL ROSTER */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
           {featuredCreators.map((creator, index) => {
-            const isActive = index === activeIndex;
+            const isActive = index === safeIndex;
             return (
               <button
                 key={creator.id}
@@ -167,7 +173,7 @@ export const CreatorNetworkSection: React.FC<CreatorNetworkSectionProps> = ({
                     {creator.name}
                   </div>
                   <div className="text-[10px] font-medium text-gray-300 lowercase">
-                    {creator.followersShort || creator.subscribers.split(' ')[0]}
+                    {creator.followersShort || creator.subscribers?.split(' ')[0] || ''}
                   </div>
                 </div>
 

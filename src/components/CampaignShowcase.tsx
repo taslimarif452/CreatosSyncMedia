@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight, ArrowUpRight, Play, Eye, TrendingUp, Sparkles } from 'lucide-react';
-import { CAMPAIGNS } from '../data/campaigns';
+import { useAdminData } from '../context/AdminDataContext';
 import { Campaign } from '../types';
 
 interface CampaignShowcaseProps {
@@ -11,9 +11,15 @@ interface CampaignShowcaseProps {
 export const CampaignShowcase: React.FC<CampaignShowcaseProps> = ({
   onSelectCampaign
 }) => {
-  const spotlightCampaign = CAMPAIGNS[0]; // Asus ROG Gaming
-  const secondaryCampaign1 = CAMPAIGNS[1]; // Fintech CRED
-  const secondaryCampaign2 = CAMPAIGNS[2]; // boAt Audio
+  const { campaigns, settings } = useAdminData();
+
+  if (!campaigns.length) {
+    return null;
+  }
+
+  const spotlightCampaign = campaigns[0];
+  const secondaryCampaign1 = campaigns[1] || campaigns[0];
+  const secondaryCampaign2 = campaigns[2] || campaigns[1] || campaigns[0];
 
   return (
     <section id="campaigns-showcase-section" className="py-24 bg-white border-b border-[#E5E7EB] text-[#111111]">
@@ -28,8 +34,8 @@ export const CampaignShowcase: React.FC<CampaignShowcaseProps> = ({
               className="text-3xl sm:text-5xl font-bold tracking-tight text-[#0F172A] leading-[1.1]"
               style={{ fontFamily: "'Syne', sans-serif" }}
             >
-              campaigns that <br />
-              <span className="text-[#64748B]">made noise.</span>
+              {settings.campaignsSectionTitle || 'campaigns that'} <br />
+              <span className="text-[#64748B]">{settings.campaignsSectionSubtitle || 'made noise.'}</span>
             </h2>
           </div>
           <button
@@ -38,7 +44,7 @@ export const CampaignShowcase: React.FC<CampaignShowcaseProps> = ({
             type="button"
             className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#64748B] cursor-default pointer-events-none select-none"
           >
-            <span>View All Work ({CAMPAIGNS.length})</span>
+            <span>Verified Work ({campaigns.length})</span>
             <ArrowRight className="w-4 h-4 text-[#64748B]" />
           </button>
         </div>
@@ -93,14 +99,16 @@ export const CampaignShowcase: React.FC<CampaignShowcaseProps> = ({
               </p>
 
               {/* Key Results Row */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-[#E2E8F0]">
-                {spotlightCampaign.results.map((res, i) => (
-                  <div key={i} className="flex flex-col">
-                    <span className="text-sm font-black text-[#0F172A]">{res.value}</span>
-                    <span className="text-[10px] text-[#64748B] uppercase font-semibold">{res.metric}</span>
-                  </div>
-                ))}
-              </div>
+              {spotlightCampaign.results && spotlightCampaign.results.length > 0 && (
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-[#E2E8F0]">
+                  {spotlightCampaign.results.map((res, i) => (
+                    <div key={i} className="flex flex-col">
+                      <span className="text-sm font-black text-[#0F172A]">{res.value}</span>
+                      <span className="text-[10px] text-[#64748B] uppercase font-semibold">{res.metric}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 

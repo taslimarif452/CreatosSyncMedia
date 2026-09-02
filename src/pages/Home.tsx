@@ -10,6 +10,7 @@ import { BrandCTA } from '../components/BrandCTA';
 import { CreatorCTA } from '../components/CreatorCTA';
 import { CampaignForm } from '../components/CampaignForm';
 import { Campaign } from '../types';
+import { useAdminData } from '../context/AdminDataContext';
 
 interface HomeProps {
   navigate: (path: string) => void;
@@ -22,6 +23,8 @@ export const Home: React.FC<HomeProps> = ({
   onSelectCampaign,
   onSelectCreator
 }) => {
+  const { settings } = useAdminData();
+
   useEffect(() => {
     const handleHashScroll = () => {
       const hash = window.location.hash;
@@ -80,22 +83,26 @@ export const Home: React.FC<HomeProps> = ({
         }}
       />
 
-      {/* 05. Creator Network */}
-      <CreatorNetworkSection
-        onSelectCreator={onSelectCreator}
-        onExploreAll={() => {
-          navigate('/creators');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
-      />
+      {/* 05. Creator Network (Conditionally rendered by Admin toggle) */}
+      {settings.showCreatorsSection && (
+        <CreatorNetworkSection
+          onSelectCreator={onSelectCreator}
+          onExploreAll={() => {
+            navigate('/creators');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
+      )}
 
       {/* 06. How It Works / Process */}
       <ProcessSection />
 
-      {/* 07. Campaign Showcase (Campaigns That Made Noise) */}
-      <CampaignShowcase
-        onSelectCampaign={onSelectCampaign}
-      />
+      {/* 07. Campaign Showcase (Conditionally rendered by Admin toggle) */}
+      {settings.showCampaignsSection && (
+        <CampaignShowcase
+          onSelectCampaign={onSelectCampaign}
+        />
+      )}
 
       {/* 08. For Brands CTA */}
       <BrandCTA onStartCampaign={scrollToCampaignForm} />
