@@ -386,7 +386,7 @@ export const Admin: React.FC<AdminProps> = ({ navigate }) => {
           <div className="flex items-center gap-3 pb-6 border-b border-[#262626] mb-6">
             <div className="h-10 w-10 flex items-center justify-center flex-shrink-0 bg-[#141414] rounded-xl border border-[#333] p-1.5">
               <img
-                src="https://res.cloudinary.com/dbqmhnahl/image/upload/v1788166817/CSM_fevicon_uvvso7.png"
+                src="https://res.cloudinary.com/dbqmhnahl/image/upload/v1788333936/CSM_png_cirlce_uwvyan.png"
                 alt="Logo"
                 className="w-full h-full object-contain"
                 referrerPolicy="no-referrer"
