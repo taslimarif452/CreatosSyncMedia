@@ -14,15 +14,47 @@ import { Admin } from './pages/Admin';
 import { AdminDataProvider } from './context/AdminDataContext';
 import { Campaign } from './types';
 
-export default function App() {
-  const [currentPath, setCurrentPath] = useState<string>('/');
-  const [selectedCampaign, setSelectedCampaign] = useState<Campaign | null>(null);
-  const [selectedCreatorId, setSelectedCreatorId] = useState<string | null>(null);
+const getNormalizedPath = (): string => {
+  if (typeof window === 'undefined') return '/';
 
-  // Handle browser back/forward and initial path
+  // 1. Check search parameter (e.g. ?page=admin or ?path=/admin)
+  const urlParams = new URLSearchParams(window.location.search);
+  const pageParam = urlParams.get('page') || urlParams.get('path');
+  if (pageParam) {
+    return pageParam.startsWith('/') ? pageParam : `/${pageParam}`;
+  }
+
+  // 2. Check hash route (e.g. #/admin or #admin)
+  const hash = window.location.hash;
+  if (hash && hash.startsWith('#/')) {
+    return hash.substring(1);
+  }
+  if (hash && hash.startsWith('#')) {
+    const cleanHash = hash.substring(1);
+    if (['admin', 'services', 'for-brands', 'for-creators', 'creators', 'about', 'contact'].includes(cleanHash) || cleanHash.startsWith('creator/')) {
+      return `/${cleanHash}`;
+    }
+  }
+
+  // 3. Standard pathname
+  return window.location.pathname || '/';
+};
+
+export default function App() {
+  const [currentPath, setCurrentPath] = useState<string>(() => getNormalizedPath());
+  const [selectedCampaign, setSelectedCampaign] = useState<Campaign | null>(null);
+  const [selectedCreatorId, setSelectedCreatorId] = useState<string | null>(() => {
+    const initPath = getNormalizedPath();
+    if (initPath.startsWith('/creator/')) {
+      return initPath.replace('/creator/', '');
+    }
+    return null;
+  });
+
+  // Handle browser back/forward and hash changes
   useEffect(() => {
-    const handlePopState = () => {
-      const path = window.location.pathname || '/';
+    const syncLocation = () => {
+      const path = getNormalizedPath();
       setCurrentPath(path);
       if (path.startsWith('/creator/')) {
         const id = path.replace('/creator/', '');
@@ -32,8 +64,15 @@ export default function App() {
       }
     };
 
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    // Run on initial mount
+    syncLocation();
+
+    window.addEventListener('popstate', syncLocation);
+    window.addEventListener('hashchange', syncLocation);
+    return () => {
+      window.removeEventListener('popstate', syncLocation);
+      window.removeEventListener('hashchange', syncLocation);
+    };
   }, []);
 
   const navigate = (path: string) => {
