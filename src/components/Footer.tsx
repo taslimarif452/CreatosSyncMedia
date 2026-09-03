@@ -133,13 +133,6 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
             >
               For Creators
             </button>
-            <button
-              onClick={() => handleNav('/admin')}
-              className="text-xs text-left text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1.5 font-semibold cursor-pointer"
-            >
-              <span>Admin Panel</span>
-              <ArrowUpRight className="w-3 h-3" />
-            </button>
           </div>
 
           {/* Quick Roster Links */}

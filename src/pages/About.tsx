@@ -234,7 +234,7 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
                     <Building2 className="w-6 h-6" />
                   </div>
                   <div>
-                    <div className="text-2xl sm:text-3xl font-black text-[#38BDF8] tracking-tight">
+                    <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#38BDF8] tracking-tight">
                       40+
                     </div>
                     <div className="text-xs sm:text-sm font-medium text-[#E5E7EB]">
@@ -249,7 +249,7 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
                     <Users className="w-6 h-6" />
                   </div>
                   <div>
-                    <div className="text-2xl sm:text-3xl font-black text-[#38BDF8] tracking-tight">
+                    <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#38BDF8] tracking-tight">
                       200+
                     </div>
                     <div className="text-xs sm:text-sm font-medium text-[#E5E7EB]">
@@ -264,7 +264,7 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
                     <Megaphone className="w-6 h-6" />
                   </div>
                   <div>
-                    <div className="text-2xl sm:text-3xl font-black text-[#38BDF8] tracking-tight">
+                    <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#38BDF8] tracking-tight">
                       500+
                     </div>
                     <div className="text-xs sm:text-sm font-medium text-[#E5E7EB]">
@@ -279,7 +279,7 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
                     <BarChart3 className="w-6 h-6" />
                   </div>
                   <div>
-                    <div className="text-2xl sm:text-3xl font-black text-[#38BDF8] tracking-tight">
+                    <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#38BDF8] tracking-tight">
                       100%
                     </div>
                     <div className="text-xs sm:text-sm font-medium text-[#E5E7EB]">

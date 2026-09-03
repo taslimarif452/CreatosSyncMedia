@@ -1,0 +1,11 @@
+{
+  "projectId": "creatorssync-media",
+  "appId": "1:771545789666:web:4b4c6eb95d67df32d91abb",
+  "apiKey": "AIzaSyBkZbmDKpzuLYHe_SHIQDb_zXzg9g5_eUY",
+  "authDomain": "creatorssync-media.firebaseapp.com",
+  "firestoreDatabaseId": "(default)",
+  "storageBucket": "creatorssync-media.firebasestorage.app",
+  "messagingSenderId": "771545789666",
+  "measurementId": "G-PMJT3Q9NVH",
+  "databaseURL": "https://creatorssync-media-default-rtdb.asia-southeast1.firebasedatabase.app"
+}

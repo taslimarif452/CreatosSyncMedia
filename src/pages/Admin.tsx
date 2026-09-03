@@ -26,9 +26,14 @@ import {
   ShieldCheck,
   AlertCircle,
   Database,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Lock,
+  LogIn,
+  LogOut,
+  ShieldAlert
 } from 'lucide-react';
 import { useAdminData } from '../context/AdminDataContext';
+import { useAuth, ALLOWED_ADMIN_EMAILS } from '../context/AuthContext';
 import { Creator, Campaign, CreatorCategory, CampaignType } from '../types';
 import { compressAndConvertToBase64 } from '../utils/imageCompressor';
 
@@ -60,6 +65,10 @@ const CAMPAIGN_TYPES: CampaignType[] = [
 ];
 
 export const Admin: React.FC<AdminProps> = ({ navigate }) => {
+  const { user, loading: authLoading, isAdmin, signInWithGoogle, signOut } = useAuth();
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [isSigningIn, setIsSigningIn] = useState<boolean>(false);
+
   const {
     creators,
     campaigns,
@@ -405,6 +414,166 @@ export const Admin: React.FC<AdminProps> = ({ navigate }) => {
     );
   });
 
+  const handleGoogleSignIn = async () => {
+    setIsSigningIn(true);
+    setAuthError(null);
+    const res = await signInWithGoogle();
+    setIsSigningIn(false);
+    if (!res.success && res.error) {
+      setAuthError(res.error);
+    }
+  };
+
+  // 1. Loading State while checking Firebase Auth status
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-[#080808] text-[#F5F5F5] flex flex-col items-center justify-center p-6">
+        <div className="flex flex-col items-center gap-4 text-center max-w-sm">
+          <div className="w-12 h-12 rounded-2xl bg-[#141414] border border-[#262626] flex items-center justify-center shadow-lg">
+            <RefreshCw className="w-6 h-6 text-[#4F7CFF] animate-spin" />
+          </div>
+          <div className="space-y-1">
+            <h3 className="text-base font-semibold text-white">Verifying Admin Access</h3>
+            <p className="text-xs text-[#8E8E93]">Checking secure Google credentials with Firebase...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 2. Unauthenticated OR Non-Admin Account: Show Clean Google Sign-In Gate
+  if (!user || !isAdmin) {
+    return (
+      <div className="min-h-screen bg-[#080808] text-[#F5F5F5] flex flex-col items-center justify-center p-4 sm:p-6">
+        <div className="w-full max-w-md bg-[#101010] border border-[#262626] rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+          {/* Subtle Ambient Light */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-32 bg-[#4F7CFF]/10 blur-3xl pointer-events-none rounded-full" />
+
+          {/* Logo & Header */}
+          <div className="flex flex-col items-center text-center mb-8 relative z-10">
+            <div className="h-14 w-14 flex items-center justify-center bg-[#141414] rounded-2xl border border-[#2a2a2a] p-2 shadow-inner mb-4">
+              <img
+                src="https://res.cloudinary.com/dbqmhnahl/image/upload/v1788333936/CSM_png_cirlce_uwvyan.png"
+                alt="CreatorsSyncMedia"
+                className="w-full h-full object-contain"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+            <div className="text-lg font-extrabold text-white tracking-tight">
+              Creators<span className="text-[#4F7CFF]">Sync</span>Media
+            </div>
+            <div className="flex items-center gap-2 mt-2 px-3 py-1 rounded-full bg-[#181818] border border-[#2a2a2a]">
+              <Lock className="w-3.5 h-3.5 text-[#4F7CFF]" />
+              <span className="text-[11px] font-semibold text-[#D4D4D4] uppercase tracking-wider">
+                Restricted Admin Access
+              </span>
+            </div>
+          </div>
+
+          {/* Unauthorized Signed-in State Warning */}
+          {user && !isAdmin && (
+            <div className="mb-6 p-4 rounded-xl bg-rose-950/40 border border-rose-800/60 text-left space-y-2">
+              <div className="flex items-center gap-2 text-rose-400 font-semibold text-xs">
+                <ShieldAlert className="w-4 h-4 flex-shrink-0" />
+                <span>Unauthorized Google Account</span>
+              </div>
+              <p className="text-xs text-rose-200/90 leading-relaxed">
+                Signed in as <span className="font-semibold text-white underline">{user.email}</span>. This account does not have administrator privileges.
+              </p>
+              <div className="pt-2 flex justify-end">
+                <button
+                  onClick={() => signOut()}
+                  className="text-xs font-semibold text-rose-300 hover:text-white underline cursor-pointer"
+                >
+                  Sign Out & Try Another Account
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Auth Error Banner */}
+          {authError && (
+            <div className="mb-6 p-3.5 rounded-xl bg-amber-950/40 border border-amber-800/60 text-xs text-amber-200 text-left flex items-start gap-2.5">
+              <AlertCircle className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+              <span>{authError}</span>
+            </div>
+          )}
+
+          {/* Google Sign-In Action */}
+          <div className="space-y-4">
+            <button
+              onClick={handleGoogleSignIn}
+              disabled={isSigningIn}
+              className="w-full py-3.5 px-4 rounded-xl bg-white hover:bg-[#F0F0F0] active:scale-[0.99] text-black font-semibold text-sm flex items-center justify-center gap-3 transition-all cursor-pointer shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {isSigningIn ? (
+                <>
+                  <RefreshCw className="w-4 h-4 animate-spin text-black" />
+                  <span>Connecting to Google...</span>
+                </>
+              ) : (
+                <>
+                  {/* Google Vector Icon */}
+                  <svg className="w-5 h-5" viewBox="0 0 24 24">
+                    <path
+                      fill="#4285F4"
+                      d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                    />
+                    <path
+                      fill="#34A853"
+                      d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                    />
+                    <path
+                      fill="#FBBC05"
+                      d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+                    />
+                    <path
+                      fill="#EA4335"
+                      d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+                    />
+                  </svg>
+                  <span>Sign in with Google</span>
+                </>
+              )}
+            </button>
+
+            {/* Allowed Admins Guidance Info */}
+            <div className="p-4 rounded-xl bg-[#141414] border border-[#222222] text-left">
+              <div className="text-[11px] font-bold text-[#8E8E93] uppercase tracking-wider mb-2">
+                Authorized Admin Accounts:
+              </div>
+              <ul className="text-xs text-[#CCCCCC] space-y-1.5 font-mono">
+                {ALLOWED_ADMIN_EMAILS.map((email) => (
+                  <li key={email} className="flex items-center gap-2">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+                    <span>{email}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-[10px] text-[#737373] mt-2.5 leading-normal">
+                Only the verified accounts listed above will be granted full write & manage permissions in the Admin Panel.
+              </p>
+            </div>
+          </div>
+
+          {/* Return to Website Button */}
+          <div className="mt-6 pt-6 border-t border-[#222222]">
+            <button
+              onClick={() => {
+                navigate('/');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="w-full py-2.5 px-3 rounded-xl bg-[#141414] hover:bg-[#1C1C1C] border border-[#262626] text-xs font-semibold text-[#A1A1A1] hover:text-white flex items-center justify-center gap-2 transition-colors cursor-pointer"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Return to Live Website</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#080808] text-[#F5F5F5] flex flex-col md:flex-row">
       {/* Toast Notification */}
@@ -562,6 +731,41 @@ export const Admin: React.FC<AdminProps> = ({ navigate }) => {
               </span>
             </div>
           </div>
+
+          {/* Logged in Admin User Card */}
+          {user && (
+            <div className="p-3 rounded-xl bg-[#141414] border border-[#262626] mb-2 flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2.5 overflow-hidden">
+                {user.photoURL ? (
+                  <img
+                    src={user.photoURL}
+                    alt={user.displayName || 'Admin'}
+                    className="w-7 h-7 rounded-full object-cover border border-[#333] flex-shrink-0"
+                    referrerPolicy="no-referrer"
+                  />
+                ) : (
+                  <div className="w-7 h-7 rounded-full bg-[#4F7CFF]/20 border border-[#4F7CFF]/40 text-[#4F7CFF] flex items-center justify-center text-xs font-bold flex-shrink-0">
+                    {user.email?.charAt(0).toUpperCase() || 'A'}
+                  </div>
+                )}
+                <div className="overflow-hidden text-left">
+                  <div className="text-xs font-semibold text-white truncate">
+                    {user.displayName || 'Admin'}
+                  </div>
+                  <div className="text-[10px] text-[#A1A1A1] truncate font-mono">
+                    {user.email}
+                  </div>
+                </div>
+              </div>
+              <button
+                onClick={() => signOut()}
+                title="Sign Out"
+                className="p-1.5 rounded-lg hover:bg-[#222] text-[#8E8E93] hover:text-rose-400 transition-colors cursor-pointer flex-shrink-0"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
+            </div>
+          )}
 
           <button
             onClick={() => {

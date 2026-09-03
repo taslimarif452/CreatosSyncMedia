@@ -37,12 +37,12 @@ export const Metrics: React.FC = () => {
       sublabel: 'Delivered Across Verticals'
     },
     {
-      id: 'client-satisfaction',
-      value: '100%',
-      targetNum: 100,
-      suffix: '%',
-      label: 'Client Satisfaction',
-      sublabel: 'Proven ROI & Retention'
+      id: 'pan-india',
+      value: 'PAN INDIA',
+      targetNum: 0,
+      suffix: '',
+      label: 'NETWORK',
+      sublabel: 'Tier 1 & Tier 2 Regional Reach'
     }
   ];
 
@@ -87,9 +87,9 @@ export const Metrics: React.FC = () => {
         </div>
       </div>
 
-      {/* 4-Metric Container: Full Width 100% like Our Brand Partners */}
+      {/* 4-Metric Container: Equal Widths for All 4 Cards */}
       <div className="w-full border-t border-[#222222] bg-black">
-        <div className="w-full grid grid-cols-4">
+        <div className="w-full grid grid-cols-2 lg:grid-cols-4">
           {METRICS_DATA.map((item, index) => {
             // Calculate dynamic animated value if numerical
             let displayVal = item.value;
@@ -101,16 +101,20 @@ export const Metrics: React.FC = () => {
             return (
               <div
                 key={item.id}
-                className={`group min-h-[160px] sm:min-h-[210px] md:min-h-[260px] lg:min-h-[280px] p-4 sm:p-7 md:p-9 lg:p-12 flex flex-col justify-between text-left items-start transition-all duration-200 hover:bg-[#0a0a0a] cursor-pointer ${
-                  index !== 0 ? 'border-l border-[#1F1F1F]' : ''
+                className={`group min-h-[160px] sm:min-h-[210px] md:min-h-[260px] lg:min-h-[280px] p-4 sm:p-6 md:p-7 lg:p-7 xl:p-9 2xl:p-10 flex flex-col justify-between text-left items-start transition-all duration-200 hover:bg-[#0a0a0a] cursor-pointer ${
+                  index % 2 !== 0 ? 'border-l border-[#1F1F1F]' : ''
+                } ${
+                  index >= 2 ? 'border-t lg:border-t-0 border-[#1F1F1F]' : ''
+                } ${
+                  index !== 0 ? 'lg:border-l border-[#1F1F1F]' : ''
                 }`}
               >
                 {/* Top Section: Large Number + Uppercase Label */}
                 <div className="w-full text-left">
-                  <div className="text-2xl min-[380px]:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-[#FFFFFF] group-hover:text-[#4F7CFF] transition-colors duration-200 tracking-tight leading-none">
+                  <div className="text-2xl min-[380px]:text-3xl sm:text-4xl md:text-5xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-[#FFFFFF] group-hover:text-[#4F7CFF] transition-colors duration-200 tracking-tight leading-none whitespace-nowrap">
                     {displayVal}
                   </div>
-                  <div className="text-[11px] min-[380px]:text-xs sm:text-sm md:text-base font-medium text-[#F5F5F5] group-hover:text-[#4F7CFF] transition-colors duration-200 uppercase tracking-wider mt-2.5 sm:mt-3">
+                  <div className="text-xs sm:text-sm md:text-base font-medium text-[#F5F5F5] group-hover:text-[#4F7CFF] transition-colors duration-200 uppercase tracking-wider mt-2.5 sm:mt-3.5">
                     {item.label}
                   </div>
                 </div>

@@ -133,9 +133,9 @@ export const Services: React.FC<ServicesPageProps> = ({ navigate }) => {
               
               <div className="relative aspect-[4/4.5] rounded-xl overflow-hidden bg-[#141414]">
                 <img
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=80"
+                  src="https://res.cloudinary.com/dbqmhnahl/image/upload/v1788426853/ChatGPT_Image_Sep_2_2026_11_38_10_PM_ka6gjc.png"
                   alt="CreatorsSyncMedia Production"
-                  className="w-full h-full object-cover object-top filter brightness-95 group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover object-center filter brightness-95 group-hover:scale-105 transition-transform duration-700"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-black/30" />

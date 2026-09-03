@@ -12,6 +12,7 @@ import { About } from './pages/About';
 import { Contact } from './pages/Contact';
 import { Admin } from './pages/Admin';
 import { AdminDataProvider } from './context/AdminDataContext';
+import { AuthProvider } from './context/AuthContext';
 import { Campaign } from './types';
 
 const getNormalizedPath = (): string => {
@@ -156,24 +157,26 @@ export default function App() {
   };
 
   return (
-    <AdminDataProvider>
-      <div className="min-h-screen bg-[#080808] text-[#F5F5F5] font-sans antialiased selection:bg-[#4F7CFF] selection:text-white flex flex-col justify-between">
-        {/* Persistent Navigation (Hidden on standalone admin screen for clean workspace) */}
-        {!isAdminPage && <Navbar currentPath={currentPath} navigate={navigate} />}
+    <AuthProvider>
+      <AdminDataProvider>
+        <div className="min-h-screen bg-[#080808] text-[#F5F5F5] font-sans antialiased selection:bg-[#4F7CFF] selection:text-white flex flex-col justify-between">
+          {/* Persistent Navigation (Hidden on standalone admin screen for clean workspace) */}
+          {!isAdminPage && <Navbar currentPath={currentPath} navigate={navigate} />}
 
-        {/* Main Page Content */}
-        <main className={`flex-grow ${isAdminPage ? 'min-h-screen' : ''}`}>{renderContent()}</main>
+          {/* Main Page Content */}
+          <main className={`flex-grow ${isAdminPage ? 'min-h-screen' : ''}`}>{renderContent()}</main>
 
-        {/* Persistent Footer (Hidden on standalone admin screen) */}
-        {!isAdminPage && <Footer navigate={navigate} />}
+          {/* Persistent Footer (Hidden on standalone admin screen) */}
+          {!isAdminPage && <Footer navigate={navigate} />}
 
-        {/* Global Interactive Campaign Detail Modal */}
-        <CampaignDetailModal
-          campaign={selectedCampaign}
-          onClose={() => setSelectedCampaign(null)}
-          onStartCampaign={handleStartCampaignFromModal}
-        />
-      </div>
-    </AdminDataProvider>
+          {/* Global Interactive Campaign Detail Modal */}
+          <CampaignDetailModal
+            campaign={selectedCampaign}
+            onClose={() => setSelectedCampaign(null)}
+            onStartCampaign={handleStartCampaignFromModal}
+          />
+        </div>
+      </AdminDataProvider>
+    </AuthProvider>
   );
 }
