@@ -88,9 +88,9 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
               </div>
 
               {/* Right Column: Visual Showcase with Night Skyline + '<' Chevron Pattern + Official Logo + Mumbai Pill */}
-              <div id="about-visual-showcase" className="lg:col-span-5 relative w-full h-[640px] sm:h-[720px] lg:h-full min-h-[580px] lg:min-h-[720px] pt-16 sm:pt-20 lg:pt-0 mb-0 flex items-center justify-center">
+              <div id="about-visual-showcase" className="lg:col-span-5 relative w-full h-[480px] sm:h-[620px] lg:h-full min-h-[460px] sm:min-h-[580px] lg:min-h-[720px] pt-4 sm:pt-12 lg:pt-0 mb-0 flex items-center justify-center overflow-hidden lg:overflow-visible">
                 {/* Right Side: Illuminated Skyscrapers Night Skyline (Flushed to header and down to WHO WE ARE section) */}
-                <div className="absolute right-0 -top-4 sm:-top-6 lg:-top-8 -bottom-8 w-[82%] sm:w-[75%] overflow-hidden pointer-events-none rounded-2xl">
+                <div className="absolute right-0 -top-2 sm:-top-6 lg:-top-8 -bottom-4 sm:-bottom-8 w-[88%] sm:w-[75%] overflow-hidden pointer-events-none rounded-2xl">
                   <img
                     src="https://png.pngtree.com/thumb_back/fh260/background/20220505/pngtree-chicago-skyline-lake-america-michigan-photo-image_17705618.jpg"
                     alt="City skyline at night"
@@ -104,10 +104,10 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
                 </div>
 
                 {/* Geometric '<' Chevron Shape Pattern behind the Logo (Extended to stretch top to bottom) */}
-                <div className="absolute -top-4 sm:-top-6 lg:-top-8 -bottom-8 inset-x-0 flex items-center justify-center pointer-events-none -translate-x-7 sm:-translate-x-12 scale-135 sm:scale-150 lg:scale-160">
+                <div className="absolute -top-2 sm:-top-6 lg:-top-8 -bottom-4 sm:-bottom-8 inset-x-0 flex items-center justify-center pointer-events-none -translate-x-3 sm:-translate-x-10 lg:-translate-x-12 scale-100 sm:scale-135 lg:scale-160">
                   <svg
                     viewBox="0 0 500 450"
-                    className="w-full h-full object-contain drop-shadow-[0_0_50px_rgba(37,99,235,0.65)]"
+                    className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(37,99,235,0.55)] sm:drop-shadow-[0_0_50px_rgba(37,99,235,0.65)]"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -134,8 +134,8 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
                 </div>
 
                 {/* Real Website Logo inside Circular Badge */}
-                <div className="relative z-10 -translate-x-14 sm:-translate-x-20 md:-translate-x-24">
-                  <div className="relative w-48 h-48 sm:w-60 sm:h-60 md:w-72 md:h-72 rounded-full border-2 border-white flex items-center justify-center overflow-hidden">
+                <div className="relative z-10 -translate-x-6 sm:-translate-x-16 md:-translate-x-24">
+                  <div className="relative w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 rounded-full border-2 border-white flex items-center justify-center overflow-hidden bg-[#080808]/70 shadow-[0_0_40px_rgba(0,0,0,0.8)]">
                     <img
                       src="https://res.cloudinary.com/dbqmhnahl/image/upload/v1788333936/CSM_png_cirlce_uwvyan.png"
                       alt="CreatorsSyncMedia Official Logo"
@@ -146,15 +146,15 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
                 </div>
 
                 {/* Location Pill: Mumbai, Maharashtra (Overlapping at Bottom Right - shifted up) */}
-                <div className="absolute bottom-[86px] sm:bottom-[94px] right-1 sm:right-3 z-20 inline-flex items-center gap-3 sm:gap-3.5 p-1 sm:p-1.5 pr-5 sm:pr-7 rounded-full bg-[#080808]/95 border border-[#2563EB] shadow-[0_10px_30px_rgba(0,0,0,0.85)] backdrop-blur-md">
-                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#2563EB] flex items-center justify-center text-white shrink-0 shadow-md">
-                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5 fill-white" />
+                <div className="absolute bottom-[36px] sm:bottom-[70px] lg:bottom-[86px] right-2 sm:right-3 z-20 inline-flex items-center gap-2.5 sm:gap-3.5 p-1 sm:p-1.5 pr-4 sm:pr-7 rounded-full bg-[#080808]/95 border border-[#2563EB] shadow-[0_10px_30px_rgba(0,0,0,0.85)] backdrop-blur-md">
+                  <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-[#2563EB] flex items-center justify-center text-white shrink-0 shadow-md">
+                    <MapPin className="w-3.5 h-3.5 sm:w-5 sm:h-5 fill-white" />
                   </div>
                   <div className="text-left flex flex-col justify-center">
-                    <div className="text-xs sm:text-sm font-bold text-white/90 leading-tight">
+                    <div className="text-[11px] sm:text-sm font-bold text-white/90 leading-tight">
                       Mumbai,
                     </div>
-                    <div className="text-sm sm:text-base font-black text-white tracking-wide leading-tight">
+                    <div className="text-xs sm:text-base font-black text-white tracking-wide leading-tight">
                       Maharashtra
                     </div>
                   </div>
@@ -163,7 +163,7 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
             </div>
 
             {/* Middle Feature Pillars: 4 Pillars - shifted up */}
-            <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 pt-8 border-t border-[#1E3A8A]/40 mb-10 -mt-[70px]">
+            <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 pt-8 border-t border-[#1E3A8A]/40 mb-10 mt-2 sm:-mt-6 lg:-mt-[70px]">
               {/* Pillar 1: WHO WE ARE */}
               <div className="flex items-start gap-3.5">
                 <div className="w-10 h-10 rounded-xl bg-[#0B1A3D] border border-[#1E40AF]/50 flex items-center justify-center text-[#3B82F6] shrink-0 mt-0.5">
