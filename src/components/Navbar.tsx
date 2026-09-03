@@ -233,29 +233,19 @@ export const Navbar: React.FC<NavbarProps> = ({
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Brand Logo */}
+          {/* Brand Name */}
           <button
             id="brand-logo-btn"
             onClick={() => handleNavClick('/')}
-            className="flex items-center gap-2.5 text-left group focus:outline-none cursor-pointer"
+            className="flex items-center text-left group focus:outline-none cursor-pointer"
             aria-label="CreatorsSyncMedia Home"
           >
-            <div className="h-9 sm:h-10 w-9 sm:w-10 flex items-center justify-center flex-shrink-0">
-              <img
-                src="https://res.cloudinary.com/dbqmhnahl/image/upload/v1788333936/CSM_png_cirlce_uwvyan.png"
-                alt="CreatorsSyncMedia Logo"
-                className="w-full h-full object-contain group-hover:scale-105 transition-transform"
-                referrerPolicy="no-referrer"
-              />
-            </div>
-            <div className="flex flex-col">
-              <span
-                className="text-lg font-extrabold tracking-tight text-[#F5F5F5] group-hover:text-white transition-colors"
-                style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: '-0.02em' }}
-              >
-                Creators<span className="text-[#4F7CFF]">Sync</span>Media
-              </span>
-            </div>
+            <span
+              className="text-lg sm:text-xl font-extrabold tracking-tight text-[#F5F5F5] group-hover:text-white transition-colors"
+              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: '-0.02em' }}
+            >
+              Creators<span className="text-[#4F7CFF]">Sync</span>Media
+            </span>
           </button>
 
           {/* Desktop Navigation Links with Dropdowns */}

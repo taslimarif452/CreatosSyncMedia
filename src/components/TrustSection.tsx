@@ -28,7 +28,8 @@ export const TrustSection: React.FC = () => {
     },
     {
       label: 'Physics Wallah',
-      image: 'https://pbs.twimg.com/media/GoKyfAXWoAAIGI8.png'
+      image: 'https://img.icons8.com/m_rounded/1200/physics-wallah.jpg',
+      roundedClass: 'rounded-[4px]'
     },
     {
       label: 'Foundit',
@@ -105,19 +106,19 @@ export const TrustSection: React.FC = () => {
       {brandPartners.map((item, idx) => (
         <div
           key={idx}
-          className="flex flex-col items-center justify-center text-center shrink-0 select-none group px-8 sm:px-12 md:px-16 py-4 sm:py-6 border-r border-[#262626]"
+          className="flex flex-col items-center justify-center text-center shrink-0 select-none group px-8 sm:px-12 md:px-16 py-3 border-r border-[#262626]"
         >
-          <div className="h-20 sm:h-28 md:h-32 w-36 sm:w-52 md:w-60 flex items-center justify-center mb-3 sm:mb-4">
+          <div className="h-28 sm:h-36 md:h-40 w-44 sm:w-60 md:w-68 flex items-center justify-center mb-3 sm:mb-4">
             <img
               src={item.image}
               alt={item.label}
-              className="max-h-full max-w-full object-contain pointer-events-none drop-shadow-md rounded-lg group-hover:scale-105 transition-transform duration-300"
+              className={`max-h-full max-w-full object-contain pointer-events-none drop-shadow-lg ${item.roundedClass || 'rounded-xl'} group-hover:scale-105 transition-transform duration-300`}
               loading="lazy"
               draggable={false}
               referrerPolicy="no-referrer"
             />
           </div>
-          <span className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-[#E5E5E5] group-hover:text-white transition-colors leading-tight tracking-wide whitespace-nowrap">
+          <span className="text-base sm:text-lg md:text-xl font-bold text-white group-hover:text-amber-400 transition-colors leading-tight tracking-wide whitespace-nowrap">
             {item.label}
           </span>
         </div>
@@ -128,7 +129,7 @@ export const TrustSection: React.FC = () => {
   return (
     <section
       id="trust-section"
-      className="py-10 sm:py-16 md:py-20 bg-[#080808] border-y border-[#262626] overflow-hidden flex items-center min-h-[160px] sm:min-h-[220px] md:min-h-[260px]"
+      className="py-6 sm:py-8 md:py-9 bg-[#080808] border-y border-[#262626] overflow-hidden flex items-center min-h-[200px] sm:min-h-[240px] md:min-h-[260px]"
     >
       <div className="w-full">
         <div className="flex flex-col items-center text-center">
