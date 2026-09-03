@@ -99,15 +99,15 @@ export const Metrics: React.FC = () => {
             return (
               <div
                 key={item.id}
-                className={`min-h-[110px] sm:min-h-[160px] md:min-h-[220px] p-2.5 sm:p-4 md:p-8 flex flex-col justify-between transition-colors duration-200 hover:bg-[#0c0c0c] ${
+                className={`group min-h-[110px] sm:min-h-[160px] md:min-h-[220px] p-2.5 sm:p-4 md:p-8 flex flex-col justify-between transition-all duration-200 hover:bg-[#0c0c0c] cursor-pointer ${
                   index !== 0 ? 'border-l border-[#1F1F1F]' : ''
                 }`}
               >
                 <div>
-                  <div className="text-base min-[380px]:text-lg sm:text-3xl md:text-4xl lg:text-5xl font-bold sm:font-normal text-[#F5F5F5] tracking-tight mb-1 sm:mb-2">
+                  <div className="text-base min-[380px]:text-lg sm:text-3xl md:text-4xl lg:text-5xl font-bold sm:font-normal text-[#F5F5F5] group-hover:text-[#4F7CFF] transition-colors duration-200 tracking-tight mb-1 sm:mb-2">
                     {displayVal}
                   </div>
-                  <div className="text-[10px] min-[380px]:text-[11px] sm:text-sm md:text-base font-medium sm:font-normal text-[#F5F5F5] uppercase tracking-tight sm:tracking-wider">
+                  <div className="text-[10px] min-[380px]:text-[11px] sm:text-sm md:text-base font-medium sm:font-normal text-[#F5F5F5] group-hover:text-[#4F7CFF] transition-colors duration-200 uppercase tracking-tight sm:tracking-wider">
                     {item.label}
                   </div>
                 </div>
