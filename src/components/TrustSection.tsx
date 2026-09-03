@@ -15,12 +15,8 @@ export const TrustSection: React.FC = () => {
       image: 'https://media.licdn.com/dms/image/v2/D5622AQGQvgihOSP-oA/feedshare-shrink_800/B56ZiYBtchHUAg-/0/1754897251006?e=2147483647&v=beta&t=8PkitTk07uFD6-6pz8JHCQT3x7eiH5y-hNMkiUHb5RM'
     },
     {
-      label: 'Masai School',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHq_v_x3szNyVe0-PWkp2QnMnO6nRaaeW3X3BR2IsG06g7ty67EwNvotCT&s=10'
-    },
-    {
-      label: 'Mirai School',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkaDh5M5wDLsik6f3hWKgiGUhHKqhACAvN_Jc9Oz0qxwmqdV-01rzBdT8&s=10'
+      label: 'Mirai school of Technology',
+      image: 'https://media.ahmedabadmirror.com/am/uploads/mediaGallery/image/1748866119463.jpg-org'
     },
     {
       label: 'Coursera',
@@ -28,12 +24,26 @@ export const TrustSection: React.FC = () => {
     },
     {
       label: 'Physics Wallah',
-      image: 'https://img.icons8.com/m_rounded/1200/physics-wallah.jpg',
-      roundedClass: 'rounded-[4px]'
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Physics_wallah_logo.jpg/500px-Physics_wallah_logo.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail',
+      roundedClass: 'rounded-[7px]'
     },
     {
       label: 'Foundit',
       image: 'https://play-lh.googleusercontent.com/BKx438gbzWpEn23ELCB7Jc0o7qve1o8BhGkWHYlIzxvYWqNvq2TjLL2AufcVbt1eoEyVh_bTf1t6zybiKTa8QQ'
+    },
+    {
+      label: 'Masai School',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHq_v_x3szNyVe0-PWkp2QnMnO6nRaaeW3X3BR2IsG06g7ty67EwNvotCT&s=10'
+    },
+    {
+      label: 'Rishihood University',
+      image: 'https://i.pinimg.com/736x/08/50/ba/0850ba8821d062396207ee5ffc902eb0.jpg',
+      roundedClass: 'rounded-[7px]'
+    },
+    {
+      label: 'IIT Delhi',
+      image: 'https://images.seeklogo.com/logo-png/48/1/indian-institute-of-technology-delhi-logo-png_seeklogo-483677.png',
+      roundedClass: 'rounded-[7px]'
     }
   ];
 
