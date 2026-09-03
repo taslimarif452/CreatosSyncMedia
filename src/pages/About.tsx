@@ -90,29 +90,27 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
               {/* Right Column: Real Logo Badge + Mumbai Pill */}
               <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
                 {/* Real Website Logo inside Circular Badge */}
-                <div className="relative group">
-                  {/* Outer Glow / Geometric Accent Rings */}
-                  <div className="absolute -inset-2 bg-gradient-to-r from-[#2563EB] to-[#60A5FA] rounded-full blur-md opacity-30 group-hover:opacity-60 transition duration-500" />
-                  <div className="relative w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full bg-white p-3.5 sm:p-5 flex items-center justify-center shadow-2xl ring-4 ring-[#2563EB]/50">
+                <div className="relative">
+                  <div className="relative w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full border-2 border-white p-[1px] flex items-center justify-center overflow-hidden">
                     <img
                       src="https://res.cloudinary.com/dbqmhnahl/image/upload/v1788333936/CSM_png_cirlce_uwvyan.png"
                       alt="CreatorsSyncMedia Official Logo"
-                      className="w-full h-full object-contain pointer-events-none drop-shadow-md"
+                      className="w-full h-full object-contain scale-[1.075] rounded-full pointer-events-none"
                       referrerPolicy="no-referrer"
                     />
                   </div>
                 </div>
 
                 {/* Location Pill: Mumbai, Maharashtra */}
-                <div className="mt-5 sm:mt-6 inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#0B152F]/90 border border-[#2563EB]/50 backdrop-blur-md shadow-xl">
-                  <div className="w-8 h-8 rounded-full bg-[#2563EB] flex items-center justify-center text-white shrink-0 shadow-md">
-                    <MapPin className="w-4 h-4 fill-white" />
+                <div className="mt-5 sm:mt-6 inline-flex items-center gap-3.5 p-1 pr-5 sm:pr-6 rounded-full bg-[#080808] border border-[#2563EB] shadow-xl">
+                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#2563EB] flex items-center justify-center text-white shrink-0 shadow-md">
+                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5 fill-white" />
                   </div>
                   <div className="text-left">
                     <div className="text-xs sm:text-sm font-bold text-white tracking-wide">
                       Mumbai,
                     </div>
-                    <div className="text-[11px] sm:text-xs font-semibold text-[#93C5FD]">
+                    <div className="text-[11px] sm:text-xs font-semibold text-white">
                       Maharashtra
                     </div>
                   </div>
@@ -184,7 +182,7 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
             </div>
 
             {/* Bottom Metrics Bar (4 Stats with Circular Icons) */}
-            <div className="relative z-10 py-4 sm:py-6">
+            <div className="relative z-10 border border-[#2563EB] rounded-[15px] p-4 sm:p-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-[#1E3A8A]/40">
                 {/* Metric 1 */}
                 <div className="flex items-center gap-4 sm:justify-center pt-3 sm:pt-0">
