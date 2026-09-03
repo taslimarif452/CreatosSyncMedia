@@ -26,7 +26,7 @@ interface AboutPageProps {
 
 export const About: React.FC<AboutPageProps> = ({ navigate }) => {
   return (
-    <div id="about-page" className="pt-24 sm:pt-28 pb-24 bg-[#080808]">
+    <div id="about-page" className="pt-0 pb-24 bg-[#080808]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Visual Hero Banner (Matching the Reference Design) */}
         <section
@@ -34,9 +34,9 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
           className="relative mb-20"
         >
           {/* Top Row: Heading & Description on Left, Logo & Location on Right */}
-          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-12 sm:mb-16">
+          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch mb-0">
               {/* Left Column */}
-              <div className="lg:col-span-7">
+              <div className="lg:col-span-7 pt-20 sm:pt-24 lg:pt-28 pb-10 sm:pb-12 flex flex-col justify-center">
                 <div className="inline-flex items-center gap-2 mb-3">
                   <span className="text-xs sm:text-sm font-bold tracking-widest text-[#3B82F6] uppercase">
                     ABOUT US
@@ -87,30 +87,74 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
                 </p>
               </div>
 
-              {/* Right Column: Real Logo Badge + Mumbai Pill */}
-              <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
+              {/* Right Column: Visual Showcase with Night Skyline + '<' Chevron Pattern + Official Logo + Mumbai Pill */}
+              <div id="about-visual-showcase" className="lg:col-span-5 relative w-full h-[640px] sm:h-[720px] lg:h-full min-h-[580px] lg:min-h-[720px] pt-16 sm:pt-20 lg:pt-0 mb-0 flex items-center justify-center">
+                {/* Right Side: Illuminated Skyscrapers Night Skyline (Flushed to header and down to WHO WE ARE section) */}
+                <div className="absolute right-0 -top-4 sm:-top-6 lg:-top-8 -bottom-8 w-[82%] sm:w-[75%] overflow-hidden pointer-events-none rounded-2xl">
+                  <img
+                    src="https://png.pngtree.com/thumb_back/fh260/background/20220505/pngtree-chicago-skyline-lake-america-michigan-photo-image_17705618.jpg"
+                    alt="City skyline at night"
+                    className="w-full h-full object-cover object-center opacity-85"
+                    referrerPolicy="no-referrer"
+                  />
+                  {/* Atmospheric gradient overlay blending into dark page canvas */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/60" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#080808]/80 via-transparent to-[#080808]" />
+                </div>
+
+                {/* Geometric '<' Chevron Shape Pattern behind the Logo (Extended to stretch top to bottom) */}
+                <div className="absolute -top-4 sm:-top-6 lg:-top-8 -bottom-8 inset-x-0 flex items-center justify-center pointer-events-none -translate-x-7 sm:-translate-x-12 scale-135 sm:scale-150 lg:scale-160">
+                  <svg
+                    viewBox="0 0 500 450"
+                    className="w-full h-full object-contain drop-shadow-[0_0_50px_rgba(37,99,235,0.65)]"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <defs>
+                      <linearGradient id="chevronPrimary" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#38BDF8" />
+                        <stop offset="35%" stopColor="#2563EB" />
+                        <stop offset="100%" stopColor="#1D4ED8" />
+                      </linearGradient>
+
+                      <linearGradient id="chevronAccent" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#60A5FA" />
+                        <stop offset="50%" stopColor="#38BDF8" />
+                        <stop offset="100%" stopColor="#2563EB" />
+                      </linearGradient>
+                    </defs>
+
+                    {/* Electric Blue Chevron '<' Main Body (120 Degree Stretched Angle) */}
+                    <path
+                      d="M 60 225 L 175 25 L 275 25 L 160 225 L 275 425 L 175 425 Z"
+                      fill="url(#chevronPrimary)"
+                    />
+                  </svg>
+                </div>
+
                 {/* Real Website Logo inside Circular Badge */}
-                <div className="relative">
-                  <div className="relative w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full border-2 border-white p-[1px] flex items-center justify-center overflow-hidden">
+                <div className="relative z-10 -translate-x-6 sm:-translate-x-10 md:-translate-x-12">
+                  <div className="relative w-48 h-48 sm:w-60 sm:h-60 md:w-72 md:h-72 rounded-full border-2 border-white flex items-center justify-center overflow-hidden">
                     <img
                       src="https://res.cloudinary.com/dbqmhnahl/image/upload/v1788333936/CSM_png_cirlce_uwvyan.png"
                       alt="CreatorsSyncMedia Official Logo"
-                      className="w-full h-full object-contain scale-[1.075] rounded-full pointer-events-none"
+                      className="w-full h-full object-contain scale-[1.07] rounded-full pointer-events-none"
                       referrerPolicy="no-referrer"
                     />
                   </div>
                 </div>
 
-                {/* Location Pill: Mumbai, Maharashtra */}
-                <div className="mt-5 sm:mt-6 inline-flex items-center gap-3.5 sm:gap-4 p-1.5 pr-6 sm:pr-8 min-w-[210px] sm:min-w-[240px] rounded-full bg-[#080808] border border-[#2563EB] shadow-xl translate-x-8 sm:translate-x-28 md:translate-x-40">
-                  <div className="w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-[#2563EB] flex items-center justify-center text-white shrink-0 shadow-md">
-                    <MapPin className="w-5 h-5 sm:w-6 sm:h-6 fill-white" />
+                {/* Location Pill: Mumbai, Maharashtra (Overlapping at Bottom Right) */}
+                <div className="absolute bottom-4 sm:bottom-6 right-1 sm:right-3 z-20 inline-flex items-center gap-3 sm:gap-3.5 p-1 sm:p-1.5 pr-5 sm:pr-7 rounded-full bg-[#080808]/95 border border-[#2563EB] shadow-[0_10px_30px_rgba(0,0,0,0.85)] backdrop-blur-md">
+                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#2563EB] flex items-center justify-center text-white shrink-0 shadow-md">
+                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5 fill-white" />
                   </div>
                   <div className="text-left flex flex-col justify-center">
-                    <div className="text-sm sm:text-base font-bold text-white/90 leading-tight">
+                    <div className="text-xs sm:text-sm font-bold text-white/90 leading-tight">
                       Mumbai,
                     </div>
-                    <div className="text-base sm:text-lg font-black text-white tracking-wide leading-tight">
+                    <div className="text-sm sm:text-base font-black text-white tracking-wide leading-tight">
                       Maharashtra
                     </div>
                   </div>
