@@ -70,14 +70,50 @@ export const AdminDataProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [settings, setSettings] = useState<SectionSettings>(() => {
     try {
       const stored = localStorage.getItem(`${STORAGE_KEY}_settings`);
+      let base = DEFAULT_SETTINGS;
       if (stored) {
-        return { ...DEFAULT_SETTINGS, ...JSON.parse(stored) };
+        const parsed = JSON.parse(stored);
+        base = { ...DEFAULT_SETTINGS, ...parsed };
       }
+
+      // Check explicit single flags as well (handles cases where boolean false was overwritten or lost)
+      const storedShowCreators = localStorage.getItem(`${STORAGE_KEY}_show_creators`);
+      if (storedShowCreators !== null) {
+        base.showCreatorsSection = storedShowCreators === 'true';
+      }
+      const storedShowCampaigns = localStorage.getItem(`${STORAGE_KEY}_show_campaigns`);
+      if (storedShowCampaigns !== null) {
+        base.showCampaignsSection = storedShowCampaigns === 'true';
+      }
+
+      return base;
     } catch (e) {
       console.error('Failed to parse stored settings:', e);
     }
     return DEFAULT_SETTINGS;
   });
+
+  // Listen to window storage event for real-time synchronization across browser tabs
+  useEffect(() => {
+    const handleStorageChange = (e: StorageEvent) => {
+      if (!e.key) return;
+      if (e.key === `${STORAGE_KEY}_settings` && e.newValue) {
+        try {
+          const parsed = JSON.parse(e.newValue);
+          setSettings((prev) => ({ ...prev, ...parsed }));
+        } catch (err) {
+          console.error(err);
+        }
+      } else if (e.key === `${STORAGE_KEY}_show_creators` && e.newValue !== null) {
+        setSettings((prev) => ({ ...prev, showCreatorsSection: e.newValue === 'true' }));
+      } else if (e.key === `${STORAGE_KEY}_show_campaigns` && e.newValue !== null) {
+        setSettings((prev) => ({ ...prev, showCampaignsSection: e.newValue === 'true' }));
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
 
   // Save to localStorage on change
   useEffect(() => {
@@ -137,16 +173,43 @@ export const AdminDataProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   // Visibility Controls
   const setSectionVisibility = (section: 'creators' | 'campaigns', isVisible: boolean) => {
     setSettings((prev) => {
-      if (section === 'creators') {
-        return { ...prev, showCreatorsSection: isVisible };
-      } else {
-        return { ...prev, showCampaignsSection: isVisible };
+      const next = {
+        ...prev,
+        ...(section === 'creators'
+          ? { showCreatorsSection: isVisible }
+          : { showCampaignsSection: isVisible })
+      };
+      try {
+        localStorage.setItem(`${STORAGE_KEY}_settings`, JSON.stringify(next));
+        // Also persist standalone boolean keys for bulletproof persistence across page refreshes
+        if (section === 'creators') {
+          localStorage.setItem(`${STORAGE_KEY}_show_creators`, String(isVisible));
+        } else {
+          localStorage.setItem(`${STORAGE_KEY}_show_campaigns`, String(isVisible));
+        }
+      } catch (e) {
+        console.error('Failed to immediately save section visibility:', e);
       }
+      return next;
     });
   };
 
   const updateSettings = (newSettings: Partial<SectionSettings>) => {
-    setSettings((prev) => ({ ...prev, ...newSettings }));
+    setSettings((prev) => {
+      const next = { ...prev, ...newSettings };
+      try {
+        localStorage.setItem(`${STORAGE_KEY}_settings`, JSON.stringify(next));
+        if (newSettings.showCreatorsSection !== undefined) {
+          localStorage.setItem(`${STORAGE_KEY}_show_creators`, String(newSettings.showCreatorsSection));
+        }
+        if (newSettings.showCampaignsSection !== undefined) {
+          localStorage.setItem(`${STORAGE_KEY}_show_campaigns`, String(newSettings.showCampaignsSection));
+        }
+      } catch (e) {
+        console.error('Failed to immediately save settings:', e);
+      }
+      return next;
+    });
   };
 
   const resetToDefaults = () => {
@@ -157,6 +220,8 @@ export const AdminDataProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       localStorage.removeItem(`${STORAGE_KEY}_creators`);
       localStorage.removeItem(`${STORAGE_KEY}_campaigns`);
       localStorage.removeItem(`${STORAGE_KEY}_settings`);
+      localStorage.removeItem(`${STORAGE_KEY}_show_creators`);
+      localStorage.removeItem(`${STORAGE_KEY}_show_campaigns`);
     } catch (e) {
       console.error(e);
     }
