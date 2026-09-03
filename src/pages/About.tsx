@@ -125,16 +125,16 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
                       </linearGradient>
                     </defs>
 
-                    {/* Electric Blue Chevron '<' Main Body (120 Degree Stretched Angle) */}
+                    {/* Electric Blue Chevron '<' Main Body (120 Degree Stretched Angle with slightly reduced thickness) */}
                     <path
-                      d="M 60 225 L 175 25 L 275 25 L 160 225 L 275 425 L 175 425 Z"
+                      d="M 60 225 L 175 25 L 257 25 L 142 225 L 257 425 L 175 425 Z"
                       fill="url(#chevronPrimary)"
                     />
                   </svg>
                 </div>
 
                 {/* Real Website Logo inside Circular Badge */}
-                <div className="relative z-10 -translate-x-6 sm:-translate-x-10 md:-translate-x-12">
+                <div className="relative z-10 -translate-x-14 sm:-translate-x-20 md:-translate-x-24">
                   <div className="relative w-48 h-48 sm:w-60 sm:h-60 md:w-72 md:h-72 rounded-full border-2 border-white flex items-center justify-center overflow-hidden">
                     <img
                       src="https://res.cloudinary.com/dbqmhnahl/image/upload/v1788333936/CSM_png_cirlce_uwvyan.png"
@@ -145,8 +145,8 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
                   </div>
                 </div>
 
-                {/* Location Pill: Mumbai, Maharashtra (Overlapping at Bottom Right) */}
-                <div className="absolute bottom-4 sm:bottom-6 right-1 sm:right-3 z-20 inline-flex items-center gap-3 sm:gap-3.5 p-1 sm:p-1.5 pr-5 sm:pr-7 rounded-full bg-[#080808]/95 border border-[#2563EB] shadow-[0_10px_30px_rgba(0,0,0,0.85)] backdrop-blur-md">
+                {/* Location Pill: Mumbai, Maharashtra (Overlapping at Bottom Right - shifted up) */}
+                <div className="absolute bottom-[86px] sm:bottom-[94px] right-1 sm:right-3 z-20 inline-flex items-center gap-3 sm:gap-3.5 p-1 sm:p-1.5 pr-5 sm:pr-7 rounded-full bg-[#080808]/95 border border-[#2563EB] shadow-[0_10px_30px_rgba(0,0,0,0.85)] backdrop-blur-md">
                   <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#2563EB] flex items-center justify-center text-white shrink-0 shadow-md">
                     <MapPin className="w-4 h-4 sm:w-5 sm:h-5 fill-white" />
                   </div>
@@ -162,8 +162,8 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
               </div>
             </div>
 
-            {/* Middle Feature Pillars: 4 Pillars */}
-            <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 pt-8 border-t border-[#1E3A8A]/40 mb-10">
+            {/* Middle Feature Pillars: 4 Pillars - shifted up */}
+            <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 pt-8 border-t border-[#1E3A8A]/40 mb-10 -mt-[70px]">
               {/* Pillar 1: WHO WE ARE */}
               <div className="flex items-start gap-3.5">
                 <div className="w-10 h-10 rounded-xl bg-[#0B1A3D] border border-[#1E40AF]/50 flex items-center justify-center text-[#3B82F6] shrink-0 mt-0.5">
