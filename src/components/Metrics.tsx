@@ -101,7 +101,7 @@ export const Metrics: React.FC = () => {
             return (
               <div
                 key={item.id}
-                className={`group min-h-[160px] sm:min-h-[210px] md:min-h-[260px] lg:min-h-[280px] p-4 sm:p-6 md:p-7 lg:p-7 xl:p-9 2xl:p-10 flex flex-col justify-between text-left items-start transition-all duration-200 hover:bg-[#0a0a0a] cursor-pointer ${
+                className={`group min-h-[160px] sm:min-h-[210px] md:min-h-[260px] lg:min-h-[280px] p-4 sm:p-6 lg:p-4 xl:p-8 2xl:p-10 flex flex-col justify-between text-left items-start transition-all duration-200 hover:bg-[#0a0a0a] cursor-pointer ${
                   index % 2 !== 0 ? 'border-l border-[#1F1F1F]' : ''
                 } ${
                   index >= 2 ? 'border-t lg:border-t-0 border-[#1F1F1F]' : ''
@@ -111,10 +111,10 @@ export const Metrics: React.FC = () => {
               >
                 {/* Top Section: Large Number + Uppercase Label */}
                 <div className="w-full text-left">
-                  <div className="text-2xl min-[380px]:text-3xl sm:text-4xl md:text-5xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-[#FFFFFF] group-hover:text-[#4F7CFF] transition-colors duration-200 tracking-tight leading-none whitespace-nowrap">
+                  <div className="text-[34px] min-[380px]:text-[38px] sm:text-[48px] md:text-[60px] font-bold text-[#FFFFFF] group-hover:text-[#4F7CFF] transition-colors duration-200 tracking-tighter sm:tracking-tight leading-none whitespace-nowrap">
                     {displayVal}
                   </div>
-                  <div className="text-xs sm:text-sm md:text-base font-medium text-[#F5F5F5] group-hover:text-[#4F7CFF] transition-colors duration-200 uppercase tracking-wider mt-2.5 sm:mt-3.5">
+                  <div className="text-xs sm:text-sm font-medium text-[#F5F5F5] group-hover:text-[#4F7CFF] transition-colors duration-200 uppercase tracking-wider mt-2.5 sm:mt-3.5">
                     {item.label}
                   </div>
                 </div>
