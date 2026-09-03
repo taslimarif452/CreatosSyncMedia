@@ -87,9 +87,9 @@ export const Metrics: React.FC = () => {
         </div>
       </div>
 
-      {/* 4-Metric Container: Equal Widths for All 4 Cards */}
+      {/* 4-Metric Container: 2 Cards visible at once on Mobile (horizontal scroll), 4-Col Grid on Desktop */}
       <div className="w-full border-t border-[#222222] bg-black">
-        <div className="w-full grid grid-cols-2 lg:grid-cols-4">
+        <div className="w-full flex lg:grid lg:grid-cols-4 overflow-x-auto no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory">
           {METRICS_DATA.map((item, index) => {
             // Calculate dynamic animated value if numerical
             let displayVal = item.value;
@@ -101,27 +101,23 @@ export const Metrics: React.FC = () => {
             return (
               <div
                 key={item.id}
-                className={`group min-h-[160px] sm:min-h-[210px] md:min-h-[260px] lg:min-h-[280px] p-4 sm:p-6 lg:p-4 xl:p-8 2xl:p-10 flex flex-col justify-between text-left items-start transition-all duration-200 hover:bg-[#0a0a0a] cursor-pointer ${
-                  index % 2 !== 0 ? 'border-l border-[#1F1F1F]' : ''
-                } ${
-                  index >= 2 ? 'border-t lg:border-t-0 border-[#1F1F1F]' : ''
-                } ${
-                  index !== 0 ? 'lg:border-l border-[#1F1F1F]' : ''
+                className={`group w-1/2 min-w-[50%] max-w-[50%] lg:w-auto lg:min-w-0 lg:max-w-none flex-shrink-0 lg:flex-shrink snap-start min-h-[150px] sm:min-h-[190px] md:min-h-[240px] lg:min-h-[280px] p-3.5 min-[380px]:p-4 sm:p-6 lg:p-4 xl:p-8 2xl:p-10 flex flex-col justify-between text-left items-start transition-all duration-200 hover:bg-[#0a0a0a] cursor-pointer ${
+                  index !== 0 ? 'border-l border-[#1F1F1F]' : ''
                 }`}
               >
                 {/* Top Section: Large Number + Uppercase Label */}
                 <div className="w-full text-left">
-                  <div className="text-[34px] min-[380px]:text-[38px] sm:text-[48px] md:text-[60px] font-bold text-[#FFFFFF] group-hover:text-[#4F7CFF] transition-colors duration-200 tracking-tighter sm:tracking-tight leading-none whitespace-nowrap">
+                  <div className="text-[22px] min-[360px]:text-[25px] min-[390px]:text-[28px] sm:text-[38px] md:text-[50px] lg:text-[60px] font-bold text-[#FFFFFF] group-hover:text-[#4F7CFF] transition-colors duration-200 tracking-tighter sm:tracking-tight leading-none whitespace-nowrap">
                     {displayVal}
                   </div>
-                  <div className="text-xs sm:text-sm font-medium text-[#F5F5F5] group-hover:text-[#4F7CFF] transition-colors duration-200 uppercase tracking-wider mt-2.5 sm:mt-3.5">
+                  <div className="text-[10px] min-[360px]:text-[11px] sm:text-xs md:text-sm font-medium text-[#F5F5F5] group-hover:text-[#4F7CFF] transition-colors duration-200 uppercase tracking-wider mt-2 sm:mt-3.5">
                     {item.label}
                   </div>
                 </div>
 
                 {/* Bottom Section: Clean Sublabel without underline/border */}
-                <div className="w-full mt-4 sm:mt-6">
-                  <div className="text-[10px] min-[380px]:text-[11px] sm:text-xs md:text-sm text-[#737373] group-hover:text-[#A3A3A3] transition-colors duration-200 leading-snug">
+                <div className="w-full mt-3 sm:mt-6">
+                  <div className="text-[10px] min-[360px]:text-[11px] sm:text-xs md:text-sm text-[#737373] group-hover:text-[#A3A3A3] transition-colors duration-200 leading-snug">
                     {item.sublabel}
                   </div>
                 </div>
