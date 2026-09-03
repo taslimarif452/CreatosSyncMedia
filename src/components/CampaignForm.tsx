@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, CheckCircle2, Loader2, Sparkles, ShieldCheck, MessageSquare } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Loader2, Sparkles, ShieldCheck, MessageSquare, Mail, Phone, MapPin } from 'lucide-react';
 import { CampaignLeadFormData } from '../types';
 import { sendToWhatsApp, formatCampaignBriefMessage } from '../utils/whatsapp';
 
@@ -128,6 +128,52 @@ export const CampaignForm: React.FC<CampaignFormProps> = ({
                 <span>End-to-end contracting, brief execution & reporting</span>
               </div>
             </div>
+
+            {/* Direct Contact & Agency Office Info */}
+            <div className="mt-8 p-5 bg-[#111111] border border-[#262626] rounded-2xl space-y-3">
+              <span className="text-[10px] font-bold tracking-widest text-[#4F7CFF] uppercase block">
+                Direct Contact Channels
+              </span>
+
+              <div className="flex items-start gap-2.5">
+                <Mail className="w-4 h-4 text-[#4F7CFF] flex-shrink-0 mt-0.5" />
+                <div>
+                  <span className="text-[10px] text-[#737373] block uppercase font-medium">Email</span>
+                  <a
+                    href="mailto:partnerships@creatorssyncmedia.in"
+                    className="text-xs text-[#E5E5E5] hover:text-[#4F7CFF] transition-colors break-all"
+                  >
+                    partnerships@creatorssyncmedia.in
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-2.5">
+                <Phone className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                <div>
+                  <span className="text-[10px] text-[#737373] block uppercase font-medium">Call & WhatsApp</span>
+                  <a
+                    href="https://wa.me/918108975875"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-[#E5E5E5] hover:text-emerald-400 transition-colors inline-flex items-center gap-1.5"
+                  >
+                    <span>+91 8108975875</span>
+                    <MessageSquare className="w-3 h-3 text-emerald-400" />
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 text-[#4F7CFF] flex-shrink-0 mt-0.5" />
+                <div>
+                  <span className="text-[10px] text-[#737373] block uppercase font-medium">Address</span>
+                  <p className="text-xs text-[#A1A1A1] leading-relaxed">
+                    Ghatkopar West Mumbai Maharashtra 400086
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Right Column: Form */}
@@ -141,7 +187,7 @@ export const CampaignForm: React.FC<CampaignFormProps> = ({
                   Campaign Brief Dispatched to WhatsApp
                 </h3>
                 <p className="text-sm text-[#9CA3AF] max-w-md mb-6 leading-relaxed">
-                  Thank you, <strong className="text-[#F5F5F5]">{formData.fullName}</strong>. Your campaign brief for <strong className="text-[#4F7CFF]">{formData.companyName}</strong> has been transferred directly to our WhatsApp strategy line (<strong className="text-[#4F7CFF]">+91 81089 75875</strong>).
+                  Thank you, <strong className="text-[#F5F5F5]">{formData.fullName}</strong>. Your campaign brief for <strong className="text-[#4F7CFF]">{formData.companyName}</strong> has been transferred directly to our WhatsApp strategy line (<strong className="text-[#4F7CFF]">+91 8108975875</strong>) & email team (<strong className="text-[#4F7CFF]">partnerships@creatorssyncmedia.in</strong>).
                 </p>
                 <div className="p-4 bg-[#111111] border border-[#262626] text-xs text-[#9CA3AF] mb-6 max-w-md w-full text-left">
                   <div className="font-semibold text-[#F5F5F5] mb-1.5">Summary Details:</div>

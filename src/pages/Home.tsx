@@ -65,6 +65,14 @@ export const Home: React.FC<HomeProps> = ({
         onJoinNetwork={handleJoinNetwork}
       />
 
+      {/* Brand Partners Heading */}
+      <h2
+        id="our-brand-partners-heading"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-left text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-[#F5F5F5] pt-10 sm:pt-14 pb-2 bg-transparent border-none"
+      >
+        Our Brand Partners 
+      </h2>
+
       {/* 02. Trust / Social Proof */}
       <TrustSection />
 

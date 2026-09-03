@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, CheckCircle2, DollarSign, Shield, Youtube, Zap, Sparkles, Loader2, Send, MessageSquare } from 'lucide-react';
+import { ArrowRight, CheckCircle2, DollarSign, Shield, Youtube, Zap, Sparkles, Loader2, Send, MessageSquare, Mail, Phone, MapPin } from 'lucide-react';
 import { sendToWhatsApp, formatCreatorApplicationMessage } from '../utils/whatsapp';
 
 interface ForCreatorsPageProps {
@@ -148,7 +148,7 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
                 Application Transferred to WhatsApp
               </h3>
               <p className="text-sm text-[#9CA3AF] max-w-md mx-auto mb-6">
-                Thank you for applying, <strong className="text-[#F5F5F5]">{formData.creatorName}</strong>! Your channel application has been routed directly to our talent acquisition team on WhatsApp (<strong className="text-[#4F7CFF]">+91 81089 75875</strong>).
+                Thank you for applying, <strong className="text-[#F5F5F5]">{formData.creatorName}</strong>! Your channel application has been routed directly to our talent acquisition team on WhatsApp (<strong className="text-[#4F7CFF]">+91 8108975875</strong>) & email (<strong className="text-[#4F7CFF]">partnerships@creatorssyncmedia.in</strong>).
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <button
@@ -322,6 +322,37 @@ export const ForCreators: React.FC<ForCreatorsPageProps> = ({ navigate }) => {
               </div>
             </form>
           )}
+
+          {/* Quick Direct Contact Strip */}
+          <div className="mt-8 p-5 rounded-2xl bg-[#101010] border border-[#262626] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+            <div className="flex flex-wrap items-center gap-4 text-[#A1A1A1]">
+              <div className="flex items-center gap-2">
+                <Mail className="w-3.5 h-3.5 text-[#4F7CFF]" />
+                <a href="mailto:partnerships@creatorssyncmedia.in" className="hover:text-white transition-colors">
+                  partnerships@creatorssyncmedia.in
+                </a>
+              </div>
+              <div className="flex items-center gap-2">
+                <Phone className="w-3.5 h-3.5 text-emerald-400" />
+                <a href="tel:+918108975875" className="hover:text-white transition-colors">
+                  +91 8108975875
+                </a>
+              </div>
+              <div className="flex items-center gap-2">
+                <MapPin className="w-3.5 h-3.5 text-[#4F7CFF]" />
+                <span>Ghatkopar West Mumbai Maharashtra 400086</span>
+              </div>
+            </div>
+            <a
+              href="https://wa.me/918108975875"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[11px] font-semibold inline-flex items-center gap-1.5 transition-all whitespace-nowrap cursor-pointer"
+            >
+              <MessageSquare className="w-3 h-3" />
+              <span>Direct WhatsApp</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>

@@ -60,57 +60,88 @@ export const Contact: React.FC = () => {
           <div className="lg:col-span-5 space-y-6">
             <div className="p-8 rounded-3xl bg-[#101010] border border-[#262626]">
               <h3 className="text-lg font-bold text-[#F5F5F5] mb-6">
-                Agency Headquarters
+                Official Agency Office
               </h3>
 
               <div className="space-y-6 text-xs text-[#A1A1A1]">
+                {/* Address */}
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-[#141414] border border-[#262626] flex items-center justify-center flex-shrink-0 text-[#4F7CFF]">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <strong className="text-[#F5F5F5] block text-sm mb-0.5">Bengaluru Hub (HQ)</strong>
-                    <span>Indiranagar 100ft Road, Bengaluru, Karnataka 560038</span>
+                    <strong className="text-[#F5F5F5] block text-sm mb-0.5">Agency Headquarters</strong>
+                    <span className="text-sm text-[#D4D4D4] font-medium leading-relaxed block">
+                      Ghatkopar West Mumbai Maharashtra 400086
+                    </span>
+                    <span className="text-[11px] text-[#737373] mt-1 block">Mumbai, India</span>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#141414] border border-[#262626] flex items-center justify-center flex-shrink-0 text-[#4F7CFF]">
-                    <MapPin className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <strong className="text-[#F5F5F5] block text-sm mb-0.5">Mumbai Creator Studio</strong>
-                    <span>Bandra West, Mumbai, Maharashtra 400050</span>
-                  </div>
-                </div>
-
+                {/* Email */}
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-[#141414] border border-[#262626] flex items-center justify-center flex-shrink-0 text-[#4F7CFF]">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
-                    <strong className="text-[#F5F5F5] block text-sm mb-0.5">Direct Enquiries</strong>
-                    <span className="text-[#4F7CFF]">partnerships@creatorssyncmedia.com</span>
+                    <strong className="text-[#F5F5F5] block text-sm mb-0.5">Email Support & Proposals</strong>
+                    <a
+                      href="mailto:partnerships@creatorssyncmedia.in"
+                      className="text-[#4F7CFF] hover:underline text-sm font-medium break-all block"
+                    >
+                      partnerships@creatorssyncmedia.in
+                    </a>
+                    <span className="text-[11px] text-[#737373] mt-0.5 block">Guaranteed 24-hour response</span>
                   </div>
                 </div>
 
+                {/* Phone & WhatsApp */}
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-[#141414] border border-[#262626] flex items-center justify-center flex-shrink-0 text-emerald-400">
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <strong className="text-[#F5F5F5] block text-sm mb-0.5">WhatsApp & Direct Line</strong>
-                    <a
-                      href="https://wa.me/918108975875"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#4F7CFF] hover:underline inline-flex items-center gap-1.5"
-                    >
-                      +91 81089 75875
-                      <MessageSquare className="w-3.5 h-3.5" />
-                    </a>
+                    <strong className="text-[#F5F5F5] block text-sm mb-0.5">Call & WhatsApp Line</strong>
+                    <div className="flex flex-wrap items-center gap-3 mt-1">
+                      <a
+                        href="tel:+918108975875"
+                        className="text-[#F5F5F5] hover:text-[#4F7CFF] text-sm font-semibold inline-flex items-center gap-1.5 transition-colors"
+                      >
+                        +91 8108975875
+                      </a>
+                      <a
+                        href="https://wa.me/918108975875"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-2.5 py-1 rounded bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[11px] font-bold inline-flex items-center gap-1 transition-all"
+                      >
+                        <MessageSquare className="w-3 h-3" />
+                        <span>Chat WhatsApp</span>
+                      </a>
+                    </div>
+                    <span className="text-[11px] text-[#737373] mt-1 block">Mon–Sat, 10:00 AM – 8:00 PM IST</span>
                   </div>
                 </div>
+              </div>
+
+              {/* Direct Quick Action CTAs */}
+              <div className="mt-8 pt-6 border-t border-[#1C1C1C] flex flex-col sm:flex-row gap-3">
+                <a
+                  href="https://wa.me/918108975875"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-3 px-4 bg-[#141414] hover:bg-emerald-500/20 border border-[#262626] hover:border-emerald-500/40 text-emerald-400 text-xs font-semibold text-center flex items-center justify-center gap-2 transition-all cursor-pointer"
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  <span>Open WhatsApp</span>
+                </a>
+                <a
+                  href="tel:+918108975875"
+                  className="flex-1 py-3 px-4 bg-[#141414] hover:bg-[#1F1F1F] border border-[#262626] hover:border-[#4F7CFF] text-[#EDEDED] text-xs font-semibold text-center flex items-center justify-center gap-2 transition-all cursor-pointer"
+                >
+                  <Phone className="w-4 h-4 text-[#4F7CFF]" />
+                  <span>Direct Call</span>
+                </a>
               </div>
             </div>
           </div>
@@ -126,7 +157,7 @@ export const Contact: React.FC = () => {
                   Inquiry Dispatched to WhatsApp
                 </h3>
                 <p className="text-sm text-[#9CA3AF] max-w-md mx-auto mb-6">
-                  Thank you, <strong className="text-[#F5F5F5]">{formData.name}</strong>. Your details have been formatted and routed to our official WhatsApp line (<strong className="text-[#4F7CFF]">+91 81089 75875</strong>).
+                  Thank you, <strong className="text-[#F5F5F5]">{formData.name}</strong>. Your details have been formatted and routed to our official WhatsApp line (<strong className="text-[#4F7CFF]">+91 8108975875</strong>) & email team (<strong className="text-[#4F7CFF]">partnerships@creatorssyncmedia.in</strong>).
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                   <button

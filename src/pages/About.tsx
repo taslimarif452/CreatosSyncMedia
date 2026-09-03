@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, CheckCircle2, Flame, Layers, ShieldCheck, Sparkles, Target, Users, Zap } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Flame, Layers, ShieldCheck, Sparkles, Target, Users, Zap, MapPin, Mail, Phone, MessageSquare } from 'lucide-react';
 
 interface AboutPageProps {
   navigate: (path: string) => void;
@@ -124,6 +124,102 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
               <p className="text-xs text-[#A1A1A1] leading-relaxed">
                 Rapid turnaround from initial campaign brief to creator sign-off in under 10 business days.
               </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Agency Office & Contact Details */}
+        <div className="mb-24 p-8 sm:p-12 rounded-3xl bg-[#101010] border border-[#262626]">
+          <div className="max-w-2xl mb-8">
+            <span className="text-xs font-bold text-[#4F7CFF] uppercase tracking-widest">
+              Direct Contact & Headquarters
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] mt-2">
+              Our Location & Communication Channels
+            </h2>
+            <p className="text-xs sm:text-sm text-[#A1A1A1] mt-2">
+              Have an urgent inquiry, partnership request, or campaign brief? Connect with our leadership and creator team directly.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Email Card */}
+            <div className="p-6 rounded-2xl bg-[#141414] border border-[#262626] flex flex-col justify-between">
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-[#1A1A1A] border border-[#2B2B2B] flex items-center justify-center text-[#4F7CFF] mb-4">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#737373] block mb-1">
+                  Email
+                </span>
+                <a
+                  href="mailto:partnerships@creatorssyncmedia.in"
+                  className="text-sm font-semibold text-[#F5F5F5] hover:text-[#4F7CFF] transition-colors break-all block"
+                >
+                  partnerships@creatorssyncmedia.in
+                </a>
+              </div>
+              <a
+                href="mailto:partnerships@creatorssyncmedia.in"
+                className="mt-4 text-xs font-medium text-[#4F7CFF] hover:underline inline-flex items-center gap-1"
+              >
+                <span>Send Email</span>
+                <ArrowRight className="w-3 h-3" />
+              </a>
+            </div>
+
+            {/* Phone & WhatsApp Card */}
+            <div className="p-6 rounded-2xl bg-[#141414] border border-[#262626] flex flex-col justify-between">
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-[#1A1A1A] border border-[#2B2B2B] flex items-center justify-center text-emerald-400 mb-4">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#737373] block mb-1">
+                  Call & WhatsApp
+                </span>
+                <a
+                  href="tel:+918108975875"
+                  className="text-sm font-semibold text-[#F5F5F5] hover:text-[#4F7CFF] transition-colors block"
+                >
+                  +91 8108975875
+                </a>
+              </div>
+              <div className="mt-4 flex items-center gap-3">
+                <a
+                  href="https://wa.me/918108975875"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-medium text-emerald-400 hover:underline inline-flex items-center gap-1"
+                >
+                  <MessageSquare className="w-3 h-3" />
+                  <span>WhatsApp Chat</span>
+                </a>
+                <span className="text-[#333333]">•</span>
+                <a
+                  href="tel:+918108975875"
+                  className="text-xs font-medium text-[#9CA3AF] hover:text-white"
+                >
+                  Call Now
+                </a>
+              </div>
+            </div>
+
+            {/* Address Card */}
+            <div className="p-6 rounded-2xl bg-[#141414] border border-[#262626] flex flex-col justify-between">
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-[#1A1A1A] border border-[#2B2B2B] flex items-center justify-center text-[#4F7CFF] mb-4">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#737373] block mb-1">
+                  Address
+                </span>
+                <p className="text-sm font-semibold text-[#F5F5F5] leading-snug">
+                  Ghatkopar West Mumbai Maharashtra 400086
+                </p>
+              </div>
+              <span className="mt-4 text-xs text-[#737373]">
+                Mumbai, Maharashtra, India
+              </span>
             </div>
           </div>
         </div>

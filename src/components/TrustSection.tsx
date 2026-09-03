@@ -1,22 +1,38 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 export const TrustSection: React.FC = () => {
-  const ecosystemPillars = [
+  const brandPartners = [
     {
-      label: 'Consumer Tech & Hardware',
-      image: 'https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/RWCZER-Legal-IP-Trademarks-CP-MS-logo-740x417-1?wid=406&hei=230&fit=crop&resSharp=1'
+      label: 'Unstop',
+      image: 'https://play-lh.googleusercontent.com/QOWtHtuT-WAC1clJTeyrDhptb79ZCeQoeHNeHL7XHBsdc_Yl7w7j8XoWKbvhj4tkEMLDAhBPdOwWDbl24xrlyg'
     },
     {
-      label: 'FinTech & Wealth Apps',
-      image: 'https://play-lh.googleusercontent.com/p2zsSptkexyDWZdo0zVjxSDUDDri_dYiKS4SJXh8NlF7Gy3SUJH9HA5kFbmU13YIIk8GZ0yyBF5oqGSoMmBT-78=w480-h960-rw'
+      label: 'Internshala',
+      image: 'https://internshala.com/blog/wp-content/themes/colormag/img/thumnail.jpg'
     },
     {
-      label: 'Next-Gen Gaming & Esports',
-      image: 'https://pbs.twimg.com/profile_images/1560936388916350976/w28u0jR4_400x400.jpg'
+      label: 'CGC University',
+      image: 'https://media.licdn.com/dms/image/v2/D5622AQGQvgihOSP-oA/feedshare-shrink_800/B56ZiYBtchHUAg-/0/1754897251006?e=2147483647&v=beta&t=8PkitTk07uFD6-6pz8JHCQT3x7eiH5y-hNMkiUHb5RM'
     },
     {
-      label: 'EdTech & Professional Skills',
-      image: 'https://i0.wp.com/lawbhoomi.com/wp-content/uploads/2025/06/Grynow.jpg?fit=1200%2C800&ssl=1'
+      label: 'Masai School',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHq_v_x3szNyVe0-PWkp2QnMnO6nRaaeW3X3BR2IsG06g7ty67EwNvotCT&s=10'
+    },
+    {
+      label: 'Mirai School',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkaDh5M5wDLsik6f3hWKgiGUhHKqhACAvN_Jc9Oz0qxwmqdV-01rzBdT8&s=10'
+    },
+    {
+      label: 'Coursera',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkzFKe5JSxzXcDw3fO3WLfPY9oV98mZ-kLuwIMD78lmw&s=10'
+    },
+    {
+      label: 'Physics Wallah',
+      image: 'https://pbs.twimg.com/media/GoKyfAXWoAAIGI8.png'
+    },
+    {
+      label: 'Foundit',
+      image: 'https://play-lh.googleusercontent.com/BKx438gbzWpEn23ELCB7Jc0o7qve1o8BhGkWHYlIzxvYWqNvq2TjLL2AufcVbt1eoEyVh_bTf1t6zybiKTa8QQ'
     }
   ];
 
@@ -86,20 +102,22 @@ export const TrustSection: React.FC = () => {
 
   const renderSet = (ref?: React.RefObject<HTMLDivElement>) => (
     <div ref={ref} className="flex items-stretch shrink-0">
-      {ecosystemPillars.map((item, idx) => (
+      {brandPartners.map((item, idx) => (
         <div
           key={idx}
-          className="flex flex-col items-center justify-center text-center shrink-0 select-none group px-5 sm:px-10 md:px-16 py-2 sm:py-4 border-r border-[#262626]"
+          className="flex flex-col items-center justify-center text-center shrink-0 select-none group px-8 sm:px-12 md:px-16 py-4 sm:py-6 border-r border-[#262626]"
         >
-          <img
-            src={item.image}
-            alt={item.label}
-            className="h-16 sm:h-28 md:h-36 max-w-[170px] sm:max-w-[240px] md:max-w-[280px] object-contain mb-2 sm:mb-4 pointer-events-none drop-shadow-md"
-            loading="lazy"
-            draggable={false}
-            referrerPolicy="no-referrer"
-          />
-          <span className="text-xs sm:text-base md:text-lg font-medium text-[#D4D4D4] group-hover:text-white transition-colors leading-tight whitespace-nowrap">
+          <div className="h-20 sm:h-28 md:h-32 w-36 sm:w-52 md:w-60 flex items-center justify-center mb-3 sm:mb-4">
+            <img
+              src={item.image}
+              alt={item.label}
+              className="max-h-full max-w-full object-contain pointer-events-none drop-shadow-md rounded-lg group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+              draggable={false}
+              referrerPolicy="no-referrer"
+            />
+          </div>
+          <span className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-[#E5E5E5] group-hover:text-white transition-colors leading-tight tracking-wide whitespace-nowrap">
             {item.label}
           </span>
         </div>
@@ -110,7 +128,7 @@ export const TrustSection: React.FC = () => {
   return (
     <section
       id="trust-section"
-      className="py-8 sm:py-14 md:py-20 bg-[#080808] border-y border-[#262626] overflow-hidden flex items-center min-h-[110px] sm:min-h-[160px] md:min-h-[200px]"
+      className="py-10 sm:py-16 md:py-20 bg-[#080808] border-y border-[#262626] overflow-hidden flex items-center min-h-[160px] sm:min-h-[220px] md:min-h-[260px]"
     >
       <div className="w-full">
         <div className="flex flex-col items-center text-center">

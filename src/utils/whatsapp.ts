@@ -1,4 +1,7 @@
 export const WHATSAPP_NUMBER = '918108975875';
+export const CONTACT_EMAIL = 'partnerships@creatorssyncmedia.in';
+export const CONTACT_PHONE = '+91 8108975875';
+export const CONTACT_ADDRESS = 'Ghatkopar West Mumbai Maharashtra 400086';
 
 /**
  * Opens WhatsApp in a new tab with the pre-filled message sent to +918108975875

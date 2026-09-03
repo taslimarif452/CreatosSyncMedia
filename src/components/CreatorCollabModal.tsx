@@ -69,7 +69,7 @@ export const CreatorCollabModal: React.FC<CreatorCollabModalProps> = ({
               Request Sent to WhatsApp
             </h3>
             <p className="text-xs sm:text-sm text-[#9CA3AF] max-w-xs mx-auto mb-6 leading-relaxed">
-              Your inquiry for <strong className="text-[#F5F5F5]">{creator.name}</strong> has been transferred to our WhatsApp team (<strong className="text-[#4F7CFF]">+91 81089 75875</strong>).
+              Your inquiry for <strong className="text-[#F5F5F5]">{creator.name}</strong> has been transferred to our WhatsApp team (<strong className="text-[#4F7CFF]">+91 8108975875</strong>) & email team (<strong className="text-[#4F7CFF]">partnerships@creatorssyncmedia.in</strong>).
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5">
               <button
