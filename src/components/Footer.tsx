@@ -48,9 +48,14 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
               <p className="text-sm font-medium text-[#F5F5F5] max-w-sm mb-3">
                 Big Brands. Real Creators. Bigger Impact.
               </p>
-              <p className="text-xs text-[#A1A1A1] max-w-sm leading-relaxed mb-6">
-                Premium creator & influencer marketing agency connecting ambitious consumer brands, tech enterprises, and startups with vetted Indian digital creators.
-              </p>
+              <div className="text-xs text-[#A1A1A1] max-w-sm leading-relaxed mb-6 space-y-2.5">
+                <p>
+                  At CreatorsSyncMedia, we bridge the gap between brands and creators to build collaborations that inspire, engage, and deliver real results.
+                </p>
+                <p>
+                  We’re on a mission to empower creators, elevate brands, and shape the future of digital storytelling.
+                </p>
+              </div>
             </div>
 
             <div className="flex items-center gap-3">

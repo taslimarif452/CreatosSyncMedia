@@ -10,39 +10,39 @@ interface MetricItem {
 }
 
 export const Metrics: React.FC = () => {
-  // Configurable business numbers
+  // Configurable business numbers matching user specifications
   const METRICS_DATA: MetricItem[] = [
     {
-      id: 'creators-count',
-      value: '500+',
-      targetNum: 500,
+      id: 'brands-served',
+      value: '40+',
+      targetNum: 40,
       suffix: '+',
-      label: 'Creators',
+      label: 'Brands Served',
+      sublabel: 'Direct Brand Partnerships'
+    },
+    {
+      id: 'creators-onboard',
+      value: '200+',
+      targetNum: 200,
+      suffix: '+',
+      label: 'Creators Onboard',
       sublabel: 'Vetted Category Leaders'
     },
     {
-      id: 'audience-reach',
-      value: '50M+',
-      targetNum: 50,
-      suffix: 'M+',
-      label: 'Reach',
-      sublabel: 'Engaged Monthly Impressions'
-    },
-    {
-      id: 'campaigns-count',
-      value: '100+',
-      targetNum: 100,
+      id: 'campaigns-executed',
+      value: '500+',
+      targetNum: 500,
       suffix: '+',
-      label: 'Campaigns',
+      label: 'Campaigns Executed',
       sublabel: 'Delivered Across Verticals'
     },
     {
-      id: 'network-span',
-      value: 'PAN INDIA',
-      targetNum: 0,
-      suffix: '',
-      label: 'Network',
-      sublabel: 'Tier 1 & Tier 2 Regional Reach'
+      id: 'client-satisfaction',
+      value: '100%',
+      targetNum: 100,
+      suffix: '%',
+      label: 'Client Satisfaction',
+      sublabel: 'Proven ROI & Retention'
     }
   ];
 
@@ -101,20 +101,25 @@ export const Metrics: React.FC = () => {
             return (
               <div
                 key={item.id}
-                className={`group min-h-[140px] sm:min-h-[200px] md:min-h-[270px] lg:min-h-[300px] p-3.5 sm:p-7 md:p-10 lg:p-12 flex flex-col justify-between transition-all duration-200 hover:bg-[#0c0c0c] cursor-pointer ${
+                className={`group min-h-[160px] sm:min-h-[210px] md:min-h-[260px] lg:min-h-[280px] p-4 sm:p-7 md:p-9 lg:p-12 flex flex-col justify-between text-left items-start transition-all duration-200 hover:bg-[#0a0a0a] cursor-pointer ${
                   index !== 0 ? 'border-l border-[#1F1F1F]' : ''
                 }`}
               >
-                <div>
-                  <div className="text-base min-[380px]:text-lg sm:text-3xl md:text-4xl lg:text-5xl font-bold sm:font-normal text-[#F5F5F5] group-hover:text-[#4F7CFF] transition-colors duration-200 tracking-tight mb-1 sm:mb-2">
+                {/* Top Section: Large Number + Uppercase Label */}
+                <div className="w-full text-left">
+                  <div className="text-2xl min-[380px]:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-[#FFFFFF] group-hover:text-[#4F7CFF] transition-colors duration-200 tracking-tight leading-none">
                     {displayVal}
                   </div>
-                  <div className="text-[10px] min-[380px]:text-[11px] sm:text-sm md:text-base font-medium sm:font-normal text-[#F5F5F5] group-hover:text-[#4F7CFF] transition-colors duration-200 uppercase tracking-tight sm:tracking-wider">
+                  <div className="text-[11px] min-[380px]:text-xs sm:text-sm md:text-base font-medium text-[#F5F5F5] group-hover:text-[#4F7CFF] transition-colors duration-200 uppercase tracking-wider mt-2.5 sm:mt-3">
                     {item.label}
                   </div>
                 </div>
-                <div className="text-[9px] min-[380px]:text-[10px] sm:text-xs md:text-sm font-normal text-[#8A8A8A] leading-tight sm:leading-relaxed pt-1.5 sm:pt-2 border-t border-[#1a1a1a]/60 mt-2">
-                  {item.sublabel}
+
+                {/* Bottom Section: Clean Sublabel without underline/border */}
+                <div className="w-full mt-4 sm:mt-6">
+                  <div className="text-[10px] min-[380px]:text-[11px] sm:text-xs md:text-sm text-[#737373] group-hover:text-[#A3A3A3] transition-colors duration-200 leading-snug">
+                    {item.sublabel}
+                  </div>
                 </div>
               </div>
             );
