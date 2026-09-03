@@ -102,15 +102,15 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
                 </div>
 
                 {/* Location Pill: Mumbai, Maharashtra */}
-                <div className="mt-5 sm:mt-6 inline-flex items-center gap-3.5 p-1 pr-5 sm:pr-6 rounded-full bg-[#080808] border border-[#2563EB] shadow-xl">
-                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#2563EB] flex items-center justify-center text-white shrink-0 shadow-md">
-                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5 fill-white" />
+                <div className="mt-5 sm:mt-6 inline-flex items-center gap-3.5 sm:gap-4 p-1.5 pr-6 sm:pr-8 min-w-[210px] sm:min-w-[240px] rounded-full bg-[#080808] border border-[#2563EB] shadow-xl translate-x-8 sm:translate-x-28 md:translate-x-40">
+                  <div className="w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-[#2563EB] flex items-center justify-center text-white shrink-0 shadow-md">
+                    <MapPin className="w-5 h-5 sm:w-6 sm:h-6 fill-white" />
                   </div>
-                  <div className="text-left">
-                    <div className="text-xs sm:text-sm font-bold text-white tracking-wide">
+                  <div className="text-left flex flex-col justify-center">
+                    <div className="text-sm sm:text-base font-bold text-white/90 leading-tight">
                       Mumbai,
                     </div>
-                    <div className="text-[11px] sm:text-xs font-semibold text-white">
+                    <div className="text-base sm:text-lg font-black text-white tracking-wide leading-tight">
                       Maharashtra
                     </div>
                   </div>
