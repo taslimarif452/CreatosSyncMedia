@@ -111,13 +111,13 @@ export const CampaignForm: React.FC<CampaignFormProps> = ({
               <span className="text-[#A1A1A1]">People Want to Watch.</span>
             </h2>
             <p className="mt-4 text-sm sm:text-base text-[#9CA3AF] leading-relaxed">
-              Submit your campaign requirements below. We will analyze our 500+ creator network and send you a custom creator match proposal within 24–48 hours.
+              Submit your campaign requirements below. We will analyze our 200+ creator network and send you a custom creator match proposal within 24–48 hours.
             </p>
 
             <div className="mt-8 space-y-4 pt-6 border-t border-[#1C1C1C]">
               <div className="flex items-center gap-3 text-xs sm:text-sm text-[#9CA3AF]">
                 <div className="w-2 h-2 rounded-full bg-[#3B82F6]" />
-                <span>Direct access to 500+ top verified creators</span>
+                <span>Direct access to 200+ top verified creators</span>
               </div>
               <div className="flex items-center gap-3 text-xs sm:text-sm text-[#9CA3AF]">
                 <div className="w-2 h-2 rounded-full bg-[#3B82F6]" />

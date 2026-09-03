@@ -61,22 +61,12 @@ export const CreatorCTA: React.FC<CreatorCTAProps> = ({ onJoinNetwork }) => {
           <div className="lg:col-span-5 relative">
             <div className="relative aspect-[4/4.5] rounded-2xl overflow-hidden bg-[#141414] border border-[#262626] shadow-xl">
               <img
-                src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80"
-                alt="Creator with camera microphone producing video content"
+                src="https://res.cloudinary.com/dbqmhnahl/image/upload/v1788431210/WhatsApp_Image_2026-09-03_at_3.53.04_PM_izrgck.jpg"
+                alt="Creator representation and growth"
                 className="w-full h-full object-cover object-center filter contrast-105"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent" />
-
-              {/* Floating Badge */}
-              <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-[#080808]/90 backdrop-blur-md border border-[#262626]">
-                <div className="text-[10px] font-bold text-[#4F7CFF] uppercase tracking-wider mb-0.5">
-                  Creator Representation
-                </div>
-                <div className="text-sm font-bold text-[#F5F5F5]">
-                  Over ₹12+ Crore In Creator Brand Payouts Facilitated
-                </div>
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#080808]/40 via-transparent to-transparent pointer-events-none" />
             </div>
           </div>
         </div>
