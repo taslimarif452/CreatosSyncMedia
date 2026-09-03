@@ -25,7 +25,7 @@ export const About: React.FC<AboutPageProps> = ({ navigate }) => {
             </span>
           </h1>
           <p className="text-base sm:text-lg text-[#A1A1A1] max-w-2xl leading-relaxed">
-            CreatorsSyncMedia is a premium creator & influencer marketing agency founded to bridge the gap between ambitious brand vision and authentic creator storytelling.
+            CreatorsSync Media is a creator-led growth and marketing studio helping ambitious brands and education businesses turn digital attention into meaningful business outcomes. We bring together strategy, creators, content, and distribution to build campaigns that connect with the right audience and drive real action.
           </p>
         </div>
 

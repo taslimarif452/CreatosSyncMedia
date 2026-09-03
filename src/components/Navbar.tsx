@@ -381,7 +381,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               )}
             </button>
 
-            {/* 5. ABOUT */}
+            {/* 5. ABOUT US */}
             <button
               id="nav-link-about"
               onClick={() => handleNavClick('/about')}
@@ -391,13 +391,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                   : 'text-[#A1A1A1] hover:text-[#F5F5F5]'
               }`}
             >
-              About
+              About Us
               {currentPath === '/about' && (
                 <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#4F7CFF] rounded-full" />
               )}
             </button>
 
-            {/* 6. CONTACT */}
+            {/* 6. CONTACT US */}
             <button
               id="nav-link-contact"
               onClick={() => handleNavClick('/contact')}
@@ -407,7 +407,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   : 'text-[#A1A1A1] hover:text-[#F5F5F5]'
               }`}
             >
-              Contact
+              Contact Us
               {currentPath === '/contact' && (
                 <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#4F7CFF] rounded-full" />
               )}
@@ -539,7 +539,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => handleNavClick('/about')}
               className="text-xl font-bold tracking-tight text-left flex items-center justify-between py-3 border-b border-[#1A1A1A] text-[#F5F5F5] hover:text-[#4F7CFF] cursor-pointer"
             >
-              <span>About</span>
+              <span>About Us</span>
               <ArrowRight className="w-4 h-4 text-[#707070]" />
             </button>
 
@@ -547,7 +547,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => handleNavClick('/contact')}
               className="text-xl font-bold tracking-tight text-left flex items-center justify-between py-3 border-b border-[#1A1A1A] text-[#F5F5F5] hover:text-[#4F7CFF] cursor-pointer"
             >
-              <span>Contact</span>
+              <span>Contact Us</span>
               <ArrowRight className="w-4 h-4 text-[#707070]" />
             </button>
           </div>

@@ -102,7 +102,7 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
               onClick={() => handleNav('/about')}
               className="text-xs text-left text-[#A1A1A1] hover:text-[#F5F5F5] transition-colors cursor-pointer"
             >
-              About Agency
+              About Us
             </button>
             <button
               onClick={() => handleNav('/services')}
@@ -114,7 +114,7 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
               onClick={() => handleNav('/contact')}
               className="text-xs text-left text-[#A1A1A1] hover:text-[#F5F5F5] transition-colors cursor-pointer"
             >
-              Contact & Enquiries
+              Contact Us
             </button>
             <button
               onClick={() => handleNav('/for-brands')}
