@@ -24,7 +24,7 @@ export const TrustSection: React.FC = () => {
     },
     {
       label: 'Physics Wallah',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Physics_wallah_logo.jpg/500px-Physics_wallah_logo.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail',
+      image: 'https://res.cloudinary.com/dbqmhnahl/image/upload/v1788420861/O_kxnixh.png',
       roundedClass: 'rounded-[7px]'
     },
     {
