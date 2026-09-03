@@ -69,9 +69,9 @@ export const Metrics: React.FC = () => {
   }, []);
 
   return (
-    <section id="metrics-section" className="py-16 md:py-24 bg-[#080808] border-b border-[#262626]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+    <section id="metrics-section" className="pt-14 sm:pt-16 md:pt-20 pb-0 bg-[#080808] border-b border-[#262626]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 md:mb-14">
+        <div className="text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#141414] border border-[#262626] text-xs font-bold text-[#4F7CFF] uppercase tracking-widest mb-3.5">
             Our Network
           </div>
@@ -85,9 +85,11 @@ export const Metrics: React.FC = () => {
             Direct relationships with top digital creators across India’s most influential consumer niches.
           </p>
         </div>
+      </div>
 
-        {/* 4-Metric Container: 4-Column Grid on all screen sizes including mobile (No horizontal scrolling) */}
-        <div className="grid grid-cols-4 rounded-none bg-black border border-[#222222]">
+      {/* 4-Metric Container: Full Width 100% like Our Brand Partners */}
+      <div className="w-full border-t border-[#222222] bg-black">
+        <div className="w-full grid grid-cols-4">
           {METRICS_DATA.map((item, index) => {
             // Calculate dynamic animated value if numerical
             let displayVal = item.value;
@@ -99,7 +101,7 @@ export const Metrics: React.FC = () => {
             return (
               <div
                 key={item.id}
-                className={`group min-h-[110px] sm:min-h-[160px] md:min-h-[220px] p-2.5 sm:p-4 md:p-8 flex flex-col justify-between transition-all duration-200 hover:bg-[#0c0c0c] cursor-pointer ${
+                className={`group min-h-[140px] sm:min-h-[200px] md:min-h-[270px] lg:min-h-[300px] p-3.5 sm:p-7 md:p-10 lg:p-12 flex flex-col justify-between transition-all duration-200 hover:bg-[#0c0c0c] cursor-pointer ${
                   index !== 0 ? 'border-l border-[#1F1F1F]' : ''
                 }`}
               >

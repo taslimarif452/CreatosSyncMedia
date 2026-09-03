@@ -24,10 +24,13 @@ import {
   Layers,
   ChevronRight,
   ShieldCheck,
-  AlertCircle
+  AlertCircle,
+  Database,
+  Image as ImageIcon
 } from 'lucide-react';
 import { useAdminData } from '../context/AdminDataContext';
 import { Creator, Campaign, CreatorCategory, CampaignType } from '../types';
+import { compressAndConvertToBase64 } from '../utils/imageCompressor';
 
 interface AdminProps {
   navigate: (path: string) => void;
@@ -61,6 +64,8 @@ export const Admin: React.FC<AdminProps> = ({ navigate }) => {
     creators,
     campaigns,
     settings,
+    firestoreStatus,
+    firestoreError,
     addCreator,
     updateCreator,
     deleteCreator,
@@ -76,6 +81,37 @@ export const Admin: React.FC<AdminProps> = ({ navigate }) => {
 
   const [activeTab, setActiveTab] = useState<AdminTab>('overview');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [uploadingImageField, setUploadingImageField] = useState<string | null>(null);
+
+  // Handle direct file upload into Base64 (Saved straight into Firestore Database document)
+  const handleImageUpload = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    targetField: 'creator-image' | 'creator-cover' | 'campaign-thumb'
+  ) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      setUploadingImageField(targetField);
+      const base64 = await compressAndConvertToBase64(file);
+      if (targetField === 'creator-image') {
+        setCreatorForm((prev) => ({ ...prev, image: base64 }));
+        showToast('Profile image optimized and loaded for Firestore!');
+      } else if (targetField === 'creator-cover') {
+        setCreatorForm((prev) => ({ ...prev, coverImage: base64 }));
+        showToast('Cover image optimized and loaded for Firestore!');
+      } else if (targetField === 'campaign-thumb') {
+        setCampaignForm((prev) => ({ ...prev, thumbnail: base64 }));
+        showToast('Thumbnail image optimized and loaded for Firestore!');
+      }
+    } catch (err: any) {
+      console.error('Image upload error:', err);
+      showToast('Image processing failed: ' + (err?.message || 'Error'));
+    } finally {
+      setUploadingImageField(null);
+      e.target.value = '';
+    }
+  };
 
   // Search & Filter States
   const [creatorSearch, setCreatorSearch] = useState('');
@@ -481,6 +517,34 @@ export const Admin: React.FC<AdminProps> = ({ navigate }) => {
 
         {/* Sidebar Footer */}
         <div className="pt-6 border-t border-[#262626] mt-6 space-y-2.5">
+          {/* Firestore Database Sync Badge */}
+          <div className="p-3 rounded-xl bg-[#141414] border border-[#262626] mb-2">
+            <div className="flex items-center justify-between text-[10px] font-bold text-[#A1A1A1] uppercase tracking-wider mb-1.5">
+              <span>Cloud Storage</span>
+              <span className="flex items-center gap-1 text-[#4F7CFF]">
+                <Database className="w-3 h-3" /> Firestore
+              </span>
+            </div>
+            <div className="flex items-center gap-2 text-xs">
+              {firestoreStatus === 'connected' ? (
+                <>
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-emerald-400 font-bold">Live Synced (All Devices)</span>
+                </>
+              ) : firestoreStatus === 'connecting' ? (
+                <>
+                  <RefreshCw className="w-3 h-3 animate-spin text-amber-400" />
+                  <span className="text-amber-400 font-medium">Connecting...</span>
+                </>
+              ) : (
+                <>
+                  <AlertCircle className="w-3 h-3 text-rose-400" />
+                  <span className="text-rose-400 font-medium">Rules needed</span>
+                </>
+              )}
+            </div>
+          </div>
+
           <div className="p-3 rounded-xl bg-[#141414] border border-[#262626] mb-3">
             <div className="text-[10px] font-bold text-[#A1A1A1] uppercase tracking-wider mb-1">
               Live Visibility Status
@@ -521,11 +585,17 @@ export const Admin: React.FC<AdminProps> = ({ navigate }) => {
             {/* Top Bar */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#262626]">
               <div>
-                <h1 className="text-2xl sm:text-3xl font-black text-[#F5F5F5] tracking-tight">
-                  Agency Control Center
-                </h1>
+                <div className="flex items-center gap-3">
+                  <h1 className="text-2xl sm:text-3xl font-black text-[#F5F5F5] tracking-tight">
+                    Agency Control Center
+                  </h1>
+                  <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-bold text-emerald-400">
+                    <Database className="w-3.5 h-3.5" />
+                    Firestore Live DB
+                  </span>
+                </div>
                 <p className="text-xs sm:text-sm text-[#A1A1A1] mt-1">
-                  Manage real-time Creator rosters, Campaign case studies & dynamic section visibility.
+                  Manage real-time Creator rosters, Campaign case studies & dynamic section visibility stored on Firebase Firestore.
                 </p>
               </div>
 
@@ -546,6 +616,53 @@ export const Admin: React.FC<AdminProps> = ({ navigate }) => {
                 </button>
               </div>
             </div>
+
+            {/* Firestore Status Alert / Rules Notice if needed */}
+            {firestoreError && (
+              <div className="p-5 rounded-2xl bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border border-amber-500/30 text-xs">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div className="flex items-start gap-3">
+                    <AlertCircle className="w-5 h-5 flex-shrink-0 text-amber-400 mt-0.5" />
+                    <div>
+                      <div className="font-bold text-amber-300 text-sm">
+                        Action Required: Update Firestore Security Rules in Firebase Console
+                      </div>
+                      <p className="text-gray-300 mt-1 text-xs max-w-3xl leading-relaxed">
+                        Firebase default rules block public read/write access (<span className="text-amber-300 font-mono">Missing or insufficient permissions</span>). 
+                        To enable live cloud sync across all devices, open your Firebase Console Rules tab and paste the rule below, then click <strong className="text-white">Publish</strong>.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <button
+                      onClick={() => {
+                        const ruleText = `rules_version = '2';\nservice cloud.firestore {\n  match /databases/{database}/documents {\n    match /{document=**} {\n      allow read, write: if true;\n    }\n  }\n}`;
+                        navigator.clipboard.writeText(ruleText);
+                        showToast('Firestore Rule copied to clipboard!');
+                      }}
+                      className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs rounded-xl flex items-center gap-1.5 transition-colors cursor-pointer"
+                    >
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Copy Firestore Rule</span>
+                    </button>
+                    <a
+                      href="https://console.firebase.google.com/u/0/project/creatorssync-media/firestore/rules"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3.5 py-2 bg-[#1c1c1c] hover:bg-[#252525] border border-amber-500/30 text-amber-300 text-xs font-semibold rounded-xl flex items-center gap-1.5 transition-colors"
+                    >
+                      <span>Open Firebase Console</span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                </div>
+
+                <div className="mt-3.5 pt-3 border-t border-amber-500/20 flex flex-wrap items-center gap-4 text-[11px] text-gray-400">
+                  <span>💡 <strong>Note:</strong> App is safely functioning with local cache right now. Changes will sync to cloud once rules are published.</span>
+                </div>
+              </div>
+            )}
 
             {/* Quick Stats Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -1274,6 +1391,66 @@ export const Admin: React.FC<AdminProps> = ({ navigate }) => {
               </p>
             </div>
 
+            {/* Firestore Cloud Database Card */}
+            <div className="p-6 sm:p-8 rounded-3xl bg-[#101010] border border-[#262626]">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <Database className="w-5 h-5 text-[#4F7CFF]" />
+                    <h3 className="text-base font-bold text-[#F5F5F5]">
+                      Firebase Firestore Cloud Sync
+                    </h3>
+                  </div>
+                  <p className="text-xs text-[#A1A1A1] mt-1">
+                    All website section visibility, creators roster, and campaigns are synchronized in real-time across all devices & incognito windows.
+                  </p>
+                </div>
+                <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#181818] border border-[#333] text-xs font-semibold">
+                  {firestoreStatus === 'connected' ? (
+                    <span className="flex items-center gap-2 text-emerald-400">
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                      Live Connected (creatorssync-media)
+                    </span>
+                  ) : firestoreStatus === 'connecting' ? (
+                    <span className="flex items-center gap-2 text-amber-400">
+                      <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                      Connecting to Firestore...
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-2 text-rose-400">
+                      <AlertCircle className="w-3.5 h-3.5" />
+                      Offline / Rules Check
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-[#262626] text-xs">
+                <div className="p-3.5 rounded-xl bg-[#141414] border border-[#262626]">
+                  <span className="text-[#888] text-[10px] uppercase font-bold block mb-1">Firestore Collections</span>
+                  <div className="font-mono text-gray-300 space-y-0.5">
+                    <div>• csm_settings (Visibility)</div>
+                    <div>• csm_creators (Roster)</div>
+                    <div>• csm_campaigns (Cases)</div>
+                  </div>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-[#141414] border border-[#262626]">
+                  <span className="text-[#888] text-[10px] uppercase font-bold block mb-1">Image Storage Strategy</span>
+                  <div className="text-gray-300">
+                    Direct Base64 document payload (No Firebase Cloud Storage bucket needed).
+                  </div>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-[#141414] border border-[#262626]">
+                  <span className="text-[#888] text-[10px] uppercase font-bold block mb-1">Security Rules</span>
+                  <div className="font-mono text-emerald-400 text-[11px]">
+                    allow read, write: if true;
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Export / Copy Box */}
             <div className="p-6 sm:p-8 rounded-3xl bg-[#101010] border border-[#262626]">
               <div className="flex items-center justify-between mb-4">
@@ -1534,30 +1711,86 @@ export const Admin: React.FC<AdminProps> = ({ navigate }) => {
               {/* Row 4: Images */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#A1A1A1] mb-1.5">
-                    Profile Image URL (High Res) *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="https://..."
-                    value={creatorForm.image}
-                    onChange={(e) => setCreatorForm({ ...creatorForm, image: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-[#141414] border border-[#262626] focus:border-[#4F7CFF] text-xs text-[#F5F5F5] outline-none font-mono"
-                  />
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label className="text-xs font-bold uppercase tracking-wider text-[#A1A1A1]">
+                      Profile Image (High Res) *
+                    </label>
+                    <label className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#1a1a1a] hover:bg-[#252525] border border-[#333] text-[11px] font-bold text-[#4F7CFF] cursor-pointer transition-colors">
+                      <Upload className="w-3 h-3" />
+                      <span>{uploadingImageField === 'creator-image' ? 'Processing...' : 'Upload from Device'}</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => handleImageUpload(e, 'creator-image')}
+                        disabled={uploadingImageField !== null}
+                      />
+                    </label>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {creatorForm.image && (
+                      <div className="w-11 h-11 rounded-xl overflow-hidden border border-[#333] flex-shrink-0 bg-black">
+                        <img
+                          src={creatorForm.image}
+                          alt="Profile Preview"
+                          className="w-full h-full object-cover"
+                          referrerPolicy="no-referrer"
+                        />
+                      </div>
+                    )}
+                    <input
+                      type="text"
+                      required
+                      placeholder="https://... or click Upload from Device"
+                      value={creatorForm.image}
+                      onChange={(e) => setCreatorForm({ ...creatorForm, image: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl bg-[#141414] border border-[#262626] focus:border-[#4F7CFF] text-xs text-[#F5F5F5] outline-none font-mono"
+                    />
+                  </div>
+                  <span className="text-[10px] text-gray-500 block mt-1">
+                    Direct Firestore DB upload (Auto-optimized base64 payload)
+                  </span>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#A1A1A1] mb-1.5">
-                    Cover Image URL (Optional)
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="https://..."
-                    value={creatorForm.coverImage}
-                    onChange={(e) => setCreatorForm({ ...creatorForm, coverImage: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-[#141414] border border-[#262626] focus:border-[#4F7CFF] text-xs text-[#F5F5F5] outline-none font-mono"
-                  />
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label className="text-xs font-bold uppercase tracking-wider text-[#A1A1A1]">
+                      Cover Image (Optional)
+                    </label>
+                    <label className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#1a1a1a] hover:bg-[#252525] border border-[#333] text-[11px] font-bold text-[#4F7CFF] cursor-pointer transition-colors">
+                      <Upload className="w-3 h-3" />
+                      <span>{uploadingImageField === 'creator-cover' ? 'Processing...' : 'Upload Cover'}</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => handleImageUpload(e, 'creator-cover')}
+                        disabled={uploadingImageField !== null}
+                      />
+                    </label>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {creatorForm.coverImage && (
+                      <div className="w-11 h-11 rounded-xl overflow-hidden border border-[#333] flex-shrink-0 bg-black">
+                        <img
+                          src={creatorForm.coverImage}
+                          alt="Cover Preview"
+                          className="w-full h-full object-cover"
+                          referrerPolicy="no-referrer"
+                        />
+                      </div>
+                    )}
+                    <input
+                      type="text"
+                      placeholder="https://... or click Upload Cover"
+                      value={creatorForm.coverImage}
+                      onChange={(e) => setCreatorForm({ ...creatorForm, coverImage: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl bg-[#141414] border border-[#262626] focus:border-[#4F7CFF] text-xs text-[#F5F5F5] outline-none font-mono"
+                    />
+                  </div>
+                  <span className="text-[10px] text-gray-500 block mt-1">
+                    Direct Firestore DB upload
+                  </span>
                 </div>
               </div>
 
@@ -1817,17 +2050,45 @@ export const Admin: React.FC<AdminProps> = ({ navigate }) => {
 
               {/* Row 5: Thumbnail URL */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#A1A1A1] mb-1.5">
-                  Visual Thumbnail Image URL *
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="https://..."
-                  value={campaignForm.thumbnail}
-                  onChange={(e) => setCampaignForm({ ...campaignForm, thumbnail: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-[#141414] border border-[#262626] focus:border-[#4F7CFF] text-xs text-[#F5F5F5] outline-none font-mono"
-                />
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="text-xs font-bold uppercase tracking-wider text-[#A1A1A1]">
+                    Visual Thumbnail Image *
+                  </label>
+                  <label className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#1a1a1a] hover:bg-[#252525] border border-[#333] text-[11px] font-bold text-[#4F7CFF] cursor-pointer transition-colors">
+                    <Upload className="w-3 h-3" />
+                    <span>{uploadingImageField === 'campaign-thumb' ? 'Processing...' : 'Upload from Device'}</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => handleImageUpload(e, 'campaign-thumb')}
+                      disabled={uploadingImageField !== null}
+                    />
+                  </label>
+                </div>
+                <div className="flex items-center gap-2">
+                  {campaignForm.thumbnail && (
+                    <div className="w-14 h-10 rounded-xl overflow-hidden border border-[#333] flex-shrink-0 bg-black">
+                      <img
+                        src={campaignForm.thumbnail}
+                        alt="Thumbnail Preview"
+                        className="w-full h-full object-cover"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                  )}
+                  <input
+                    type="text"
+                    required
+                    placeholder="https://... or click Upload from Device"
+                    value={campaignForm.thumbnail}
+                    onChange={(e) => setCampaignForm({ ...campaignForm, thumbnail: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl bg-[#141414] border border-[#262626] focus:border-[#4F7CFF] text-xs text-[#F5F5F5] outline-none font-mono"
+                  />
+                </div>
+                <span className="text-[10px] text-gray-500 block mt-1">
+                  Saved directly inside Firestore document payload (No separate Cloud Storage bucket needed)
+                </span>
               </div>
 
               {/* Row 6: Description */}
